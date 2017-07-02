@@ -9,8 +9,7 @@
 
   <!-- 新 Bootstrap 核心 CSS 文件 -->
 <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="css/all.css">
-<link rel="icon" href="favicon.ico">
+<link rel="icon" href="./favicon.ico">
 </head>
 <body>
   <nav class = "nav-container">
@@ -59,25 +58,28 @@
       <div class = "menu-bar">
         <div class="menu-bar-left">
           <ul class = "words-display">
-            <li><a href="#">Open</a></li>
-            <li><a href="#">Close</a></li>
-            <li><a href="#">All</a></li>
+            <li id="open_num"><a href="#" >Open</a></li>
+            <li id="close_num"><a href="#" >Close</a></li>
+            <li id="all_num"><a href="#">All</a></li>
           </ul>
         </div>
       </div>
-
       <div class = "search-bar">
         <div class = "select-bar">
           <div class = "select-menu">
+            <div>
               <span class = "select-bar-tab">dddddd</span>
+            </div>
+            <div>
               <ul class = "select-bar-menu">
                 <li>Recent searches</li>
                 <li>Clear recent searches</li>
               </ul>
+            </div>
           </div>
           <div class = "click-to-search">
             <div>
-              <input type="text" size="4" value="" placeholder="Please input sth to search">
+              <input type="text" size="4" value="" id = "searchBar" placeholder="Please input sth to search">
 
             </div>
           </div>
@@ -88,9 +90,7 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="js/onload.js"></script>
-  <script type="text/javascript" src="js/showlist.js"></script>
-  <script type="text/javascript" src="js/tttt.js"></script>
+  <script type="text/javascript" src="bundle.js"></script>
 
 </body>
 </html>
