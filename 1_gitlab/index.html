@@ -10,6 +10,8 @@
   <!-- 新 Bootstrap 核心 CSS 文件 -->
 <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link rel="icon" href="./favicon.ico">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs
+/jquery/1.4.0/jquery.min.js"></script>
 </head>
 <body>
   <nav class = "nav-container">
@@ -45,16 +47,15 @@
   <nav class = "nav-body nav-second">
     <div class="body-container">
       <ul class = "ul-display nav-container">
-        <li><a href="#">List</a></li>
-        <li><a href="#">Boards</a></li>
-        <li class = "active"><a href="#">Labels</a></li>
-        <li><a href="#">Milestones</a></li>
+        <li class = "active"><a href="#" id="list">List</a></li>
+        <li><a href="#" id="boards">Boards</a></li>
+        <li  id="labels"><a href="#">Labels</a></li>
+        <li><a href="#" id="milestones">Milestones</a></li>
       </ul>
     </div>
   </nav>
   <div class = "main-body">
     <div class = "flex-body">
-
       <div class = "menu-bar">
         <div class="menu-bar-left">
           <ul class = "words-display">
