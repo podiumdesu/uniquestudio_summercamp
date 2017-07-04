@@ -20,13 +20,15 @@ let issue_info = [
       "bug",
       "array_err",
       "object_err",
-      "js_err"
+      "js_err",
+      "ddd"
     ],
     tagColor: [
       "#aedede",
       "red",
       "yellow",
-      "pink"
+      "pink",
+      "blue"
     ],
     no: 1,
     name: "pushpushtest",
@@ -103,7 +105,7 @@ labels  ->
 
 //大概实现的是一个渲染的功能
 function showListIssue(IssueInTheArray) {
-
+  //$("#boardPage").attr("style","display:none");
   var all_num = IssueInTheArray.length;
   var listBodyNode = document.getElementsByClassName("display-issue")[0];
   var disIssueNode = [];
@@ -168,7 +170,9 @@ function showListIssue(IssueInTheArray) {
 
 
 function showBoardsValue() {
-  alert("hello,world");
+
+  var mainNode = $(".flex-body")[0];
+  $("#boardPage").attr("style","display:block");
 
 }
 
@@ -196,6 +200,93 @@ displayCloseIssue.onclick = function(event) {
   showListIssue(closeIssueNum());
 }
 
+
+//点击addlist按钮时显示下拉菜单
+//嘻嘻学习使用了一下jquery，真的很方便哎
+$("button#addListBtn").click(function() {
+  if ($("div#addListUpdown").attr("class").indexOf("toDisplay") > 0) {
+    $("div#addListUpdown").addClass("toHide");
+    $("div#addListUpdown").removeClass("toDisplay");
+  } else {
+    $("div#addListUpdown").removeClass("toHide");
+    $("div#addListUpdown").addClass("toDisplay");
+  }
+})
+
+//跳出新增labels的页面
+$("#goToCreateNewLabels").click(function() {
+  $("div#addListUpdown").addClass("toHide");
+  $("div#addListUpdown").removeClass("toDisplay");
+})
+
+//要先建立起一个可以存放labels以及其对应的issue的编号以及它的颜色的数组。
+
+
+/*获取所有的label以及所有的labelcolor*/
+var allLabels = [
+  {
+    name: "bug",
+    IssueHave: [1,2,3],
+    color: "#aedede"
+  },
+  {
+    name: "js_err",
+    IssueHave: [1,2],
+    color: "pink"
+  },
+  {
+    name: "object_err",
+    IssueHave: [1],
+    color: "yellow"
+  },
+  {
+    name: "array_err",
+    IssueHave: [1],
+    color: "red"
+  },
+  {
+    name: "display_err",
+    IssueHave: [3],
+    color: "#fddeae"
+  }
+];
+
+/*获取所有的issue编号*/
+var firstShowLabels = [];
+for (let i = 0; i < allLabels.length; i++) {
+  firstShowLabels.push(i);
+}
+
+/**封装成可以显示被搜索到的labels的div块的函数  所需要传入的参数是allLabels[]中的index */
+function showLabelListWhenSearch(searchLabel) {
+  let label_num = searchLabel.length;
+  var insertLabelsDisNode = document.getElementById("labelsTodisplay");
+  var ddddNode = [];
+  for (var i = 0 ; i < label_num; i++) {
+    var dddd = '<div class = "choose"><label ><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle glyphicon"></span></label>'
+    dddd +='<div class = "labelsColor" style = "background-color : '+allLabels[searchLabel[i]].color+'"></div>';
+    dddd +='<div class = "labelsName" style="display: inline-block"><span class="labelname">'+allLabels[searchLabel[i]].name+'</span></div></div>';
+    ddddNode[i] = document.createElement("div");
+    //alert(dddd);
+    ddddNode[i].innerHTML = dddd;
+    insertLabelsDisNode.appendChild(ddddNode[i]);
+  }
+
+}
+addLoadEvent(showLabelListWhenSearch(firstShowLabels))
+
+///////全都是bug
+
+
+//设置方框的颜色
+
+//for (var i = 0 ; i < )
+
+//内容渲染
+/*碰到的问题：
+在flex-body下的节点，如果不使用clear的话就没法更新新节点，（再添加新的节点就会跑到之前的那个页面上去）
+但是如果clear的话，这个节点之后所有的节点都会没有，就必须要重新再建立链接。
+*/
 $("#boards").click(function(event) {
 //  var targetNode = document.getElementsByClassName("flex-body")[0];
   var targetNode = $(".flex-body")[0];
@@ -203,7 +294,8 @@ $("#boards").click(function(event) {
   var list = document.getElementById("list").parentNode;
   list.removeAttribute("class","active");
   boards.setAttribute("class","active");
-  targetNode.setAttribute("style","display:none");
+  targetNode.setAttribute("style","display:none")
+  //clear(targetNode);
 });
 
 $("#list").click(function(event) {
@@ -223,6 +315,7 @@ searchBar.addEventListener("keyup",function(event) {    //监听回车事件
     searchBarFunc();
   }
 })
+
 
 
 //////////////一些可复用的函数///////////

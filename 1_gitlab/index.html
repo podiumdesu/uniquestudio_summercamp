@@ -89,6 +89,57 @@
       <div class = "display-issue">
         <div></div>
       </div>
+      <div id = "boardPage">
+        <div class="row head">
+            <span class="col-lg-1">development</span>
+                <div class="col-lg-11">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id = "boardSearchBar" placeholder="搜你想要的">
+                        <span class="input-group-btn">
+                        <button class="btn btn-info" type="button" id ="addListBtn"><span>Add list</span></button>
+                        </span>
+                    </div>
+                </div>
+        </div>
+        <div id = "addListUpdown" class = "toDisplay UpdownFlow">
+          <div class = "listFlexbody">
+            <h1>Add list</h1>
+            <div class="updownIntro">
+              <p>hello,world. What you can just do here is to search the labels you use in your projects. Have a good time :)</p>
+            </div>
+            <div class = "updownSearch">
+              <div class ="col-lg-13">
+                <div class = "input-group">
+                  <input type="text" class = "form-control" id = "addListSearchBar" placeholder="search for the labels">
+                  <span class = "input-group-btn">
+                  <button type="button" class = "btn btn-success" name="button"><span class = "glyphicon glyphicon-search"></span></button>
+                <!--bootstrap是真的很好用啊！！！！！-->
+                </div>
+              </div>
+            </div>
+            <div class = "labelsTodisplay" id = "labelsTodisplay">
+                <!--这里用js插入代码
+                <div class = "choose">
+                  <label >
+                    <input type="checkbox" value="" class="labelsCheckout" />
+                  <span class="checkboxStyle glyphicon"></span>
+                  </label>
+                  <div class = "labelsColor">
+                  </div>
+                  <div class = "labelsName" style="display: inline-block"><span class="labelname">bug</span></div>
+                </div>
+              -->
+            </div>
+            <div class ="addListMore">
+              <div class = "createNewLabels">
+                <span id="goToCreateNewLabels">Create new labels</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id = "addNewLabel" class = "UpdownFlow">
+          <div><span>dddd</span></div>
+        </div>
     </div>
   </div>
   <script type="text/javascript" src="bundle.js"></script>

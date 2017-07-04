@@ -149,3 +149,134 @@ div.search-bar div.click-to-search input {
   height: 35px;
   width: 80%;
 }
+
+
+
+/*****boards页面的css******/
+/*
+感觉自己多个div间没法进行共用一个class，我是面向div进行class编写，但是应该是通过class来对每个写的div进行定义
+如果class不能复用的话就会导致有非常多的css要写，但是本身是没必要的。
+
+就像js中的函数的封装一样，多封装一个可复用的函数，就可以少写好多行代码。
+
+如果之后还能重构整个代码结构的话，还是应该考虑一下css的重复类的编写还有js的模块化。
+
+这次项目感觉没实现的功能还有很多，所以可能还是不够优雅，直接上手就开始使用框架了。页面的逻辑什么的还需要好好理清楚才好。
+
+*/
+
+
+.UpdownFlow {
+  width: 300px;
+  z-index: 1;
+  position: absolute;
+  right: 10%;
+  border: 1px solid green;
+}
+#addListUpdown h1 {
+  text-align: center;
+  margin: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid pink;
+}
+div.updownIntro {
+  margin: 8px;
+  border-bottom: 1px solid pink;
+}
+ div.updownSearch {
+  margin: 8px;
+
+}
+
+div.labelsTodisplay {
+  margin: 8px;
+  border-bottom: 1px solid black;
+  padding: 3px 0;
+
+}
+div.choose label {
+  margin-bottom: 0px;
+}
+input.labelsCheckout {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+/*设置复选框的大小和颜色*/
+input.labelsCheckout {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+/* + 只有紧邻的才会被选中 */
+input.labelsCheckout + span {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 4px;
+  background-color: coral;
+  transition: all ease 1s;
+}
+
+input.labelsCheckout:checked + span {
+  background-color: lightgreen;
+
+}
+
+div.labelsColor {
+  margin-left: 8px;
+}
+div.labelsName {
+  vertical-align: top;
+  margin-left: 8px;
+}
+
+div.labelsName > span{
+  font-size: 15px;
+}
+div.labelsTodisplay div.labelsColor {
+  width: 1.6em;
+  height: 1.6em;
+
+  display: inline-block;
+  border-radius: 4px;
+}
+
+div.choose:hover{
+  background-color: #C5F7FF;
+}
+
+div.choose {
+  padding: 3px 0;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.toDisplay {
+  display: block;
+}
+.toHide {
+  display: none;
+}
+
+div.addListMore {
+  margin: 8px;
+}
+
+div.createNewLabels {
+  height: 30px;
+  padding: 5px;
+}
+
+div.createNewLabels:hover {
+  background-color: #c5f7ff;
+  cursor: pointer;
+}
+div.createNewLabels > span {
+  vertical-align: bottom;
+}
+
+#addNewLabel  {
+  width: 300px;
+}
