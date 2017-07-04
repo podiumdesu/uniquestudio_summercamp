@@ -121,7 +121,9 @@ nav.nav-second{
 }
 
 
-
+#boardPage > span {
+  vertical-align: text-bottom;
+}
 
 div.display-issue p{
   line-height: 25px;
@@ -150,6 +152,35 @@ div.search-bar div.click-to-search input {
   width: 80%;
 }
 
+/*
+var allLabels = [
+  {
+    name: "bug",
+    IssueHave: [1,2,3],
+    color: "#aedede"
+  },
+  {
+    name: "js_err",
+    IssueHave: [1,2],
+    color: "pink"
+  },
+  {
+    name: "object_err",
+    IssueHave: [1],
+    color: "yellow"
+  },
+  {
+    name: "array_err",
+    IssueHave: [1],
+    color: "red"
+  },
+  {
+    name: "display_err",
+    IssueHave: [3],
+    color: "#fddeae"
+  }
+];
+*/
 
 
 /*****boards页面的css******/
@@ -171,7 +202,7 @@ div.search-bar div.click-to-search input {
   z-index: 1;
   position: absolute;
   right: 10%;
-  border: 1px solid green;
+  border: 3px solid green;
 }
 #addListUpdown h1 {
   text-align: center;
@@ -191,7 +222,7 @@ div.updownIntro {
 
 div.labelsTodisplay {
   margin: 8px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid pink;
   padding: 3px 0;
 
 }
@@ -280,7 +311,7 @@ div.createNewLabels > span {
 
 #addNewLabel  {
   width: 300px;
-  border: 1px solid pink;
+  border: 3px solid pink;
 
 }
 #addNewLabel h1 {
@@ -331,7 +362,6 @@ button.closebtn {
   height: 30px;
   margin-bottom: -5px;
   /*这样就可以解决多行span之间存在空格的问题了*/
-  background-color: red;
 
 }
 .btn-block2 {
@@ -348,7 +378,8 @@ button.closebtn {
   width: 34px;
   height: 34px;
   vertical-align: middle;
-  background-color: red;
+  background-color: transparent;
+  border: 1px dotted pink;
 }
 
 .flow-to-right {

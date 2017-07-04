@@ -94,7 +94,7 @@
             <span class="col-lg-1">development</span>
                 <div class="col-lg-11">
                     <div class="input-group">
-                        <input type="text" class="form-control" id = "boardSearchBar" placeholder="搜你想要的">
+                        <input type="text" class="form-control" id = "boardSearchBar" placeholder="Search or filter results...">
                         <span class="input-group-btn">
                         <button class="btn btn-info" type="button" id ="addListBtn"><span>Add list</span></button>
                         </span>
@@ -137,16 +137,16 @@
             </div>
           </div>
         </div>
-        <div id = "addNewLabel" class = "UpdownFlow toDisplay">
+        <div id = "addNewLabel" class = "UpdownFlow toHide">
           <div id = "title">
             <button type="button" class="close back" id = "toBackSearchLabel"><span aria-hidden="true">back</span><span class="sr-only"></span></button>
               <h1>Create new label</h1>
              <button type="button" class="close closebtn" id = "toCloseNewLabel"><span aria-hidden="true">close</span><span class="sr-only"></span></button>
           </div>
           <div id = "inputTheLabelName" class="margin8px" >
-            <input type="text" class="btn-block" placeholder="Name new label">
+            <input type="text" class="btn-block" placeholder="Name new label" id = "pppName">
           </div>
-            <div id = "colorSection" class="margin8px">
+            <div id = "colorSection"  class=" wtf margin8px">
               <!--这个方法用来消除同一行中的span之间的间隙-->
               <span class = "eachColor" data-color="#0033cc" style="background-color:#0033cc"></span><!--
            --><span class = "eachColor" data-color="#42bbca" style="background-color:#42bbca"></span><!--
@@ -169,12 +169,11 @@
             </div>
           <div id = "assignColor" class="margin8px">
             <span id="chosenColor"></span>
-
-            <input type="text" class="btn-block2" placeholder="Assign your own color">
+            <input type="text" id="showColorName" class="btn-block2" placeholder="Assign your own color">
           </div>
           <div id = "clickToCreate" class = "margin8px">
-            <button class="btn btn-success">点击确认</button>
-            <button class="btn flow-to-right">取消</button>
+            <button class="btn btn-success" id="ok">点击确认</button>
+            <button class="btn flow-to-right" id="cancel">取消</button>
           </div>
         </div>
     </div>

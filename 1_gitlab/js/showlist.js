@@ -11,6 +11,7 @@ for (var i = 1; i <= all ; i++) {
 */
 /***这些全部都是数据*******/
 //mentor用了很魔法的方法w
+//因为后面设计函数时候的问题，所以数组第一个设置成空的对象了。
 let issue_info = [
   {
 
@@ -232,6 +233,8 @@ $("#toBackSearchLabel").click(function() {
   $("#addListUpdown").removeClass("toHide");
   $("#addListUpdown").addClass("toDisplay");
   $("#addNewLabel").addClass("toHide");
+  document.getElementById("pppName").value = "";
+//  document.getElementById("chosenColor").attr("style","")
 });
 
 $("#toCloseNewLabel").click(function() {
@@ -270,9 +273,12 @@ var allLabels = [
 ];
 
 /*获取所有的issue编号*/
-var firstShowLabels = [];
-for (let i = 0; i < allLabels.length; i++) {
-  firstShowLabels.push(i);
+function getAllLabelsIndex() {
+  var firstShowLabels = [];
+  for (let i = 0; i < allLabels.length; i++) {
+    firstShowLabels.push(i);
+  }
+  return firstShowLabels;
 }
 
 /**boards页面下addlist时搜索labels
@@ -293,7 +299,7 @@ function showLabelListWhenSearch(searchLabel) {
   }
 
 }
-addLoadEvent(showLabelListWhenSearch(firstShowLabels));// 最开始显示所有的lables
+addLoadEvent(showLabelListWhenSearch(getAllLabelsIndex()));// 最开始显示所有的lables
 
 ///////全都是bug
 
@@ -461,6 +467,7 @@ function showOpenCloseNum() {
   }
 }
 
+
 /******获取allIssue，openIssue，closeIssue数组中的issue编号****/
 var allIssue = [];
 for (let i = 1; i <= all; i++) {
@@ -489,6 +496,39 @@ function closeIssueNum() {
 /****************************************/
 
 
+/*通过监听其父节点来解决*/
+//为颜色块的每个颜色绑定点击事件。并获取它们的对应的颜色。
+$(".eachColor").click(function() {
+  var sss = $(this).attr("data-color");
+  $("#chosenColor").attr("style","background-color:"+sss);
+  $("#showColorName").val(sss);
+});
+
+$("#cancel").click(function() {
+  $("#addNewLabel").removeClass("toDisplay");
+  $("#addNewLabel").addClass("toHide");
+});
+
+$("#ok").click(function()  {
+  if (document.getElementById("pppName").value.length === 0) {
+    alert("Please name your label");
+  } else if (document.getElementById("showColorName").value.length === 0) {
+    alert("Please choose the color");
+  } else {
+    createNewLabel();
+    var targetNode = $(".labelsTodisplay")[0];
+    clear(targetNode);
+    showLabelListWhenSearch(getAllLabelsIndex());
+  }
+});
+
+  document.getElementById("pppName").value = "";
+function createNewLabel() {
+  var ppp = {};
+  ppp.name = document.getElementById("pppName").value;
+  ppp.color = document.getElementById("showColorName").value;
+  allLabels.push(ppp);    //但是刷新之后就所有数据都不见了！！！！
+}
 
 
 addLoadEvent(showOpenCloseNum());
