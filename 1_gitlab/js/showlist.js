@@ -104,6 +104,7 @@ labels  ->
 //两点半开始写第一个逻辑，写的比较久。感觉对dom操作又熟悉了一些。
 
 //大概实现的是一个渲染的功能
+/*list页面下需要显示的list*/
 function showListIssue(IssueInTheArray) {
   //$("#boardPage").attr("style","display:none");
   var all_num = IssueInTheArray.length;
@@ -191,19 +192,23 @@ displayOpenIssue.onclick = function(event) {
   var targetNode = document.getElementsByClassName("display-issue")[0];
   clear(targetNode);
   showListIssue(openIssueNum());
-}
+};
 
 var displayCloseIssue = document.getElementById("close_num");
 displayCloseIssue.onclick = function(event) {
   var targetNode = document.getElementsByClassName("display-issue")[0];
   clear(targetNode);
   showListIssue(closeIssueNum());
-}
+};
 
 
 //点击addlist按钮时显示下拉菜单
 //嘻嘻学习使用了一下jquery，真的很方便哎
 $("button#addListBtn").click(function() {
+  //判断添加label的页面是否存在
+  if ($("#addNewLabel").attr("class").indexOf("toDisplay") > 0) {
+    $("#addNewLabel").addClass("toHide");
+  }
   if ($("div#addListUpdown").attr("class").indexOf("toDisplay") > 0) {
     $("div#addListUpdown").addClass("toHide");
     $("div#addListUpdown").removeClass("toDisplay");
@@ -211,14 +216,27 @@ $("button#addListBtn").click(function() {
     $("div#addListUpdown").removeClass("toHide");
     $("div#addListUpdown").addClass("toDisplay");
   }
-})
+});
 
 //跳出新增labels的页面
-$("#goToCreateNewLabels").click(function() {
+$("div.createNewLabels").click(function() {
   $("div#addListUpdown").addClass("toHide");
   $("div#addListUpdown").removeClass("toDisplay");
-})
+  $("#addNewLabel").removeClass("toHide");
+  $("#addNewLabel").addClass("toDisplay");
+});
 
+
+//关闭
+$("#toBackSearchLabel").click(function() {
+  $("#addListUpdown").removeClass("toHide");
+  $("#addListUpdown").addClass("toDisplay");
+  $("#addNewLabel").addClass("toHide");
+});
+
+$("#toCloseNewLabel").click(function() {
+  $("#addNewLabel").addClass("toHide");
+});
 //要先建立起一个可以存放labels以及其对应的issue的编号以及它的颜色的数组。
 
 
@@ -257,13 +275,15 @@ for (let i = 0; i < allLabels.length; i++) {
   firstShowLabels.push(i);
 }
 
-/**封装成可以显示被搜索到的labels的div块的函数  所需要传入的参数是allLabels[]中的index */
+/**boards页面下addlist时搜索labels
+封装成可以显示被搜索到的labels的div块的函数
+所需要传入的参数是allLabels[]中的index */
 function showLabelListWhenSearch(searchLabel) {
   let label_num = searchLabel.length;
   var insertLabelsDisNode = document.getElementById("labelsTodisplay");
   var ddddNode = [];
   for (var i = 0 ; i < label_num; i++) {
-    var dddd = '<div class = "choose"><label ><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle glyphicon"></span></label>'
+    var dddd = '<div class = "choose"><label ><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle glyphicon"></span></label>';
     dddd +='<div class = "labelsColor" style = "background-color : '+allLabels[searchLabel[i]].color+'"></div>';
     dddd +='<div class = "labelsName" style="display: inline-block"><span class="labelname">'+allLabels[searchLabel[i]].name+'</span></div></div>';
     ddddNode[i] = document.createElement("div");
@@ -273,14 +293,9 @@ function showLabelListWhenSearch(searchLabel) {
   }
 
 }
-addLoadEvent(showLabelListWhenSearch(firstShowLabels))
+addLoadEvent(showLabelListWhenSearch(firstShowLabels));// 最开始显示所有的lables
 
 ///////全都是bug
-
-
-//设置方框的颜色
-
-//for (var i = 0 ; i < )
 
 //内容渲染
 /*碰到的问题：
@@ -294,7 +309,7 @@ $("#boards").click(function(event) {
   var list = document.getElementById("list").parentNode;
   list.removeAttribute("class","active");
   boards.setAttribute("class","active");
-  targetNode.setAttribute("style","display:none")
+  targetNode.setAttribute("style","display:none");
   //clear(targetNode);
 });
 
@@ -307,6 +322,7 @@ $("#list").click(function(event) {
   targetNode.setAttribute("style","display:block");
   showBoardsValue();
 });
+
 //监听搜索label的回车事件，并进一步执行程序
 var searchBar = document.getElementById("searchBar");
 searchBar.addEventListener("keyup",function(event) {    //监听回车事件
@@ -316,6 +332,39 @@ searchBar.addEventListener("keyup",function(event) {    //监听回车事件
   }
 })
 
+var searchLabelBar = document.getElementById("addListSearchBar");
+searchLabelBar.addEventListener("keyup",function(event) {
+  var event = event || window.event;
+  if (event.keyCode == 13) {
+    searchLabel();
+  }
+});
+/*这段代码有bug，但是不知道问题在哪里*/
+var searchLabelBtn = document.getElementById("addListSearchBarBtn");
+searchLabelBtn.click(function() {
+  alert("ddd");
+  searchLabel();
+});
+
+function searchLabel() {
+  //模糊匹配的搜索！利用正则表达式匹配一下就行啦
+  var targetNode = $(".labelsTodisplay")[0];
+  var resultarr = [];
+  var searchForValue = searchLabelBar.value;
+  if (searchForValue.length === 0) {
+    clear(targetNode);
+    showLabelListWhenSearch(firstShowLabels);
+  }
+  var searcharr = searchForValue.split('');
+  var reg = new RegExp(searcharr.join(".*"));
+  for (let i = 0; i < allLabels.length; i++) {
+    if (reg.exec(allLabels[i].name)) {
+      resultarr.push(i);
+    }
+  }
+  clear(targetNode);
+  showLabelListWhenSearch(resultarr);
+}
 
 
 //////////////一些可复用的函数///////////
@@ -335,8 +384,6 @@ function clear(targetNode) {
     targetNode.removeChild(targetNode.firstChild);
   }
 }
-
-
 function addLoadEvent(func) {
   var oldonload = window.onload;
   if (typeof window.onload != "function") {
@@ -345,10 +392,9 @@ function addLoadEvent(func) {
     window.onload = function() {
       oldonload();
       func();
-    }
+    };
   }
 }
-
 //将节点插入到另一个节点后面
 function insertAfter (newElement, targetElement) {
   var parent = targetElement.parentNode;//获得该节点的上一个父节点，可以是元素节点，也可以是文本节点
@@ -361,12 +407,11 @@ function insertAfter (newElement, targetElement) {
 }
 
 function tagsInIssueNum(issue_num) {     //需要传入的参数是issue_info[i];
-
   return issue_num.tag.length;
 }
 /////////////////////////////////////////
 
-/*获取搜索框的label并进行比对*/
+/*list页面下 获取搜索框的label并进行比对 不是模糊搜索*/
 function searchBarFunc() {
   var arr = [];
 
@@ -388,7 +433,7 @@ function searchBarFunc() {
 }
 
 
-//显示list上标示的几个open close的数量
+//显示list页面上标示的几个open close的数量
 function showOpenCloseNum() {
   var open = 0;
   var close = 0;
@@ -415,12 +460,13 @@ function showOpenCloseNum() {
     para[i].setAttribute("color","black");
   }
 }
+
 /******获取allIssue，openIssue，closeIssue数组中的issue编号****/
 var allIssue = [];
 for (let i = 1; i <= all; i++) {
   allIssue.push(i);
 }
-
+/*获取state标记分别为1和0的issue的编号数组*/
 function openIssueNum() {
   var openIssue = [];
   for (let i = 1; i <= all; i++) {
@@ -441,6 +487,8 @@ function closeIssueNum() {
   return openIssue;
 }
 /****************************************/
+
+
 
 
 addLoadEvent(showOpenCloseNum());

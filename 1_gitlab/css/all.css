@@ -183,6 +183,7 @@ div.updownIntro {
   margin: 8px;
   border-bottom: 1px solid pink;
 }
+
  div.updownSearch {
   margin: 8px;
 
@@ -279,4 +280,79 @@ div.createNewLabels > span {
 
 #addNewLabel  {
   width: 300px;
+  border: 1px solid pink;
+
+}
+#addNewLabel h1 {
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 25%;
+}
+
+div.title {
+  display: inline-block;
+}
+
+button.back {
+  display: inline-block;
+  position: absolute;
+  left: 10px;
+  top:9px;
+}
+button.closebtn {
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  top: 9px;
+}
+#title {
+  margin: 0 8px;
+  border-bottom: 1px solid pink;
+}
+
+.margin8px {
+    margin: 8px;
+}
+
+#addNewLabel input {
+  padding: 5px 4px;
+}
+
+#colorSection {
+  width: 282px;
+  letter-spacing: normal;
+  word-spacing: -1px;
+}
+.eachColor {
+  display: inline-block;
+  width: 47px;
+  margin: 0px;
+  height: 30px;
+  margin-bottom: -5px;
+  /*这样就可以解决多行span之间存在空格的问题了*/
+  background-color: red;
+
+}
+.btn-block2 {
+  display: inline-block;
+  width: 86%;
+  vertical-align: middle;
+}
+.eachColor:hover {
+  cursor: pointer;
+}
+
+#chosenColor {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  vertical-align: middle;
+  background-color: red;
+}
+
+.flow-to-right {
+  display: inline-block;
+  position: absolute;
+  right: 8px;
 }
