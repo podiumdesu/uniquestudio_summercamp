@@ -31,6 +31,8 @@ div .header-icon {
 
 
 }
+
+
 div .header-content {
   padding: 0px;
   line-height: 15px;
@@ -48,11 +50,36 @@ div.header-content a:hover {
 
 nav.nav-body {
   position: relative;
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #DFEFF0;
   width: 100%;
 
 }
 
+.labelInissue {
+   margin:3px 4px;
+   padding:3px 10px;
+   color: rgba(33,33,23,0.4);
+   border-radius: 20px;
+   font-size: 13px;
+   vertical-align: text-bottom;
+
+}
+
+.issueClosed {
+   background-color: #F6F6F6;
+}
+
+.issueOpen {
+  height: 60px;
+  padding: 5px 10px;
+  border-bottom: 1px solid #DFEFF0;
+
+}
+
+.displayClose {
+  position: absolute;
+  right: 10%;
+}
 nav.nav-body div.body-container {
   display: flex;
   text-align: center;
@@ -137,9 +164,6 @@ div.flex-body {
   background-color: transparent;
 }
 
-div.search-bar div.select-bar div {
-  display: inline;
-}
 
 div.search-bar div.select-bar ul {
   display: none;
@@ -148,40 +172,11 @@ div.search-bar div.select-menu {
   width: 20%;
 }
 div.search-bar div.click-to-search input {
-  height: 35px;
-  width: 80%;
+  height: 36px;
+  width: 100%;
+  padding: 0 10px;
+  vertical-align: text-top;
 }
-
-/*
-var allLabels = [
-  {
-    name: "bug",
-    IssueHave: [1,2,3],
-    color: "#aedede"
-  },
-  {
-    name: "js_err",
-    IssueHave: [1,2],
-    color: "pink"
-  },
-  {
-    name: "object_err",
-    IssueHave: [1],
-    color: "yellow"
-  },
-  {
-    name: "array_err",
-    IssueHave: [1],
-    color: "red"
-  },
-  {
-    name: "display_err",
-    IssueHave: [3],
-    color: "#fddeae"
-  }
-];
-*/
-
 
 /*****boards页面的css******/
 /*
@@ -196,7 +191,12 @@ var allLabels = [
 
 */
 
-
+.chooseActive {
+  border-bottom: 2px solid #1f78d1;
+}
+.chooseHover:hover {
+  border-bottom: 2px solid rgba(0,0,0,0.5);
+}
 .UpdownFlow {
   width: 300px;
   z-index: 1;
@@ -220,12 +220,18 @@ div.updownIntro {
 
 }
 
+#boardPage {
+  margin-top: 100px;
+}
+
 div.labelsTodisplay {
   margin: 8px;
   border-bottom: 1px solid pink;
   padding: 3px 0;
 
 }
+
+
 div.choose label {
   margin-bottom: 0px;
 }
@@ -253,6 +259,18 @@ input.labelsCheckout + span {
 
 input.labelsCheckout:checked + span {
   background-color: lightgreen;
+
+}
+
+.menu-bar-left {
+  border-bottom: 1px solid #DFEFF0;
+}
+div.click-to-search > div.input-group {
+
+  padding: 10px 10px;
+  background-color:#F6F6F6;
+  border-bottom: 1px solid #DFEFF0;
+
 
 }
 
@@ -386,4 +404,7 @@ button.closebtn {
   display: inline-block;
   position: absolute;
   right: 8px;
+}
+.height55px {
+  height: 60px;
 }

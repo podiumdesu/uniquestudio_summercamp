@@ -14,7 +14,7 @@
 /jquery/1.4.0/jquery.min.js"></script>
 </head>
 <body>
-  <nav class = "nav-container">
+  <nav class = "nav-container height55px">
     <div class = "nav-bar">
       <div class = "category">
         <img src="images/category.png" alt="category" id = "img_category">
@@ -59,18 +59,15 @@
       <div class = "menu-bar">
         <div class="menu-bar-left">
           <ul class = "words-display">
-            <li id="open_num"><a href="#" >Open</a></li>
-            <li id="close_num"><a href="#" >Close</a></li>
-            <li id="all_num"><a href="#">All</a></li>
+            <li id="open_num"  class = "chooseHover chooseActive"><a href="#" >Open</a></li>
+            <li id="close_num" class = "chooseHover"><a href="#" >Close</a></li>
+            <li id="all_num" class = "chooseHover"><a href="#">All</a></li>
           </ul>
         </div>
       </div>
-      <div class = "search-bar">
-        <div class = "select-bar">
-          <div class = "select-menu">
-            <div>
-              <span class = "select-bar-tab">dddddd</span>
-            </div>
+      <div class = "search-bar height55px">
+        <div class = "select-bar height55px">
+          <div class = "select-menu ">
             <div>
               <ul class = "select-bar-menu">
                 <li>Recent searches</li>
@@ -78,16 +75,27 @@
               </ul>
             </div>
           </div>
-          <div class = "click-to-search">
-            <div>
+          <div class = "click-to-search height55px">
+            <div class="input-group height55px">
+              <span class="input-group-btn">
+              <button class="btn btn-info" type="button"><span>&nbsp;&nbsp;</span></button>
+              </span>
               <input type="text" size="4" value="" id = "searchBar" placeholder="Please input sth to search">
-
             </div>
           </div>
         </div>
       </div>
       <div class = "display-issue">
-        <div></div>
+        <!--使用js动态添加节点
+        <div style="background-color: rgba(0,0,0,0.1);margin: 5px 0;padding: 0 4px;">
+          <p>pushpushtest</p><span>#1</span>
+          <span style="color:pink"> 2017-07-03T08:47:28.713Z </span>
+          <span style="background-color:#aedede; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">bug</span>
+          <span style="background-color:red; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">array_err</span>
+          <span style="background-color:yellow; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">object_err</span>
+          <span style="background-color:pink; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">js_err</span>
+          <span style="background-color:blue; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">ddd</span></div>
+        -->
       </div>
       <div id = "boardPage">
         <div class="row head">

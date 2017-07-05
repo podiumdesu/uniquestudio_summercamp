@@ -29,12 +29,12 @@ let issue_info = [
       "red",
       "yellow",
       "pink",
-      "blue"
+      "lightyellow"
     ],
     no: 1,
     name: "pushpushtest",
     date: "2017-07-03T08:47:28.713Z",
-    state: 0
+    state: 1
   },
   {
     tag: [
@@ -48,7 +48,7 @@ let issue_info = [
     no: 2,
     name: "second test",
     date: "2017-07-03T08:47:28.713Z",
-    state: 1
+    state: 0
   },
   {
     tag: [
@@ -61,6 +61,20 @@ let issue_info = [
     ],
     no: 3,
     name: "third push test",
+    date: "2017-07-03T08:47:28.713Z",
+    state: 1
+  },
+  {
+    tag: [
+      "hello,world",
+      "wtf"
+    ],
+    tagColor: [
+      "#fddddd",
+      "#aeeaea"
+    ],
+    no: 4,
+    name: "what do you want",
     date: "2017-07-03T08:47:28.713Z",
     state: 1
   }
@@ -93,6 +107,63 @@ issue_info[3].state = 1;
 var all = issue_info.length-1;
 
 /*************************/
+
+//显示list页面上标示的几个open close的数量
+function showOpenCloseNum() {
+  var open = 0;
+  var close = 0;
+  for (let i = 1; i <= all; i++) {
+    if (issue_info[i].state === 1) {
+      open++;
+    } else {
+      close++;
+    }
+  }
+
+  var num = new Array();
+  var para = new Array();
+  var t = new Array();
+  num[0] = document.getElementById("open_num");
+  num[1] = document.getElementById("close_num");
+  num[2] = document.getElementById("all_num");
+  var dis_num = new Array(open,close,all);
+  for (var i =0; i < 3; i++) {
+    para[i] = document.createElement("span");
+    t[i] = document.createTextNode(dis_num[i]);
+    num[i].appendChild(para[i]);
+    para[i].appendChild(t[i]);
+    para[i].setAttribute("color","black");
+  }
+}
+
+
+/******获取allIssue，openIssue，closeIssue数组中的issue编号****/
+var allIssue = [];
+for (let i = 1; i <= all; i++) {
+  allIssue.push(i);
+}
+/*获取state标记分别为1和0的issue的编号数组*/
+function openIssueNum() {
+  var openIssue = [];
+  for (let i = 1; i <= all; i++) {
+    if (issue_info[i].state == 1) {
+      openIssue.push(i);
+    }
+  }
+  return openIssue;
+}
+
+function closeIssueNum() {
+  var openIssue = [];
+  for (let i = 1; i <= all; i++) {
+    if (issue_info[i].state == 0) {
+      openIssue.push(i);
+    }
+  }
+  return openIssue;
+}
+/****************************************/
+
 
 
 /*
@@ -151,10 +222,11 @@ function showListIssue(IssueInTheArray) {
       tagsNodesValueNode[k] = document.createTextNode(issueTags[i][k]);
       disIssueNode[i].appendChild(tagsNodes[k]);
       tagsNodes[k].appendChild(tagsNodesValueNode[k]);
-      tagsNodes[k].setAttribute("style","background-color:"+issueTagsColors[i][k]+"; margin:0px 4px; padding:2px; border-radius: 5px;font-size: 13px;");
+      tagsNodes[k].setAttribute("style","background-color:"+issueTagsColors[i][k]);
+      tagsNodes[k].className += "labelInissue";
     }
     issueName[i] = document.createTextNode(issue_info[IssueInTheArray[i-1]].name);
-    issueNo[i] = document.createTextNode('#'+issue_info[IssueInTheArray[i-1]].no);
+    issueNo[i] = document.createTextNode('#'+issue_info[IssueInTheArray[i-1]].no+' · ');
     issueDate[i] = document.createTextNode(' '+issue_info[IssueInTheArray[i-1]].date+' ');
 
     paraNode[i].appendChild(issueName[i]);
@@ -163,12 +235,22 @@ function showListIssue(IssueInTheArray) {
     dateNode[i].setAttribute("style","color:pink");
   }
   for (var j = 1; j <= all_num ; j++) {
-    disIssueNode[j].setAttribute("style","border-bottom:1px solid rgba(0,0,0,0.2); margin: 5px 0; padding: 0 4px;");
-    if(issue_info[IssueInTheArray[j-1]].state == 0) {
-      disIssueNode[j].setAttribute("style","background-color: rgba(0,0,0,0.1);margin: 5px 0;padding: 0 4px;");
+    disIssueNode[j].className += " issueOpen ";
+    if(issue_info[IssueInTheArray[j-1]].state === 0) {
+      disIssueNode[j].className += " issueClosed";
+      //let sss = disIssueNode[j].createElement("span").createTextNode("Closed");
+      //sss.className += "displayClose";
     }
   }
+  /*
+  for (let p = tagsInIssueNum(issue_info[IssueInTheArrayp[i-1]]) ; p > 0; p-- ) {
+    disIssueNode[i].appendChild(paraNode[p]);
+    disIssueNode[i].appendChild(infoNode[p]);
+    disIssueNode[i].appendChild(dateNode[p]);
+  }
+  */
 }
+
 
 
 function showBoardsValue() {
@@ -184,6 +266,9 @@ function showBoardsValue() {
 var displayAllIssue = document.getElementById("all_num");
 displayAllIssue.onclick = function(event) {
   var targetNode = document.getElementsByClassName("display-issue")[0];
+  $(this).addClass("chooseActive");
+  $("#open_num").removeClass("chooseActive");
+  $("#close_num").removeClass("chooseActive");
   clear(targetNode);
   showListIssue(allIssue);
 };
@@ -191,6 +276,9 @@ displayAllIssue.onclick = function(event) {
 var displayOpenIssue = document.getElementById("open_num");
 displayOpenIssue.onclick = function(event) {
   var targetNode = document.getElementsByClassName("display-issue")[0];
+  $(this).addClass("chooseActive");
+  $("#all_num").removeClass("chooseActive");
+  $("#close_num").removeClass("chooseActive");
   clear(targetNode);
   showListIssue(openIssueNum());
 };
@@ -198,8 +286,13 @@ displayOpenIssue.onclick = function(event) {
 var displayCloseIssue = document.getElementById("close_num");
 displayCloseIssue.onclick = function(event) {
   var targetNode = document.getElementsByClassName("display-issue")[0];
+    $(this).addClass("chooseActive");
+    $("#open_num").removeClass("chooseActive");
+    $("#all_num").removeClass("chooseActive");
   clear(targetNode);
+
   showListIssue(closeIssueNum());
+  $(".issueClosed").removeClass("issueClosed");
 };
 
 
@@ -269,6 +362,11 @@ var allLabels = [
     name: "display_err",
     IssueHave: [3],
     color: "#fddeae"
+  },
+  {
+    name: "ddd",
+    IssueHave: [1],
+    color: "lightyellow"
   }
 ];
 
@@ -284,6 +382,7 @@ function getAllLabelsIndex() {
 /**boards页面下addlist时搜索labels
 封装成可以显示被搜索到的labels的div块的函数
 所需要传入的参数是allLabels[]中的index */
+
 function showLabelListWhenSearch(searchLabel) {
   let label_num = searchLabel.length;
   var insertLabelsDisNode = document.getElementById("labelsTodisplay");
@@ -359,7 +458,7 @@ function searchLabel() {
   var searchForValue = searchLabelBar.value;
   if (searchForValue.length === 0) {
     clear(targetNode);
-    showLabelListWhenSearch(firstShowLabels);
+    showLabelListWhenSearch(getAllLabelsIndex());
   }
   var searcharr = searchForValue.split('');
   var reg = new RegExp(searcharr.join(".*"));
@@ -437,63 +536,6 @@ function searchBarFunc() {
   clear(targetNode);
   showListIssue(arr);
 }
-
-
-//显示list页面上标示的几个open close的数量
-function showOpenCloseNum() {
-  var open = 0;
-  var close = 0;
-  for (let i = 1; i <= all; i++) {
-    if (issue_info[i].state === 1) {
-      open++;
-    } else {
-      close++;
-    }
-  }
-
-  var num = new Array();
-  var para = new Array();
-  var t = new Array();
-  num[0] = document.getElementById("open_num");
-  num[1] = document.getElementById("close_num");
-  num[2] = document.getElementById("all_num");
-  var dis_num = new Array(open,close,all);
-  for (var i =0; i < 3; i++) {
-    para[i] = document.createElement("span");
-    t[i] = document.createTextNode(dis_num[i]);
-    num[i].appendChild(para[i]);
-    para[i].appendChild(t[i]);
-    para[i].setAttribute("color","black");
-  }
-}
-
-
-/******获取allIssue，openIssue，closeIssue数组中的issue编号****/
-var allIssue = [];
-for (let i = 1; i <= all; i++) {
-  allIssue.push(i);
-}
-/*获取state标记分别为1和0的issue的编号数组*/
-function openIssueNum() {
-  var openIssue = [];
-  for (let i = 1; i <= all; i++) {
-    if (issue_info[i].state == 1) {
-      openIssue.push(i);
-    }
-  }
-  return openIssue;
-}
-
-function closeIssueNum() {
-  var openIssue = [];
-  for (let i = 1; i <= all; i++) {
-    if (issue_info[i].state == 0) {
-      openIssue.push(i);
-    }
-  }
-  return openIssue;
-}
-/****************************************/
 
 
 /*通过监听其父节点来解决*/
