@@ -102,92 +102,191 @@
       </div>
 
       <div id = "boardPage" class="toHide">
-        <div class="row head">
-            <span class="col-lg-1">development</span>
-                <div class="col-lg-11">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id = "boardSearchBar" placeholder="Search or filter results...">
-                        <span class="input-group-btn">
-                        <button class="btn btn-info" type="button" id ="addListBtn"><span>Add list</span></button>
-                        </span>
-                    </div>
-                </div>
-        </div>
-        <div id = "addListUpdown" class = "toHide UpdownFlow">
-          <div class = "listFlexbody">
-            <h1>Add list</h1>
-            <div class="updownIntro">
-              <p>hello,world. What you can just do here is to search the labels you use in your projects. Have a good time :)</p>
-            </div>
-            <div class = "updownSearch">
-              <div class ="col-lg-13">
-                <div class = "input-group">
-                  <input type="text" class = "form-control" id = "addListSearchBar" placeholder="search for the labels">
-                  <span class = "input-group-btn">
-                  <button type="button" class = "btn btn-success" name="button" id = "addListSearchBarBtn"><span class = "glyphicon glyphicon-search"></span></button>
-                <!--bootstrap是真的很好用啊！！！！！-->
-                </div>
-              </div>
-            </div>
-            <div class = "labelsTodisplay" id = "labelsTodisplay">
-                <!--这里用js插入代码
-                <div class = "choose">
-                  <label >
-                    <input type="checkbox" value="" class="labelsCheckout" />
-                  <span class="checkboxStyle glyphicon"></span>
-                  </label>
-                  <div class = "labelsColor">
+        <div class="allinhere">
+          <div class="row head">
+              <span class="col-lg-1">development</span>
+                  <div class="col-lg-11">
+                      <div class="input-group">
+                          <input type="text" class="form-control" id = "boardSearchBar" placeholder="Search or filter results...">
+                          <span class="input-group-btn">
+                          <button class="btn btn-info" type="button" id ="addListBtn"><span>Add list</span></button>
+                          </span>
+                      </div>
                   </div>
-                  <div class = "labelsName" style="display: inline-block"><span class="labelname">bug</span></div>
+          </div>
+          <div id = "addListUpdown" class = "toHide UpdownFlow">
+            <div class = "listFlexbody">
+              <h1>Add list</h1>
+              <div class="updownIntro">
+                <p>hello,world. What you can just do here is to search the labels you use in your projects. Have a good time :)</p>
+              </div>
+              <div class = "updownSearch">
+                <div class ="col-lg-13">
+                  <div class = "input-group">
+                    <input type="text" class = "form-control" id = "addListSearchBar" placeholder="search for the labels">
+                    <span class = "input-group-btn">
+                    <button type="button" class = "btn btn-success" name="button" id = "addListSearchBarBtn"><span class = "glyphicon glyphicon-search"></span></button>
+                  <!--bootstrap是真的很好用啊！！！！！-->
+                  </div>
                 </div>
-              -->
-            </div>
-            <div class ="addListMore">
-              <div class = "createNewLabels">
-                <span id="goToCreateNewLabels">Create new labels</span>
+              </div>
+              <div class = "labelsTodisplay" id = "labelsTodisplay">
+                  <!--这里用js插入代码
+                  <div class = "choose">
+                    <label >
+                      <input type="checkbox" value="" class="labelsCheckout" />
+                    <span class="checkboxStyle glyphicon"></span>
+                    </label>
+                    <div class = "labelsColor">
+                    </div>
+                    <div class = "labelsName" style="display: inline-block"><span class="labelname">bug</span></div>
+                  </div>
+                -->
+              </div>
+              <div class ="addListMore">
+                <div class = "createNewLabels">
+                  <span id="goToCreateNewLabels">Create new labels</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div id = "addNewLabel" class = "UpdownFlow toHide">
-          <div id = "title">
-            <button type="button" class="close back" id = "toBackSearchLabel"><span aria-hidden="true">back</span><span class="sr-only"></span></button>
-              <h1>Create new label</h1>
-             <button type="button" class="close closebtn" id = "toCloseNewLabel"><span aria-hidden="true">close</span><span class="sr-only"></span></button>
-          </div>
-          <div id = "inputTheLabelName" class="margin8px" >
-            <input type="text" class="btn-block" placeholder="Name new label" id = "pppName">
-          </div>
-            <div id = "colorSection"  class=" wtf margin8px">
-              <!--这个方法用来消除同一行中的span之间的间隙-->
-              <span class = "eachColor" data-color="#0033cc" style="background-color:#0033cc"></span><!--
-           --><span class = "eachColor" data-color="#42bbca" style="background-color:#42bbca"></span><!--
-           --><span class = "eachColor" data-color="#44adbe" style="background-color:#44adbe"></span><!--
-           --><span class = "eachColor" data-color="#abd695" style="background-color:#abd695"></span><!--
-           --><span class = "eachColor" data-color="#5cbb5c" style="background-color:#5cbb5c"></span><!--
-           --><span class = "eachColor" data-color="#69d100" style="background-color:#69d100"></span><!--
-           --><span class = "eachColor" data-color="#004e00" style="background-color:#004e00"></span><!--
-           --><span class = "eachColor" data-color="#34495e" style="background-color:#34495e"></span><!--
-           --><span class = "eachColor" data-color="#7fbcbd" style="background-color:#7fbcbd"></span><!--
-           --><span class = "eachColor" data-color="#a295d6" style="background-color:#a295d6"></span><!--
-           --><span class = "eachColor" data-color="#5b43ad" style="background-color:#5b43ad"></span><!--
-           --><span class = "eachColor" data-color="#8e44ad" style="background-color:#8e44ad"></span><!--
-           --><span class = "eachColor" data-color="#ffecdb" style="background-color:#ffecdb"></span><!--
-           --><span class = "eachColor" data-color="#ad4363" style="background-color:#ad4363"></span><!--
-           --><span class = "eachColor" data-color="#d10069" style="background-color:#d10069"></span><!--
-           --><span class = "eachColor" data-color="#cc0033" style="background-color:#cc0033"></span><!--
-           --><span class = "eachColor" data-color="#ff0000" style="background-color:#ff0000"></span><!--
-           --><span class = "eachColor" data-color="#d9534f" style="background-color:#d9534f"></span>
+          <div id = "addNewLabel" class = "UpdownFlow toHide">
+            <div id = "title">
+              <button type="button" class="close back" id = "toBackSearchLabel"><span aria-hidden="true">back</span><span class="sr-only"></span></button>
+                <h1>Create new label</h1>
+               <button type="button" class="close closebtn" id = "toCloseNewLabel"><span aria-hidden="true">close</span><span class="sr-only"></span></button>
             </div>
-          <div id = "assignColor" class="margin8px">
-            <span id="chosenColor"></span>
-            <input type="text" id="showColorName" class="btn-block2" placeholder="Assign your own color">
-          </div>
-          <div id = "clickToCreate" class = "margin8px">
-            <button class="btn btn-success" id="ok">点击确认</button>
-            <button class="btn flow-to-right" id="cancel">取消</button>
+            <div id = "inputTheLabelName" class="margin8px" >
+              <input type="text" class="btn-block" placeholder="Name new label" id = "pppName">
+            </div>
+              <div id = "colorSection"  class=" wtf margin8px">
+                <!--这个方法用来消除同一行中的span之间的间隙-->
+                <span class = "eachColor" data-color="#0033cc" style="background-color:#0033cc"></span><!--
+             --><span class = "eachColor" data-color="#42bbca" style="background-color:#42bbca"></span><!--
+             --><span class = "eachColor" data-color="#44adbe" style="background-color:#44adbe"></span><!--
+             --><span class = "eachColor" data-color="#abd695" style="background-color:#abd695"></span><!--
+             --><span class = "eachColor" data-color="#5cbb5c" style="background-color:#5cbb5c"></span><!--
+             --><span class = "eachColor" data-color="#69d100" style="background-color:#69d100"></span><!--
+             --><span class = "eachColor" data-color="#004e00" style="background-color:#004e00"></span><!--
+             --><span class = "eachColor" data-color="#34495e" style="background-color:#34495e"></span><!--
+             --><span class = "eachColor" data-color="#7fbcbd" style="background-color:#7fbcbd"></span><!--
+             --><span class = "eachColor" data-color="#a295d6" style="background-color:#a295d6"></span><!--
+             --><span class = "eachColor" data-color="#5b43ad" style="background-color:#5b43ad"></span><!--
+             --><span class = "eachColor" data-color="#8e44ad" style="background-color:#8e44ad"></span><!--
+             --><span class = "eachColor" data-color="#ffecdb" style="background-color:#ffecdb"></span><!--
+             --><span class = "eachColor" data-color="#ad4363" style="background-color:#ad4363"></span><!--
+             --><span class = "eachColor" data-color="#d10069" style="background-color:#d10069"></span><!--
+             --><span class = "eachColor" data-color="#cc0033" style="background-color:#cc0033"></span><!--
+             --><span class = "eachColor" data-color="#ff0000" style="background-color:#ff0000"></span><!--
+             --><span class = "eachColor" data-color="#d9534f" style="background-color:#d9534f"></span>
+              </div>
+            <div id = "assignColor" class="margin8px">
+              <span id="chosenColor"></span>
+              <input type="text" id="showColorName" class="btn-block2" placeholder="Assign your own color">
+            </div>
+            <div id = "clickToCreate" class = "margin8px">
+              <button class="btn btn-success" id="ok">点击确认</button>
+              <button class="btn flow-to-right" id="cancel">取消</button>
+            </div>
           </div>
         </div>
+        <div class = "content-wrapper">
+          <div id = "content-body" class = "content-body">
+            <div class = "inlineDisplay">
+
+              <div data-id= "" class = "board left-board">
+                <header class="board-header" id="test">
+                  <h6>
+                    <i aria-hidden="true" class="fa fa-fw board-title-expandable-toggle fa-caret-down"></i>
+                    <span class = "boardtitle">Backlog</span>
+                  </h6>
+                </header>
+                <div class="boader-list-component">
+                  <ul data-board="" class="board-list">
+                    <li index = "0" class = "every-issue-to-drag">
+                      <div class = "issue-to-drag_title">
+                        <span>name</span>
+                        <span>id</span>
+                      </div>
+                      <div class = "issue-to-drag_labels">
+                        <span>push</span>
+                        <span>ddddd</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div data-id= "" class = "board">
+                <header class="board-header">
+                  <h6>
+                    <span class = "boardtitle">Backlog</span>
+                  </h6>
+                </header>
+                <div class="boader-list-component">
+                  <ul data-board="" class="board-list">
+                    <li index = "0" class = "every-issue-to-drag">
+                      <div class = "issue-to-drag_title">
+                        <span>name</span>
+                        <span>id</span>
+                      </div>
+                      <div class = "issue-to-drag_labels">
+                        <span>push</span>
+                        <span>ddddd</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div data-id= "" class = "board">
+                <header class="board-header">
+                  <h6>
+                    <span class = "boardtitle">Backlog</span>
+                  </h6>
+                </header>
+                <div class="boader-list-component">
+                  <ul data-board="" class="board-list">
+                    <li index = "0" class = "every-issue-to-drag">
+                      <div class = "issue-to-drag_title">
+                        <span>name</span>
+                        <span>id</span>
+                      </div>
+                      <div class = "issue-to-drag_labels">
+                        <span>push</span>
+                        <span>ddddd</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!--剩下的boardlist块使用js进行插入-->
+              <div data-id= "" class = "board right-board">
+                <header class="board-header">
+                  <h6>
+                    <i aria-hidden="true" class="fa fa-fw board-title-expandable-toggle fa-caret-down"></i>
+                    <span class = "boardtitle">Closed</span>
+                  </h6>
+                </header>
+                <div class="boader-list-component">
+                  <ul data-board="" class="board-list">
+                    <li index = "0" class = "every-issue-to-drag">
+                      <div class = "issue-to-drag_title">
+                        <span>name</span>
+                        <span>id</span>
+                      </div>
+                      <div class = "issue-to-drag_labels">
+                        <span>push</span>
+                        <span>ddddd</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
     </div>
   </div>
 

@@ -253,8 +253,6 @@ function showListIssue(IssueInTheArray) {
 
 
 
-
-
 //绑定点击事件。点击后，显示数据的区域进行clear，然后重新根据传入的数组渲染数据。
 
 var displayAllIssue = document.getElementById("all_num");
@@ -404,6 +402,7 @@ addLoadEvent(showLabelListWhenSearch(getAllLabelsIndex()));// 最开始显示所
 
 var listNode;
 var boardNode;
+
 
 $("#boards").click(function(event) {
   var childToAppend = document.getElementById("boardPage");
@@ -605,13 +604,39 @@ $("#ok").click(function()  {
   }
 });
 
-  document.getElementById("pppName").value = "";
+
+document.getElementById("pppName").value = "";
 function createNewLabel() {
   var ppp = {};
   ppp.name = document.getElementById("pppName").value;
   ppp.color = document.getElementById("showColorName").value;
   allLabels.push(ppp);    //但是刷新之后就所有数据都不见了！！！！
 }
+
+
+//编写boardlist的函数块，这里代码重复了，应该怎么封装呢
+$(".left-board .board-header").click(function() {
+  if ($(this).parent().attr("class").indexOf("displaySmall") > 0) {
+    $(this).parent().removeClass("displaySmall");
+    $(this).next().removeClass("toHide");
+    $(this).attr("style","border-bottom:  1px solid black;");
+  } else {
+    $(this).parent().addClass("displaySmall");
+    $(this).next().addClass("toHide");
+    $(this).attr("style","border-bottom: 0px")
+  }
+});
+$(".right-board .board-header").click(function() {
+  if ($(this).parent().attr("class").indexOf("displaySmall") > 0) {
+    $(this).parent().removeClass("displaySmall");
+    $(this).next().removeClass("toHide");
+    $(this).attr("style","border-bottom:  1px solid black;");
+  } else {
+    $(this).parent().addClass("displaySmall");
+    $(this).next().addClass("toHide");
+    $(this).attr("style","border-bottom: 0px")
+  }
+});
 
 
 addLoadEvent(showOpenCloseNum());

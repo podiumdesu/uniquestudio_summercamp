@@ -198,11 +198,20 @@ div.search-bar div.click-to-search input {
   border-bottom: 2px solid rgba(0,0,0,0.5);
 }
 .UpdownFlow {
+  background-color: white;
   width: 300px;
-  z-index: 1;
+  z-index: 100;
   position: absolute;
-  right: 10%;
+  right: 0;
+  top: 40px;
   border: 3px solid green;
+}
+
+.allinhere {
+  height: 55px;
+  padding: 10px 20px;
+  position: relative;
+  background-color: #f6f6f6;
 }
 #addListUpdown h1 {
   text-align: center;
@@ -219,6 +228,7 @@ div.updownIntro {
   margin: 8px;
 
 }
+
 
 
 div.labelsTodisplay {
@@ -270,6 +280,7 @@ div.click-to-search > div.input-group {
 
 
 }
+
 
 div.labelsColor {
   margin-left: 8px;
@@ -405,3 +416,113 @@ button.closebtn {
 .height55px {
   height: 60px;
 }
+
+/*****设置labellist页面的多个方框****/
+
+.inlineDisplay {
+
+  width: 100%;
+  padding: 20px;
+  overflow-x: scroll;
+  white-space: nowrap;  /*设置滑动效果*/
+  display: block;
+  background-color: #f6f6f6;
+  border: 1px solid pink;
+
+
+}
+
+.board {   /*整个方框的样式*/
+  width: 350px;
+  height: 500px;
+  border: 2px solid black;
+  position: relative;
+
+  display: inline-block;    /*设置滑动效果*/
+  margin-right: 10px;
+  background-color: #f6f6f6;
+  border-radius: 4px;
+  vertical-align: -webkit-baseline-middle;
+}
+
+.board ul {
+  list-style: none;
+}
+.board:last-child {
+  margin: 0px;
+}
+div.add-btn {   /*右上角的数字以及添加按钮的div*/
+  display: inline-block;
+  position: absolute;
+  right: 10%;
+  width: 10px;
+}
+div.add-btn> button {   /*添加新issue的button*/
+  display: inline;
+}
+
+.board-header {  /*最上方的label块显示信息*/
+  border-bottom: 1px solid black;
+  border-top: 3px solid pink;   /*根据label自带的颜色自己进行设置*/
+  height: 50px;
+  padding: 5px 10px;
+}
+
+.every-issue-to-drag {   /*每个可拖动的小方块*/
+  border: 1px solid black;
+  margin: 5px 5px;
+  height: 60px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/*
+background-color:#F6F6F6;
+border-bottom: 1px solid #DFEFF0;
+*/
+
+/*单独设置backlog和closed的样式*/
+.left-board > .board-header{
+  border-top: 3px solid transparent;
+}
+.right-board > .board-header{
+  border-top: 3px solid transparent;
+}
+
+.left-board > .board-header:hover {
+  cursor: pointer;
+}
+
+
+/*设置点击框框displaySmall的样式*/
+.displaySmall {
+  width: 40px;
+
+}
+.fa {
+  font:normal normal normal 14px/1 FontAwesome
+}
+
+i {
+  margin: 10px;
+}
+.displaySmall .board-header  span {
+  display: block;
+  transform: rotate(90deg) translate(7px,0);
+}
+.displaySmall .board-header i {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  margin: 0px;
+}
+.left-board.displaySmall .board-header i:before{
+  content: '\f0da';
+}
+.right-board.displaySmall .board-header i:before{
+  content: '\f0d9';
+}
+.fa-caret-down:before {
+  content: "\f0d7";
+}
+/*******************/
