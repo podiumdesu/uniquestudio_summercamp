@@ -47,57 +47,61 @@
   <nav class = "nav-body nav-second">
     <div class="body-container">
       <ul class = "ul-display nav-container">
-        <li class = "active"><a href="#" id="list">List</a></li>
-        <li><a href="#" id="boards">Boards</a></li>
+        <li class = "chooseActive"><a href="#" id="list">List</a></li>
+        <li class = " "><a href="#" id="boards">Boards</a></li>
         <li  id="labels"><a href="#">Labels</a></li>
         <li><a href="#" id="milestones">Milestones</a></li>
       </ul>
     </div>
   </nav>
   <div class = "main-body">
-    <div class = "flex-body">
-      <div class = "menu-bar">
-        <div class="menu-bar-left">
-          <ul class = "words-display">
-            <li id="open_num"  class = "chooseHover chooseActive"><a href="#" >Open</a></li>
-            <li id="close_num" class = "chooseHover"><a href="#" >Close</a></li>
-            <li id="all_num" class = "chooseHover"><a href="#">All</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class = "search-bar height55px">
-        <div class = "select-bar height55px">
-          <div class = "select-menu ">
-            <div>
-              <ul class = "select-bar-menu">
-                <li>Recent searches</li>
-                <li>Clear recent searches</li>
-              </ul>
-            </div>
-          </div>
-          <div class = "click-to-search height55px">
-            <div class="input-group height55px">
-              <span class="input-group-btn">
-              <button class="btn btn-info" type="button"><span>&nbsp;&nbsp;</span></button>
-              </span>
-              <input type="text" size="4" value="" id = "searchBar" placeholder="Please input sth to search">
-            </div>
+    <div class = "flex-body" id = "flex-body">
+      <div id = "listPage">
+        <div class = "menu-bar">
+          <div class="menu-bar-left">
+            <ul class = "words-display">
+              <li id="open_num"  class = "chooseHover chooseActive"><a href="#" >Open</a></li>
+              <li id="close_num" class = "chooseHover"><a href="#" >Close</a></li>
+              <li id="all_num" class = "chooseHover"><a href="#">All</a></li>
+            </ul>
           </div>
         </div>
+        <div class = "search-bar height55px">
+          <div class = "select-bar height55px">
+            <div class = "select-menu ">
+              <div>
+                <ul class = "select-bar-menu">
+                  <li>Recent searches</li>
+                  <li>Clear recent searches</li>
+                </ul>
+              </div>
+            </div>
+            <div class = "click-to-search height55px">
+              <div class="input-group height55px">
+                <span class="input-group-btn">
+                <button class="btn btn-info" type="button"><span>&nbsp;&nbsp;</span></button>
+                </span>
+                <input type="text" size="4" value="" id = "searchBar" placeholder="Please input sth to search">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class = "display-issue">
+          <!--使用js动态添加节点
+          <div style="background-color: rgba(0,0,0,0.1);margin: 5px 0;padding: 0 4px;">
+            <p>pushpushtest</p><span>#1</span>
+            <span style="color:pink"> 2017-07-03T08:47:28.713Z </span>
+            <span style="background-color:#aedede; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">bug</span>
+            <span style="background-color:red; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">array_err</span>
+            <span style="background-color:yellow; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">object_err</span>
+            <span style="background-color:pink; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">js_err</span>
+            <span style="background-color:blue; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">ddd</span></div>
+          -->
+        </div>
+
       </div>
-      <div class = "display-issue">
-        <!--使用js动态添加节点
-        <div style="background-color: rgba(0,0,0,0.1);margin: 5px 0;padding: 0 4px;">
-          <p>pushpushtest</p><span>#1</span>
-          <span style="color:pink"> 2017-07-03T08:47:28.713Z </span>
-          <span style="background-color:#aedede; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">bug</span>
-          <span style="background-color:red; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">array_err</span>
-          <span style="background-color:yellow; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">object_err</span>
-          <span style="background-color:pink; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">js_err</span>
-          <span style="background-color:blue; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">ddd</span></div>
-        -->
-      </div>
-      <div id = "boardPage">
+
+      <div id = "boardPage" class="toHide">
         <div class="row head">
             <span class="col-lg-1">development</span>
                 <div class="col-lg-11">
@@ -186,6 +190,7 @@
         </div>
     </div>
   </div>
+
 </div>
 
   <script type="text/javascript" src="bundle.js"></script>

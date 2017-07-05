@@ -62,7 +62,7 @@ let issue_info = [
     no: 3,
     name: "third push test",
     date: "2017-07-03T08:47:28.713Z",
-    state: 1
+    state: 0
   },
   {
     tag: [
@@ -253,12 +253,6 @@ function showListIssue(IssueInTheArray) {
 
 
 
-function showBoardsValue() {
-
-  var mainNode = $(".flex-body")[0];
-  $("#boardPage").attr("style","display:block");
-
-}
 
 
 //绑定点击事件。点击后，显示数据的区域进行clear，然后重新根据传入的数组渲染数据。
@@ -407,26 +401,73 @@ addLoadEvent(showLabelListWhenSearch(getAllLabelsIndex()));// 最开始显示所
 在flex-body下的节点，如果不使用clear的话就没法更新新节点，（再添加新的节点就会跑到之前的那个页面上去）
 但是如果clear的话，这个节点之后所有的节点都会没有，就必须要重新再建立链接。
 */
+
+var listNode;
+var boardNode;
+
 $("#boards").click(function(event) {
-//  var targetNode = document.getElementsByClassName("flex-body")[0];
-  var targetNode = $(".flex-body")[0];
-  var boards = document.getElementById("boards").parentNode;
+  var childToAppend = document.getElementById("boardPage");
+  window.listNode = $("#listPage").detach();
+  $("#flex-body").prepend(window.boardNode);
+  childToAppend.removeAttribute("class","toHide");
+  var boardss = document.getElementById("boards").parentNode;
   var list = document.getElementById("list").parentNode;
-  list.removeAttribute("class","active");
-  boards.setAttribute("class","active");
-  targetNode.setAttribute("style","display:none");
-  //clear(targetNode);
+  list.removeAttribute("class","chooseActive");
+  boardss.setAttribute("class","active");
 });
 
 $("#list").click(function(event) {
-  var targetNode = $(".flex-body")[0];
-  var boards = document.getElementById("boards").parentNode;
+  $("#flex-body").prepend(window.listNode);
+  window.boardNode = $("#boardPage").detach();
+  var boardss = document.getElementById("boards").parentNode;
   var list = document.getElementById("list").parentNode;
-  list.setAttribute("class","active");
-  boards.removeAttribute("class","active");
-  targetNode.setAttribute("style","display:block");
-  showBoardsValue();
+  list.setAttribute("class","chooseActive");
+  boardss.removeAttribute("class","active");
 });
+/*
+var listNode = document.getElementById("#list");
+var boardNode = document.getElementById("#board");
+$("#boards").click(function(event) {
+//  var targetNode = document.getElementsByClassName("flex-body")[0];
+  var targetNode = document.getElementsByClassName("flex-body")[0];
+    var childToRemove = document.getElementById("listPage");
+    var childToAppend = document.getElementById("boardPage");
+    childToAppend.removeAttribute("class");
+  targetNode.detachChild(childToRemove);
+  targetNode.appendChild(childToAppend);
+  var boardss = document.getElementById("boards").parentNode;
+  var list = document.getElementById("list").parentNode;
+  list.removeAttribute("class","chooseActive");
+  boardss.setAttribute("class","active");
+  /*
+  targetNode.setAttribute("style","display:none");
+  */
+  //clear(targetNode);
+//});
+
+
+$("#list").click(function(event) {
+  var targetNode2 = document.getElementsByClassName("flex-body")[0];
+  //childToAppend.removeAttribute("class");
+  targetNode2.removeChild(window.boardNode);
+  targetNode2.appendChild(window.listNode);
+  /*var targetNode = document.getElementsByClassName("flex-body")[0];
+  var childToAppend = document.getElementById("listPage");
+  var childToRemove = document.getElementById("boardPage");
+  targetNode.removeChild(childToRemove);
+  targetNode.appendChild(childToAppend);
+  */
+  var boardsss = document.getElementById("boards").parentNode;
+  var list = document.getElementById("list").parentNode;
+});
+
+
+function showBoardsValue() {
+
+  var mainNode = $(".flex-body")[0];
+  $("#boardPage").attr("style","display:block");
+
+}
 
 //监听搜索label的回车事件，并进一步执行程序
 var searchBar = document.getElementById("searchBar");
