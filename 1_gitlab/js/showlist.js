@@ -48,7 +48,7 @@ let issue_info = [
     no: 2,
     name: "second test",
     date: "2017-07-03T08:47:28.713Z",
-    state: 0
+    state: 1
   },
   {
     tag: [
@@ -86,7 +86,7 @@ let issue_info = [
     no: 5,
     name: "I have no label",
     date: "2017-07-03T08:47:28.713Z",
-    state: 1
+    state: 0
   },
   {
     tag: [
@@ -94,7 +94,7 @@ let issue_info = [
     tagColor: [
     ],
     no: 6,
-    name: "I don't have no label too",
+    name: "I have no label too",
     date: "2017-07-03T08:47:28.713Z",
     state: 1
   }
@@ -611,10 +611,12 @@ $(".left-board .board-header").click(function() {
   if ($(this).parent().attr("class").indexOf("displaySmall") > 0) {
     $(this).parent().removeClass("displaySmall");
     $(this).parent().children(".toHide").removeClass("toHide");
+    $(this).children().children(".board-issue-count-container").removeClass("toHide");
     $(this).attr("style","border-bottom:  1px solid black;");
   } else {
     $(this).parent().addClass("displaySmall");
     $(this).parent().children(".clickToHide").addClass("toHide");
+    $(this).children().children(".board-issue-count-container").addClass("toHide");
     $(this).attr("style","border-bottom: 0px")
   }
 });
@@ -622,10 +624,12 @@ $(".right-board .board-header").click(function() {
   if ($(this).parent().attr("class").indexOf("displaySmall") > 0) {
     $(this).parent().removeClass("displaySmall");
     $(this).parent().children(".toHide").removeClass("toHide");
+    $(this).children().children(".board-issue-count-container").removeClass("toHide");
     $(this).attr("style","border-bottom:  1px solid black;");
   } else {
     $(this).parent().addClass("displaySmall");
     $(this).parent().children(".clickToHide").addClass("toHide");
+    $(this).children().children(".board-issue-count-container").addClass("toHide");
     $(this).attr("style","border-bottom: 0px")
   }
 });
@@ -645,6 +649,8 @@ function showCloseIssue() {
   var targetNode = document.getElementById("closeBoard");
   close_num = closeIssueNum().length;
   var array = closeIssueNum();
+  tat = document.createTextNode(close_num);
+  $("#closeNum").append(tat);
   forCloseAndBacklog(close_num,array,targetNode);
 }
 
@@ -652,6 +658,8 @@ function showBacklogIssue() {
   var targetNode = document.getElementById("backlogBoard");
   noLabel_num = getThoseDontHaveLabels().length;
   var array = getThoseDontHaveLabels();
+  tat = document.createTextNode(noLabel_num);
+  $("#backlogNum").append(tat);
   forCloseAndBacklog(noLabel_num,array,targetNode);
 }
 
@@ -684,6 +692,7 @@ function forCloseAndBacklog(num,array,targetNode) {
 function addaddadd() {
   let index = getAllLabelsIndex();
   let length = index.length;
+  console.log(length);
   for (let i = 0; i < length ; i++) {
     var sss = "#" + allLabels[index[i]].name;
     $(sss).click(function() {
@@ -693,6 +702,16 @@ function addaddadd() {
   }
 }
 
+$("#addNewIssues").live("click",function() {
+  var targetNode = document.getElementsByClassName("boardlist");
+  clickToAddNewIssues(targetNode);
+});
+
+function clickToAddNewIssues(targetNode) {
+  alert('ddd');
+  targetNode.className += "toHide";
+
+}
 function showNewBoardWhenClickAL(new_board_index) {
   var index = new_board_index;  //获得是点击的那个label的编号
   var targetNode = document.getElementById("backlogBoard");
@@ -702,7 +721,14 @@ function showNewBoardWhenClickAL(new_board_index) {
   var issueHaveI = allLabels[index].IssueHave; //这是要显示的那几个issue哦～
   var sss;
   sss = '<header class="board-header" style = "border-top-color:'+allLabels[index].color+ ';">'
-  sss += '<h6><span class = "boardtitle">'+allLabels[index].name+'</span></h6></header>';
+  sss += '<h6><span class = "boardtitle">'+allLabels[index].name+'</span>';
+  sss += '<div class="board-issue-count-container pull-right clickToHide"><span class= "board-issue-count">';
+  if(issueHaveI) {
+    sss += issueHaveI.length;
+  } else {
+    sss += 0;
+  }
+  sss += '</span><button class="btn btn-small btn-default" id="addNewIssues"><i aria-hidden="true" data-hidden="true" class="fa fa-plus"></i></button></div></h6></header>';
   sss += '<div class="boader-list-component"><ul data-board="" class="board-list">';
   sss += showIssueTagsInBoards(index, issueHaveI);
   sss += '</ul></div>';
@@ -710,25 +736,29 @@ function showNewBoardWhenClickAL(new_board_index) {
   $("#backlogBoard").after(newdivs);
 }
 
+
 function showIssueTagsInBoards(index, issueHaveI) {
   //传入的是点击的那个label的index，以及含有这个label的issue的index
   //例如点击bug， 传入0，[1,2,3];
-  var blocks = issueHaveI.length;
-  var sss = "";
-  for (let i = 0 ; i < blocks; i++) {
-    sss += '<li index = '+issueHaveI[i]+' class = "every-issue-to-drag" style:"margin: 10px;">'
-    sss += '<div class = "issue-to-drag_title">'
-    sss += '<span>'+issue_info[issueHaveI[i]].name+'</span>';
-    sss += '<span>'+issue_info[issueHaveI[i]].no+'</span></div>';
-    sss += '<div class = "issue-to-drag_labels">';
-    sss += '</div>';
-    sss += '<div class = "issue-to-drag_labels"';
-    for (let k = 0; k < tagsInIssueNum(issue_info[issueHaveI[i]]); k++) {
-      sss += '<span>'+issue_info[issueHaveI[i]].tag[k] + '</span>';
+  if(allLabels[index].IssueHave) {
+    var blocks = issueHaveI.length;
+    var sss = "";
+    for (let i = 0 ; i < blocks; i++) {
+      sss += '<li index = '+issueHaveI[i]+' class = "every-issue-to-drag" style:"margin: 10px;">'
+      sss += '<div class = "issue-to-drag_title">'
+      sss += '<span>'+issue_info[issueHaveI[i]].name+'</span>';
+      sss += '<span>'+issue_info[issueHaveI[i]].no+'</span></div>';
+      sss += '<div class = "issue-to-drag_labels">';
+      sss += '</div>';
+      sss += '<div class = "issue-to-drag_labels"';
+      for (let k = 0; k < issue_info[issueHaveI[i]].tag.length; k++) {
+        sss += '<span>'+issue_info[issueHaveI[i]].tag[k] + '</span>';
+      }
     }
-    sss +='</div></li>'
+    return sss;
+  } else {
+    return "";
   }
-  return sss;
 }
 
 addLoadEvent(showCloseIssue());

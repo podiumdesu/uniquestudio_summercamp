@@ -88,14 +88,6 @@
         </div>
         <div class = "display-issue">
           <!--使用js动态添加节点
-          <div style="background-color: rgba(0,0,0,0.1);margin: 5px 0;padding: 0 4px;">
-            <p>pushpushtest</p><span>#1</span>
-            <span style="color:pink"> 2017-07-03T08:47:28.713Z </span>
-            <span style="background-color:#aedede; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">bug</span>
-            <span style="background-color:red; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">array_err</span>
-            <span style="background-color:yellow; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">object_err</span>
-            <span style="background-color:pink; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">js_err</span>
-            <span style="background-color:blue; margin:3px 4px; padding:3px 10px; color: rgba(33,33,23,0.4);border-radius: 20px;font-size: 13px;">ddd</span></div>
           -->
         </div>
 
@@ -132,15 +124,6 @@
               </div>
               <div class = "labelsTodisplay" id = "labelsTodisplay">
                   <!--这里用js插入代码
-                  <div class = "choose">
-                    <label >
-                      <input type="checkbox" value="" class="labelsCheckout" />
-                    <span class="checkboxStyle glyphicon"></span>
-                    </label>
-                    <div class = "labelsColor">
-                    </div>
-                    <div class = "labelsName" style="display: inline-block"><span class="labelname">bug</span></div>
-                  </div>
                 -->
               </div>
               <div class ="addListMore">
@@ -200,7 +183,7 @@
                     <i aria-hidden="true" class="fa fa-fw board-title-expandable-toggle fa-caret-down"></i>
                     <span class = "boardtitle">Backlog</span>
                     <div class="board-issue-count-container pull-right clickToHide">
-                      <span class= "board-issue-count"></span>
+                      <span class= "board-issue-count" id="backlogNum"></span>
                       <button class = "btn btn-small btn-default">
                         <i aria-hidden="true" data-hidden="true" class="fa fa-plus"></i>
                       </button>
@@ -208,20 +191,6 @@
                   </h6>
                 </header>
                 <!--使用js插入
-                <div class="boader-list-component">
-                  <ul data-board="" class="board-list">
-                    <li index = "0" class = "every-issue-to-drag">
-                      <div class = "issue-to-drag_title">
-                        <span>name</span>
-                        <span>id</span>
-                      </div>
-                      <div class = "issue-to-drag_labels">
-                        <span>push</span>
-                        <span>ddddd</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
               -->
               </div>
               <!--剩下的boardlist块使用js进行插入-->
@@ -231,7 +200,7 @@
                     <i aria-hidden="true" class="fa fa-fw board-title-expandable-toggle fa-caret-down"></i>
                     <span class = "boardtitle">Closed</span>
                     <div class="board-issue-count-container pull-right clickToHide">
-                      <span class= "board-issue-count"></span>
+                      <span class= "board-issue-count" id="closeNum"></span>
                       <button class = "btn btn-small btn-default">
                         <i aria-hidden="true" data-hidden="true" class="fa fa-plus"></i>
                       </button>
@@ -239,20 +208,6 @@
                   </h6>
                 </header>
                 <!--使用js插入
-                <div class="boader-list-component">
-                  <ul data-board="" class="board-list">
-                    <li index = "0" class = "every-issue-to-drag">
-                      <div class = "issue-to-drag_title">
-                        <span>name</span>
-                        <span>id</span>
-                      </div>
-                      <div class = "issue-to-drag_labels">
-                        <span>push</span>
-                        <span>ddddd</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
               -->
               </div>
             </div>
