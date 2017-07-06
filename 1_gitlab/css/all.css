@@ -536,3 +536,32 @@ i {
 .every-issue-to-drag {
   margin: 10px;
 }
+
+
+.changeColor {
+  background-color: red;
+}
+i.fa-plus:before {
+  content: "\f067";
+}
+i.fa-trash::before {
+  content: "\f1f8";
+}
+
+.board-issue-count {
+    padding-right: 10px;
+    padding-left: 10px;
+    line-height: 22px;
+    border-radius: 3px 0 0 3px;
+    border: 1px solid #e5e5e5;
+}
+.board-issue-count-container .btn {
+    line-height: 12px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.btn.btn-small {
+    padding: 1px 0px;
+    font-size: 13px;
+    vertical-align: baseline;
+}
