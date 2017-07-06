@@ -194,6 +194,9 @@ div.search-bar div.click-to-search input {
 .chooseActive {
   border-bottom: 2px solid #1f78d1;
 }
+.chooseDisactive {
+  border-bottom: 2px solid rgba(0,0,0,0.5);
+}
 .chooseHover:hover {
   border-bottom: 2px solid rgba(0,0,0,0.5);
 }
@@ -490,6 +493,9 @@ border-bottom: 1px solid #DFEFF0;
 }
 
 .left-board > .board-header:hover {
+  cursor: pointer;
+}
+.right-board > .board-header:hover {
   cursor: pointer;
 }
 

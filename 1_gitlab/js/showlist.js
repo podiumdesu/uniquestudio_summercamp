@@ -80,29 +80,42 @@ let issue_info = [
   }
 ];
 
-/*
-issue_info[1].tag = new Array("bug","array_err","object_err","js_err");
-issue_info[1].tagColor = new Array("#aedede","red","yellow","pink");
-issue_info[1].no = 1;
-issue_info[1].name = "pushpushtest";
-issue_info[1].date = new Date();
-issue_info[1].state = 0;
 
-issue_info[2].tag = new Array("js_err","bug");
-issue_info[2].tagColor = new Array("pink","#aedede");
-issue_info[2].no = 2;
-issue_info[2].name = "second test";
-issue_info[2].date = new Date();
-issue_info[2].state = 1;
 
-issue_info[3].tag = new Array("display_err","bug");
-issue_info[3].tagColor = new Array("#fddeae","#aedede");
-issue_info[3].no = 3;
-issue_info[3].name = "third push test";
-issue_info[3].date = new Date();
-issue_info[3].state = 1;
-//alert(issue_info.length);
-*/
+/*获取所有的label以及所有的labelcolor*/
+var allLabels = [
+  {
+    name: "bug",
+    IssueHave: [1,2,3],
+    color: "#aedede"
+  },
+  {
+    name: "js_err",
+    IssueHave: [1,2],
+    color: "pink"
+  },
+  {
+    name: "object_err",
+    IssueHave: [1],
+    color: "yellow"
+  },
+  {
+    name: "array_err",
+    IssueHave: [1],
+    color: "red"
+  },
+  {
+    name: "display_err",
+    IssueHave: [3],
+    color: "#fddeae"
+  },
+  {
+    name: "ddd",
+    IssueHave: [1],
+    color: "lightyellow"
+  }
+];
+
 /*****获取open，close，all的数量*****/
 var all = issue_info.length-1;
 
@@ -141,6 +154,13 @@ function showOpenCloseNum() {
 var allIssue = [];
 for (let i = 1; i <= all; i++) {
   allIssue.push(i);
+}
+function allIssue() {
+  let s = [];
+  for (let i = 1; i <= all; i++) {
+    s.push(i);
+  }
+  return s;
 }
 /*获取state标记分别为1和0的issue的编号数组*/
 function openIssueNum() {
@@ -253,6 +273,63 @@ function showListIssue(IssueInTheArray) {
 
 
 
+/**********************************获取传输数据函数块***************************************/
+/*获取所有的issue编号*/
+function getAllLabelsIndex() {
+  var firstShowLabels = [];
+  for (let i = 0; i < allLabels.length; i++) {
+    firstShowLabels.push(i);
+  }
+  return firstShowLabels;
+}
+/***********************************************************************************/
+
+
+
+/*******************************页面切换****************************************/
+
+var listNode;
+var boardNode;
+
+
+//点击list和boards进行页面的切换
+//内容渲染
+/*碰到的问题：
+在flex-body下的节点，如果不使用clear的话就没法更新新节点，（再添加新的节点就会跑到之前的那个页面上去）
+但是如果clear的话，这个节点之后所有的节点都会没有，就必须要重新再建立链接。
+*/
+$("#boards").click(function(event) {
+  /*
+  var childToAppend = document.getElementById("boardPage");
+  window.listNode = $("#listPage").detach();
+  $("#flex-body").prepend(window.boardNode);
+  childToAppend.removeAttribute("class","toHide");
+  var boardss = document.getElementById("boards").parentNode;
+  var list = document.getElementById("list").parentNode;
+  list.removeAttribute("class","chooseActive");
+  boardss.setAttribute("class","active");
+  */
+  $(this).parent().addClass("chooseActive");
+  $(this).parent().prev().removeClass("chooseActive");
+  var childToAppend = document.getElementById("boardPage");
+  childToAppend.setAttribute("class","toDisplay");
+  var childToRemove = document.getElementById("listPage");
+  childToRemove.setAttribute("class","toHide");
+});
+
+$("#list").click(function(event) {
+  var childToRemove = document.getElementById("boardPage");
+  $(this).parent().addClass("chooseActive");
+  $(this).parent().next().removeClass("chooseActive");
+  var childToAppend = document.getElementById("listPage");
+  childToRemove.setAttribute("class","toHide");
+    childToAppend.setAttribute("class","toDisplay");
+});
+/***********************************************************************************/
+
+//
+/************************************listPage函数块*************************************/
+
 //绑定点击事件。点击后，显示数据的区域进行clear，然后重新根据传入的数组渲染数据。
 
 var displayAllIssue = document.getElementById("all_num");
@@ -287,6 +364,115 @@ displayCloseIssue.onclick = function(event) {
   $(".issueClosed").removeClass("issueClosed");
 };
 
+
+
+/////////监听搜索label的回车事件，并进一步执行程序
+var searchBar = document.getElementById("searchBar");
+searchBar.addEventListener("keyup",function(event) {    //监听回车事件
+  var event = event || window.event;
+  if (event.keyCode == 13) {
+    searchBarFunc();
+  }
+})
+/*list页面下 获取搜索框的label并进行比对 不是模糊搜索*/
+function searchBarFunc() {
+  var arr = [];
+  var searchBarValue = searchBar.value;
+  if (searchBarValue.length === 0) {   //当输入为空时显示所有的issue
+    arr = allIssue;
+  }
+  for (var i = 1 ; i <= all; i++) {
+    if (strInArray(searchBarValue,issue_info[i].tag) ){
+      arr.push(i);
+    } else {
+      continue;
+    }
+  }
+  var targetNode = document.getElementsByClassName("display-issue")[0];
+  clear(targetNode);
+  showListIssue(arr);
+}
+///////////
+/***********************************************************************************/
+
+
+
+/********************************一些可复用的函数w*************************************／
+/*判断字符串是否在字符串数组中*/
+function strInArray(targetStr,targetArr) {
+  length = targetArr.length;
+  for (var i = 0; i < length; i++) {
+    if(targetStr == targetArr[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+/***清除传入节点中存在的子节点*/
+function clear(targetNode) {
+  while(targetNode.hasChildNodes()) {//当div下还存在子节点时 循环继续
+    targetNode.removeChild(targetNode.firstChild);
+  }
+}
+
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != "function") {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      oldonload();
+      func();
+    };
+  }
+}
+//将节点插入到另一个节点后面
+function insertAfter (newElement, targetElement) {
+  var parent = targetElement.parentNode;//获得该节点的上一个父节点，可以是元素节点，也可以是文本节点
+  if (parent.lastChild == targetElement) {
+    parent.appendChild(newElement);
+  } else {
+    parent.insertBefore(newElement, targetElement.nextSibling);
+  }
+
+}
+
+/*获取issue中tag这个数组的长度*/
+function tagsInIssueNum(issue_num) {     //需要传入的参数是issue_info[i];
+  return issue_num.tag.length;
+}
+
+/***********************************************************************************/
+
+
+
+/*********************************AddList页面的函数块*************************************／
+/*通过监听其父节点来解决*/
+//为颜色块的每个颜色绑定点击事件。并获取它们的对应的颜色。
+$(".eachColor").click(function() {
+  var sss = $(this).attr("data-color");
+  $("#chosenColor").attr("style","background-color:"+sss);
+  $("#showColorName").val(sss);
+});
+
+$("#cancel").click(function() {
+  $("#addNewLabel").removeClass("toDisplay");
+  $("#addNewLabel").addClass("toHide");
+});
+
+$("#ok").click(function()  {    //点击确认添加按钮以后添加
+  if (document.getElementById("pppName").value.length === 0) {
+    alert("Please name your label");
+  } else if (document.getElementById("showColorName").value.length === 0) {
+    alert("Please choose the color");
+  } else {
+    createNewLabel();
+    var targetNode = $(".labelsTodisplay")[0];
+    clear(targetNode);
+    showLabelListWhenSearch(getAllLabelsIndex());
+    alert("ok!");
+  }
+});
 
 //点击addlist按钮时显示下拉菜单
 //嘻嘻学习使用了一下jquery，真的很方便哎
@@ -328,162 +514,7 @@ $("#toCloseNewLabel").click(function() {
 //要先建立起一个可以存放labels以及其对应的issue的编号以及它的颜色的数组。
 
 
-/*获取所有的label以及所有的labelcolor*/
-var allLabels = [
-  {
-    name: "bug",
-    IssueHave: [1,2,3],
-    color: "#aedede"
-  },
-  {
-    name: "js_err",
-    IssueHave: [1,2],
-    color: "pink"
-  },
-  {
-    name: "object_err",
-    IssueHave: [1],
-    color: "yellow"
-  },
-  {
-    name: "array_err",
-    IssueHave: [1],
-    color: "red"
-  },
-  {
-    name: "display_err",
-    IssueHave: [3],
-    color: "#fddeae"
-  },
-  {
-    name: "ddd",
-    IssueHave: [1],
-    color: "lightyellow"
-  }
-];
 
-/*获取所有的issue编号*/
-function getAllLabelsIndex() {
-  var firstShowLabels = [];
-  for (let i = 0; i < allLabels.length; i++) {
-    firstShowLabels.push(i);
-  }
-  return firstShowLabels;
-}
-
-/**boards页面下addlist时搜索labels
-封装成可以显示被搜索到的labels的div块的函数
-所需要传入的参数是allLabels[]中的index */
-
-function showLabelListWhenSearch(searchLabel) {
-  let label_num = searchLabel.length;
-  var insertLabelsDisNode = document.getElementById("labelsTodisplay");
-  var ddddNode = [];
-  for (var i = 0 ; i < label_num; i++) {
-    var dddd = '<div class = "choose"><label ><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle glyphicon"></span></label>';
-    dddd +='<div class = "labelsColor" style = "background-color : '+allLabels[searchLabel[i]].color+'"></div>';
-    dddd +='<div class = "labelsName" style="display: inline-block"><span class="labelname">'+allLabels[searchLabel[i]].name+'</span></div></div>';
-    ddddNode[i] = document.createElement("div");
-    //alert(dddd);
-    ddddNode[i].innerHTML = dddd;
-    insertLabelsDisNode.appendChild(ddddNode[i]);
-  }
-
-}
-addLoadEvent(showLabelListWhenSearch(getAllLabelsIndex()));// 最开始显示所有的lables
-
-///////全都是bug
-
-//内容渲染
-/*碰到的问题：
-在flex-body下的节点，如果不使用clear的话就没法更新新节点，（再添加新的节点就会跑到之前的那个页面上去）
-但是如果clear的话，这个节点之后所有的节点都会没有，就必须要重新再建立链接。
-*/
-
-var listNode;
-var boardNode;
-
-
-$("#boards").click(function(event) {
-  var childToAppend = document.getElementById("boardPage");
-  window.listNode = $("#listPage").detach();
-  $("#flex-body").prepend(window.boardNode);
-  childToAppend.removeAttribute("class","toHide");
-  var boardss = document.getElementById("boards").parentNode;
-  var list = document.getElementById("list").parentNode;
-  list.removeAttribute("class","chooseActive");
-  boardss.setAttribute("class","active");
-});
-
-$("#list").click(function(event) {
-  $("#flex-body").prepend(window.listNode);
-  window.boardNode = $("#boardPage").detach();
-  var boardss = document.getElementById("boards").parentNode;
-  var list = document.getElementById("list").parentNode;
-  list.setAttribute("class","chooseActive");
-  boardss.removeAttribute("class","active");
-});
-/*
-var listNode = document.getElementById("#list");
-var boardNode = document.getElementById("#board");
-$("#boards").click(function(event) {
-//  var targetNode = document.getElementsByClassName("flex-body")[0];
-  var targetNode = document.getElementsByClassName("flex-body")[0];
-    var childToRemove = document.getElementById("listPage");
-    var childToAppend = document.getElementById("boardPage");
-    childToAppend.removeAttribute("class");
-  targetNode.detachChild(childToRemove);
-  targetNode.appendChild(childToAppend);
-  var boardss = document.getElementById("boards").parentNode;
-  var list = document.getElementById("list").parentNode;
-  list.removeAttribute("class","chooseActive");
-  boardss.setAttribute("class","active");
-  /*
-  targetNode.setAttribute("style","display:none");
-  */
-  //clear(targetNode);
-//});
-
-
-$("#list").click(function(event) {
-  var targetNode2 = document.getElementsByClassName("flex-body")[0];
-  //childToAppend.removeAttribute("class");
-  targetNode2.removeChild(window.boardNode);
-  targetNode2.appendChild(window.listNode);
-  /*var targetNode = document.getElementsByClassName("flex-body")[0];
-  var childToAppend = document.getElementById("listPage");
-  var childToRemove = document.getElementById("boardPage");
-  targetNode.removeChild(childToRemove);
-  targetNode.appendChild(childToAppend);
-  */
-  var boardsss = document.getElementById("boards").parentNode;
-  var list = document.getElementById("list").parentNode;
-});
-
-
-function showBoardsValue() {
-
-  var mainNode = $(".flex-body")[0];
-  $("#boardPage").attr("style","display:block");
-
-}
-
-//监听搜索label的回车事件，并进一步执行程序
-var searchBar = document.getElementById("searchBar");
-searchBar.addEventListener("keyup",function(event) {    //监听回车事件
-  var event = event || window.event;
-  if (event.keyCode == 13) {
-    searchBarFunc();
-  }
-})
-
-var searchLabelBar = document.getElementById("addListSearchBar");
-searchLabelBar.addEventListener("keyup",function(event) {
-  var event = event || window.event;
-  if (event.keyCode == 13) {
-    searchLabel();
-  }
-});
 /*这段代码有bug，但是不知道问题在哪里*/
 var searchLabelBtn = document.getElementById("addListSearchBarBtn");
 searchLabelBtn.click(function() {
@@ -491,11 +522,16 @@ searchLabelBtn.click(function() {
   searchLabel();
 });
 
-function searchLabel() {
+
+$("#addListSearchBar").bind("input propertychange",function() {  //使用bind检测输入框的实时变化，并进行搜索。
+  searchLabel($(this).val());
+});
+//模糊搜索
+function searchLabel(sss) {
   //模糊匹配的搜索！利用正则表达式匹配一下就行啦
   var targetNode = $(".labelsTodisplay")[0];
   var resultarr = [];
-  var searchForValue = searchLabelBar.value;
+  var searchForValue = sss;
   if (searchForValue.length === 0) {
     clear(targetNode);
     showLabelListWhenSearch(getAllLabelsIndex());
@@ -512,107 +548,39 @@ function searchLabel() {
 }
 
 
-//////////////一些可复用的函数///////////
-/*判断字符串是否在字符串数组中*/
-function strInArray(targetStr,targetArr) {
-  length = targetArr.length;
-  for (var i = 0; i < length; i++) {
-    if(targetStr == targetArr[i]) {
-      return true;
-    }
-  }
-  return false;
-}
-/***清除传入节点中存在的子节点*/
-function clear(targetNode) {
-  while(targetNode.hasChildNodes()) {//当div下还存在子节点时 循环继续
-    targetNode.removeChild(targetNode.firstChild);
-  }
-}
-function addLoadEvent(func) {
-  var oldonload = window.onload;
-  if (typeof window.onload != "function") {
-    window.onload = func;
-  } else {
-    window.onload = function() {
-      oldonload();
-      func();
-    };
-  }
-}
-//将节点插入到另一个节点后面
-function insertAfter (newElement, targetElement) {
-  var parent = targetElement.parentNode;//获得该节点的上一个父节点，可以是元素节点，也可以是文本节点
-  if (parent.lastChild == targetElement) {
-    parent.appendChild(newElement);
-  } else {
-    parent.insertBefore(newElement, targetElement.nextSibling);
-  }
-
-}
-
-function tagsInIssueNum(issue_num) {     //需要传入的参数是issue_info[i];
-  return issue_num.tag.length;
-}
-/////////////////////////////////////////
-
-/*list页面下 获取搜索框的label并进行比对 不是模糊搜索*/
-function searchBarFunc() {
-  var arr = [];
-
-  var searchBarValue = searchBar.value;
-  if (searchBarValue.length === 0) {   //当输入为空时显示所有的issue
-    arr = allIssue;
-  }
-  for (var i = 1 ; i <= all; i++) {
-    if (strInArray(searchBarValue,issue_info[i].tag) ){
-      arr.push(i);
-    } else {
-      continue;
-    }
-  }
-
-  var targetNode = document.getElementsByClassName("display-issue")[0];
-  clear(targetNode);
-  showListIssue(arr);
-}
-
-
-/*通过监听其父节点来解决*/
-//为颜色块的每个颜色绑定点击事件。并获取它们的对应的颜色。
-$(".eachColor").click(function() {
-  var sss = $(this).attr("data-color");
-  $("#chosenColor").attr("style","background-color:"+sss);
-  $("#showColorName").val(sss);
-});
-
-$("#cancel").click(function() {
-  $("#addNewLabel").removeClass("toDisplay");
-  $("#addNewLabel").addClass("toHide");
-});
-
-$("#ok").click(function()  {
-  if (document.getElementById("pppName").value.length === 0) {
-    alert("Please name your label");
-  } else if (document.getElementById("showColorName").value.length === 0) {
-    alert("Please choose the color");
-  } else {
-    createNewLabel();
-    var targetNode = $(".labelsTodisplay")[0];
-    clear(targetNode);
-    showLabelListWhenSearch(getAllLabelsIndex());
-  }
-});
-
-
 document.getElementById("pppName").value = "";
-function createNewLabel() {
+function createNewLabel() {   //addlist页面根据用户输入添加新的label
   var ppp = {};
   ppp.name = document.getElementById("pppName").value;
   ppp.color = document.getElementById("showColorName").value;
   allLabels.push(ppp);    //但是刷新之后就所有数据都不见了！！！！
 }
 
+/**boards页面下addlist时搜索labels
+封装成可以显示被搜索到的labels的div块的函数
+所需要传入的参数是allLabels[]中的index */
+
+//每次修改数据以后需要重新进行计算
+function showLabelListWhenSearch(searchLabel) {
+  let label_num = searchLabel.length;
+  var insertLabelsDisNode = document.getElementById("labelsTodisplay");
+  var ddddNode = [];
+  for (var i = 0 ; i < label_num; i++) {
+    var dddd = '<div class = "choose"><label ><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle glyphicon"></span></label>';
+    dddd +='<div class = "labelsColor" style = "background-color : '+allLabels[searchLabel[i]].color+'"></div>';
+    dddd +='<div class = "labelsName" style="display: inline-block"><span class="labelname">'+allLabels[searchLabel[i]].name+'</span></div></div>';
+    ddddNode[i] = document.createElement("div");
+    ddddNode[i].setAttribute("id",allLabels[searchLabel[i]].name);
+    //alert(dddd);
+    ddddNode[i].innerHTML = dddd;
+    insertLabelsDisNode.appendChild(ddddNode[i]);
+  }
+
+}
+addLoadEvent(showLabelListWhenSearch(getAllLabelsIndex()));// 最开始显示所有的lables
+
+
+/***********************************************************************************/
 
 //编写boardlist的函数块，这里代码重复了，应该怎么封装呢
 $(".left-board .board-header").click(function() {
@@ -622,7 +590,7 @@ $(".left-board .board-header").click(function() {
     $(this).attr("style","border-bottom:  1px solid black;");
   } else {
     $(this).parent().addClass("displaySmall");
-    $(this).next().addClass("toHide");
+    $(this).parent().children(".clickToHide").addClass("toHide");
     $(this).attr("style","border-bottom: 0px")
   }
 });
@@ -633,11 +601,77 @@ $(".right-board .board-header").click(function() {
     $(this).attr("style","border-bottom:  1px solid black;");
   } else {
     $(this).parent().addClass("displaySmall");
-    $(this).next().addClass("toHide");
+    $(this).parent().children(".clickToHide").addClass("toHide");
     $(this).attr("style","border-bottom: 0px")
   }
 });
 
+
+/***board页面下显示每个issue******/
+function showCloseIssue() {
+  var targetNode = document.getElementById("closeBoard");
+  close_num = closeIssueNum().length;
+  var ddd = [];
+  var sss = [];
+  for (let i = 0; i < close_num; i++) {
+    console.log(close_num);
+    ddd[i] = '<div class="boader-list-component"><ul data-board="" class="board-list"><li index = "0" class = "every-issue-to-drag">';
+    ddd[i] += '<div class ="issue-to-drag_title"><span>';
+    ddd[i] += issue_info[closeIssueNum()[i]].name;
+    ddd[i] += '</span><span>';
+    ddd[i] += issue_info[closeIssueNum()[i]].no;
+    ddd[i] += '</span></div>';
+    ddd[i] += '<div class = "issue-to-drag_labels"';
+    for (let k = 0; k < tagsInIssueNum(issue_info[closeIssueNum()[i]]); k++) {
+      sss[k] = '<span>'+issue_info[closeIssueNum()[i]].tag[k] + '<span>';
+      ddd[i] += sss[k];
+    }
+    ddd[i] += '</div></li></ul></div>';
+    newList = document.createElement("div");
+    newList.className += "clickToHide";
+    newList.innerHTML = ddd[i];
+    targetNode.appendChild(newList);
+  }
+}
+
+function addaddadd() {
+  let index = getAllLabelsIndex();
+  let length = index.length;
+  for (let i = 0; i < length ; i++) {
+    var sss = "#" + allLabels[index[i]].name;
+    $(sss).click(function() {
+      showNewBoardWhenClickAL(i);//将点击的label的编号传入函数
+      //但是我需要显示的是包含这个label编号的issue；通过issueHave这个属性
+    });
+  }
+}
+
+function showNewBoardWhenClickAL(new_board_index) {
+  var targetNode = document.getElementById("backlogBoard");
+  var newdiv = document.createElement("div");
+  var sss;
+  sss = '<div data-id= "" class = "board left-board"><header class="board-header" id="test">'
+  sss += '<h6><i aria-hidden="true" class="fa fa-fw board-title-expandable-toggle fa-caret-down"></i>';
+  sss += '<span class = "boardtitle">Backlog</span></h6></header>';
+  sss += '<div class="boader-list-component"><ul data-board="" class="board-list">';
+  sss += '<li index = "0" class = "every-issue-to-drag">'
+  sss += '<div class = "issue-to-drag_title">'
+  sss += '<span>'+ddddddname+'</span>';
+  sss += '<span>'+dddddid+'</span></div>';
+  sss += '<div class = "issue-to-drag_labels">';
+  sss += showIssueTagsInBoards(i);
+  sss += '</div></li></ul></div></div>';
+}
+
+function showIssueTagsInBoards(i) {
+  var sss;
+  var length = i
+}
+
+
+addLoadEvent(addaddadd());
+
+addLoadEvent(showCloseIssue());
 
 addLoadEvent(showOpenCloseNum());
 addLoadEvent(showListIssue(openIssueNum()));
