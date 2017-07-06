@@ -77,6 +77,26 @@ let issue_info = [
     name: "what do you want",
     date: "2017-07-03T08:47:28.713Z",
     state: 1
+  },
+  {
+    tag: [
+    ],
+    tagColor: [
+    ],
+    no: 5,
+    name: "I have no label",
+    date: "2017-07-03T08:47:28.713Z",
+    state: 1
+  },
+  {
+    tag: [
+    ],
+    tagColor: [
+    ],
+    no: 6,
+    name: "I don't have no label too",
+    date: "2017-07-03T08:47:28.713Z",
+    state: 1
   }
 ];
 
@@ -116,6 +136,9 @@ var allLabels = [
   }
 ];
 
+function sendLabelsFromIssueToAlllabels() {
+
+}
 /*****获取open，close，all的数量*****/
 var all = issue_info.length-1;
 
@@ -276,6 +299,7 @@ function showListIssue(IssueInTheArray) {
 /**********************************获取传输数据函数块***************************************/
 /*获取所有的issue编号*/
 function getAllLabelsIndex() {
+  console.log(allLabels.length);
   var firstShowLabels = [];
   for (let i = 0; i < allLabels.length; i++) {
     firstShowLabels.push(i);
@@ -575,7 +599,7 @@ function showLabelListWhenSearch(searchLabel) {
     ddddNode[i].innerHTML = dddd;
     insertLabelsDisNode.appendChild(ddddNode[i]);
   }
-
+  addaddadd();
 }
 addLoadEvent(showLabelListWhenSearch(getAllLabelsIndex()));// 最开始显示所有的lables
 
@@ -586,7 +610,7 @@ addLoadEvent(showLabelListWhenSearch(getAllLabelsIndex()));// 最开始显示所
 $(".left-board .board-header").click(function() {
   if ($(this).parent().attr("class").indexOf("displaySmall") > 0) {
     $(this).parent().removeClass("displaySmall");
-    $(this).next().removeClass("toHide");
+    $(this).parent().children(".toHide").removeClass("toHide");
     $(this).attr("style","border-bottom:  1px solid black;");
   } else {
     $(this).parent().addClass("displaySmall");
@@ -597,7 +621,7 @@ $(".left-board .board-header").click(function() {
 $(".right-board .board-header").click(function() {
   if ($(this).parent().attr("class").indexOf("displaySmall") > 0) {
     $(this).parent().removeClass("displaySmall");
-    $(this).next().removeClass("toHide");
+    $(this).parent().children(".toHide").removeClass("toHide");
     $(this).attr("style","border-bottom:  1px solid black;");
   } else {
     $(this).parent().addClass("displaySmall");
@@ -606,34 +630,57 @@ $(".right-board .board-header").click(function() {
   }
 });
 
-
+//获取没有label的那些issue；
+function getThoseDontHaveLabels() {
+  var sss = [];
+  for (let i = 1; i <= all; i++) {
+    if (issue_info[i].tag.length === 0) {
+      sss.push(i);
+    }
+  }
+  return sss;
+}
 /***board页面下显示每个issue******/
 function showCloseIssue() {
   var targetNode = document.getElementById("closeBoard");
   close_num = closeIssueNum().length;
+  var array = closeIssueNum();
+  forCloseAndBacklog(close_num,array,targetNode);
+}
+
+function showBacklogIssue() {
+  var targetNode = document.getElementById("backlogBoard");
+  noLabel_num = getThoseDontHaveLabels().length;
+  var array = getThoseDontHaveLabels();
+  forCloseAndBacklog(noLabel_num,array,targetNode);
+}
+
+function forCloseAndBacklog(num,array,targetNode) {
   var ddd = [];
   var sss = [];
-  for (let i = 0; i < close_num; i++) {
-    console.log(close_num);
+  for (let i = 0; i < num; i++) {
     ddd[i] = '<div class="boader-list-component"><ul data-board="" class="board-list"><li index = "0" class = "every-issue-to-drag">';
     ddd[i] += '<div class ="issue-to-drag_title"><span>';
-    ddd[i] += issue_info[closeIssueNum()[i]].name;
+    ddd[i] += issue_info[array[i]].name;
     ddd[i] += '</span><span>';
-    ddd[i] += issue_info[closeIssueNum()[i]].no;
+    ddd[i] += issue_info[array[i]].no;
     ddd[i] += '</span></div>';
-    ddd[i] += '<div class = "issue-to-drag_labels"';
-    for (let k = 0; k < tagsInIssueNum(issue_info[closeIssueNum()[i]]); k++) {
-      sss[k] = '<span>'+issue_info[closeIssueNum()[i]].tag[k] + '<span>';
-      ddd[i] += sss[k];
+    if(issue_info[array[i]].tag.length !== 0) {
+      ddd[i] += '<div class = "issue-to-drag_labels"';
+      for (let k = 0; k < tagsInIssueNum(issue_info[array[i]]); k++) {
+        sss[k] = '<span>'+issue_info[array[i]].tag[k] + '</span>';
+        ddd[i] += sss[k];
+      }
+      ddd[i] +='</div>'
     }
-    ddd[i] += '</div></li></ul></div>';
+    ddd[i] += '</li></ul></div>';
     newList = document.createElement("div");
     newList.className += "clickToHide";
     newList.innerHTML = ddd[i];
     targetNode.appendChild(newList);
   }
 }
-
+//当点击addlist中的label时，在下方的boardlist中显示出新的框框
 function addaddadd() {
   let index = getAllLabelsIndex();
   let length = index.length;
@@ -647,31 +694,44 @@ function addaddadd() {
 }
 
 function showNewBoardWhenClickAL(new_board_index) {
+  var index = new_board_index;  //获得是点击的那个label的编号
   var targetNode = document.getElementById("backlogBoard");
-  var newdiv = document.createElement("div");
+  var newdivs = document.createElement("div");
+  newdivs.className += "board newBoard";
+  newdivs.setAttribute("data-id",new_board_index);
+  var issueHaveI = allLabels[index].IssueHave; //这是要显示的那几个issue哦～
   var sss;
-  sss = '<div data-id= "" class = "board left-board"><header class="board-header" id="test">'
-  sss += '<h6><i aria-hidden="true" class="fa fa-fw board-title-expandable-toggle fa-caret-down"></i>';
-  sss += '<span class = "boardtitle">Backlog</span></h6></header>';
+  sss = '<header class="board-header" style = "border-top-color:'+allLabels[index].color+ ';">'
+  sss += '<h6><span class = "boardtitle">'+allLabels[index].name+'</span></h6></header>';
   sss += '<div class="boader-list-component"><ul data-board="" class="board-list">';
-  sss += '<li index = "0" class = "every-issue-to-drag">'
-  sss += '<div class = "issue-to-drag_title">'
-  sss += '<span>'+ddddddname+'</span>';
-  sss += '<span>'+dddddid+'</span></div>';
-  sss += '<div class = "issue-to-drag_labels">';
-  sss += showIssueTagsInBoards(i);
-  sss += '</div></li></ul></div></div>';
+  sss += showIssueTagsInBoards(index, issueHaveI);
+  sss += '</ul></div>';
+  newdivs.innerHTML = sss;
+  $("#backlogBoard").after(newdivs);
 }
 
-function showIssueTagsInBoards(i) {
-  var sss;
-  var length = i
+function showIssueTagsInBoards(index, issueHaveI) {
+  //传入的是点击的那个label的index，以及含有这个label的issue的index
+  //例如点击bug， 传入0，[1,2,3];
+  var blocks = issueHaveI.length;
+  var sss = "";
+  for (let i = 0 ; i < blocks; i++) {
+    sss += '<li index = '+issueHaveI[i]+' class = "every-issue-to-drag" style:"margin: 10px;">'
+    sss += '<div class = "issue-to-drag_title">'
+    sss += '<span>'+issue_info[issueHaveI[i]].name+'</span>';
+    sss += '<span>'+issue_info[issueHaveI[i]].no+'</span></div>';
+    sss += '<div class = "issue-to-drag_labels">';
+    sss += '</div>';
+    sss += '<div class = "issue-to-drag_labels"';
+    for (let k = 0; k < tagsInIssueNum(issue_info[issueHaveI[i]]); k++) {
+      sss += '<span>'+issue_info[issueHaveI[i]].tag[k] + '</span>';
+    }
+    sss +='</div></li>'
+  }
+  return sss;
 }
-
-
-addLoadEvent(addaddadd());
 
 addLoadEvent(showCloseIssue());
-
+addLoadEvent(showBacklogIssue());
 addLoadEvent(showOpenCloseNum());
 addLoadEvent(showListIssue(openIssueNum()));
