@@ -102,12 +102,7 @@ ul.words-display li {
   line-height: 23px;
   padding: 10px 15px;
 }
-ul.words-display li.active{
-  border-bottom: 2px solid #1f78d1;
-}
-ul.words-display li.active a{
-  color: #000000;
-}
+
 ul.words-display ul li:hover{
   border-bottom: 2px solid rgba(0,0,0,0.5);
 }
@@ -116,14 +111,7 @@ nav.nav-body ul li {
   padding: 10px 15px;
 }
 
-nav.nav-body ul li.active {
-  border-bottom: 2px solid #1f78d1;
-}
-nav.nav-body ul li.active a{
-  color: black;
-}
-
-nav.nav-body ul li:hover {
+ul.titleChange li:hover {
   border-bottom: 2px solid rgba(0,0,0,0.5);
 }
 nav.nav-body div.main-body div {
@@ -282,6 +270,10 @@ div.click-to-search > div.input-group {
   border-bottom: 1px solid #DFEFF0;
 
 
+}
+
+ul.titleChange li.chooseActive a {
+  color: black;
 }
 
 
@@ -510,7 +502,7 @@ border-bottom: 1px solid #DFEFF0;
 }
 
 i {
-  margin: 10px;
+  margin: 7px;
 }
 .displaySmall .board-header  span {
   display: block;
@@ -543,11 +535,17 @@ i {
 }
 i.fa-plus:before {
   content: "\f067";
+  padding: 1px;
+  vertical-align: bottom;
 }
 i.fa-trash::before {
   content: "\f1f8";
 }
 
+.board-issue-count {
+  margin: -5px;
+  vertical-align: baseline;
+}
 .board-issue-count {
     padding-right: 10px;
     padding-left: 10px;
@@ -556,12 +554,47 @@ i.fa-trash::before {
     border: 1px solid #e5e5e5;
 }
 .board-issue-count-container .btn {
-    line-height: 12px;
+    line-height: 13px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
 .btn.btn-small {
-    padding: 1px 0px;
-    font-size: 13px;
+    padding: 0px 0px;
+    font-size: 12px;
     vertical-align: baseline;
+}
+
+ul.listboardChange li {
+  transition: all ease 1s;
+}
+
+ul.listboardChange li:hover {
+  color: black;
+}
+
+ul.listboardChange .listToChoose {
+  color: black;
+}
+
+
+div.issue-to-drag_labels {
+  margin-top: 4px;
+}
+/*为board显示的每个list中的label设置颜色*/
+.issue-to-drag_labels span{
+
+  border-radius: 10px;
+  margin-right: 10px;
+  padding: 2px 6px;
+  line-height: 10px;
+  margin-top: 4px;
+  color: black;
+}
+
+div.issue-to-drag_title span:nth-child(1){
+  margin-right: 5px;
+  color: rgba(0,0,0,0.8);
+}
+div.issue-to-drag_title span:nth-child(2){
+  color: rgba(0,0,0,0.6)
 }

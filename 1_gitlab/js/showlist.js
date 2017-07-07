@@ -53,11 +53,13 @@ let issue_info = [
   {
     tag: [
       "display_err",
-      "bug"
+      "bug",
+      "wtf"
     ],
     tagColor: [
       "#fddeae",
-      "#aedede"
+      "#aedede",
+      "#aeeaea"
     ],
     no: 3,
     name: "third push test",
@@ -133,12 +135,25 @@ var allLabels = [
     name: "ddd",
     IssueHave: [1],
     color: "lightyellow"
+  },
+  {
+    name: "hello,world",
+    IssueHave: [4],
+    color: "#fddddd"
+  },
+  {
+    name: "wtf",
+    IssueHave: [3,4],
+    color: "#aeeaea"
   }
 ];
 
-function sendLabelsFromIssueToAlllabels() {
 
-}
+//进行两个数组之间数据的交换
+//思路： 获取label中的issuehave，然后在issue中对
+//如果是对boardlist下面的issue进行添加，那么每次会获取的就是issue的名字，issue的index，以及issue现在含有的tag
+//同时会得到此时boardlist上 修改的label的名字，同时获得这个label在数组中的index。
+//然后将这个修改同时记录在allLabels和issue_info中就行啦
 /*****获取open，close，all的数量*****/
 var all = issue_info.length-1;
 
@@ -315,7 +330,12 @@ function getAllLabelsIndex() {
 var listNode;
 var boardNode;
 
-
+/*测试时使用*/
+var childToAppend = document.getElementById("boardPage");
+childToAppend.setAttribute("class","toDisplay");
+var childToRemove = document.getElementById("listPage");
+childToRemove.setAttribute("class","toHide");
+$("#listPage").parent().removeClass("flex-body");
 //点击list和boards进行页面的切换
 //内容渲染
 /*碰到的问题：
@@ -333,21 +353,25 @@ $("#boards").click(function(event) {
   list.removeAttribute("class","chooseActive");
   boardss.setAttribute("class","active");
   */
-  $(this).parent().addClass("chooseActive");
-  $(this).parent().prev().removeClass("chooseActive");
+  $(this).addClass("listToChoose");
+
+  $(this).parent().prev().children().removeClass("listToChoose");
   var childToAppend = document.getElementById("boardPage");
   childToAppend.setAttribute("class","toDisplay");
   var childToRemove = document.getElementById("listPage");
   childToRemove.setAttribute("class","toHide");
+  $("#listPage").parent().removeClass("flex-body");
 });
 
 $("#list").click(function(event) {
   var childToRemove = document.getElementById("boardPage");
-  $(this).parent().addClass("chooseActive");
-  $(this).parent().next().removeClass("chooseActive");
+  $(this).addClass("listToChoose");
+  $(this).parent().next().children().removeClass("listToChoose");
   var childToAppend = document.getElementById("listPage");
   childToRemove.setAttribute("class","toHide");
     childToAppend.setAttribute("class","toDisplay");
+  $("#listPage").parent().addClass("flex-body");
+
 });
 /***********************************************************************************/
 
@@ -670,13 +694,13 @@ function forCloseAndBacklog(num,array,targetNode) {
     ddd[i] = '<div class="boader-list-component"><ul data-board="" class="board-list"><li index = "0" class = "every-issue-to-drag">';
     ddd[i] += '<div class ="issue-to-drag_title"><span>';
     ddd[i] += issue_info[array[i]].name;
-    ddd[i] += '</span><span>';
+    ddd[i] += '</span><span>· #';
     ddd[i] += issue_info[array[i]].no;
     ddd[i] += '</span></div>';
     if(issue_info[array[i]].tag.length !== 0) {
-      ddd[i] += '<div class = "issue-to-drag_labels"';
+      ddd[i] += '<div class = "issue-to-drag_labels">';
       for (let k = 0; k < tagsInIssueNum(issue_info[array[i]]); k++) {
-        sss[k] = '<span>'+issue_info[array[i]].tag[k] + '</span>';
+        sss[k] = '<span style="background-color:' + issue_info[array[i]].tagColor[k]+ '">'+issue_info[array[i]].tag[k] + '</span>';
         ddd[i] += sss[k];
       }
       ddd[i] +='</div>'
@@ -747,12 +771,12 @@ function showIssueTagsInBoards(index, issueHaveI) {
       sss += '<li index = '+issueHaveI[i]+' class = "every-issue-to-drag" style:"margin: 10px;">'
       sss += '<div class = "issue-to-drag_title">'
       sss += '<span>'+issue_info[issueHaveI[i]].name+'</span>';
-      sss += '<span>'+issue_info[issueHaveI[i]].no+'</span></div>';
+      sss += '<span>· #'+issue_info[issueHaveI[i]].no+'</span></div>';
       sss += '<div class = "issue-to-drag_labels">';
       sss += '</div>';
-      sss += '<div class = "issue-to-drag_labels"';
+      sss += '<div class = "issue-to-drag_labels">';
       for (let k = 0; k < issue_info[issueHaveI[i]].tag.length; k++) {
-        sss += '<span>'+issue_info[issueHaveI[i]].tag[k] + '</span>';
+        sss += '<span style="background-color: ' + issue_info[issueHaveI[i]].tagColor[k]+ '">'+issue_info[issueHaveI[i]].tag[k] + '</span>';
       }
     }
     return sss;
