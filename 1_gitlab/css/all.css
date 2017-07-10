@@ -550,7 +550,7 @@ i.fa-trash::before {
     padding-right: 10px;
     padding-left: 10px;
     line-height: 22px;
-    border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 px;
     border: 1px solid #e5e5e5;
 }
 .board-issue-count-container .btn {
@@ -591,10 +591,65 @@ div.issue-to-drag_labels {
   color: black;
 }
 
+
 div.issue-to-drag_title span:nth-child(1){
   margin-right: 5px;
   color: rgba(0,0,0,0.8);
 }
 div.issue-to-drag_title span:nth-child(2){
   color: rgba(0,0,0,0.6)
+}
+
+/*changelist*/
+
+#changeIssueData {
+  height: 550px;
+  width: 300px;
+  z-index: 4;
+  background: white;
+  position: fixed;
+  right: 10px;
+  top: 210px;
+  border: 1px solid red;
+  overflow: scroll;
+}
+
+
+.ChangeIssueName {
+  margin: 8px;
+  margin-top: 10px;
+  border-bottom: 1px solid #DFEFF0;
+  font-size: 17px;
+}
+.ChangeIssueName p:nth-child(3){
+  margin-top: -10px;
+}
+.changeList {
+  margin: 8px;
+}
+
+.changeItem {
+  margin: 8px;
+  border-bottom: 1px solid #DFEFF0;
+  height: 60px;
+  padding: 5px 0px;
+}
+.changeItem {
+  font-size: 15px;
+}
+
+.changeItem p {
+  font-size: 13px;
+  margin-top: 5px;
+  color: grey;
+}
+.ddd {
+
+    border-radius: 10px;
+    margin-right: 10px;
+    padding: 2px 6px;
+    line-height: 10px;
+    margin-top: 4px;
+    color: black;
+
 }

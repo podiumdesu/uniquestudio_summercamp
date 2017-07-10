@@ -184,7 +184,7 @@
                     <span class = "boardtitle">Backlog</span>
                     <div class="board-issue-count-container pull-right clickToHide">
                       <span class= "board-issue-count" id="backlogNum"></span>
-                      <button class = "btn btn-small btn-default">
+                      <button class = "btn btn-small btn-default addNewIssues">
                         <i aria-hidden="true" data-hidden="true" class="fa fa-plus"></i>
                       </button>
                     </div>
@@ -201,7 +201,7 @@
                     <span class = "boardtitle">Closed</span>
                     <div class="board-issue-count-container pull-right clickToHide">
                       <span class= "board-issue-count" id="closeNum"></span>
-                      <button class = "btn btn-small btn-default">
+                      <button class = "btn btn-small btn-default  addNewIssues">
                         <i aria-hidden="true" data-hidden="true" class="fa fa-plus"></i>
                       </button>
                     </div>
@@ -210,7 +210,47 @@
                 <!--使用js插入
               -->
               </div>
+
             </div>
+            <div id= "changeIssueData" class = "">
+              <header class="ChangeIssueName">
+                <a href="#"  class = "pull-right">X</a>
+                <p id="toChangeissueName">hello</p>
+                <p id="toChangeissueNo">1</p>
+              </header>
+              <div class = "change_list" id = "goToChange">
+                <div id="change_date" class="changeItem">Due date
+                  <a href="#"  class = "edit-link pull-right">Edit</a>
+                  <p>None</p>
+                </div>
+                <div id="change_milestone" class="changeItem">Milestone
+                  <a href="#"  class = "edit-link pull-right">Edit</a>
+                  <p>None</p>
+                </div>
+                <div id="change_labels" class="changeItem">Labels
+                  <a href="#"  class = "edit-link pull-right">Edit</a>
+
+                </div>
+              </div>
+              <div class="toChangeLabels toHide">
+                <div class = "updownSearch">
+                  <div class ="col-lg-13">
+                    <div class = "input-group">
+                      <input type="text" class = "form-control" id = "addListSearchBar2" placeholder="search for the labels">
+                      <span class = "input-group-btn">
+                      <button type="button" class = "btn btn-success" name="button" id = "addListSearchBarBtn2"><span class = "glyphicon glyphicon-search"></span></button>
+                    <!--bootstrap是真的很好用啊！！！！！-->
+                    </div>
+                  </div>
+                </div>
+                <div class ="ssss"></div>
+                <div class = "labelsTodisplay" id = "labelsTodisplay2">
+                    <!--这里用js插入代码
+                  -->
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
