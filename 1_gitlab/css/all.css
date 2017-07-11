@@ -251,13 +251,18 @@ input.labelsCheckout + span {
   width: 1.5em;
   height: 1.5em;
   border-radius: 4px;
-  background-color: coral;
   transition: all ease 1s;
 }
+.labelsName > span {
+  transition: all ease 0.5s;
+}
 
-input.labelsCheckout:checked + span {
+.changeBack {
   background-color: lightgreen;
 
+}
+.changeFontweight {
+  font-weight: bold;
 }
 
 .menu-bar-left {
@@ -604,19 +609,24 @@ div.issue-to-drag_title span:nth-child(2){
 
 #changeIssueData {
   height: 550px;
-  width: 300px;
+  width: 25%;
   z-index: 4;
   background: white;
   position: fixed;
-  right: 10px;
+  right: 0;
   top: 210px;
-  border: 1px solid red;
+  border: 2px solid #dfeff0;
   overflow: scroll;
 }
+.width100 {
+  width: 100%;
+}
 
-
+.width75 {
+  width: 75%;
+}
 .ChangeIssueName {
-  margin: 8px;
+  margin: 0 14px;
   margin-top: 10px;
   border-bottom: 1px solid #DFEFF0;
   font-size: 17px;
@@ -625,14 +635,14 @@ div.issue-to-drag_title span:nth-child(2){
   margin-top: -10px;
 }
 .changeList {
-  margin: 8px;
+  margin: 0 14px;
 }
 
 .changeItem {
-  margin: 8px;
+  margin: 0 14px;
   border-bottom: 1px solid #DFEFF0;
-  height: 60px;
-  padding: 5px 0px;
+
+  padding: 8px 0px;
 }
 .changeItem {
   font-size: 15px;
@@ -648,8 +658,8 @@ div.issue-to-drag_title span:nth-child(2){
     border-radius: 10px;
     margin-right: 10px;
     padding: 2px 6px;
-    line-height: 10px;
+    line-height: 14px;
     margin-top: 4px;
-    color: black;
-
+    color: white;
+    display: inline-block;
 }

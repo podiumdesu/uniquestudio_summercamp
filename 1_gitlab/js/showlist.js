@@ -614,7 +614,7 @@ function showLabelListWhenSearch(searchLabel) {
   var insertLabelsDisNode = document.getElementById("labelsTodisplay");
   var ddddNode = [];
   for (var i = 0 ; i < label_num; i++) {
-    var dddd = '<div class = "choose"><label ><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle glyphicon"></span></label>';
+    var dddd = '<div class = "choose"><label style = "vertical-align: top;"><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle glyphicon"></span></label>';
     dddd +='<div class = "labelsColor" style = "background-color : '+allLabels[searchLabel[i]].color+'"></div>';
     dddd +='<div class = "labelsName" style="display: inline-block"><span class="labelname">'+allLabels[searchLabel[i]].name+'</span></div></div>';
     ddddNode[i] = document.createElement("div");
@@ -686,13 +686,13 @@ function showBacklogIssue() {
   $("#backlogNum").append(tat);
   forCloseAndBacklog(noLabel_num,array,targetNode);
 }
-
+/*
 function forCloseAndBacklog(num,array,targetNode) {
   var ddd = [];
   var sss = [];
   for (let i = 0; i < num; i++) {
-    ddd[i] = '<div class="boader-list-component"><ul data-board="" class="board-list"><li index = "0" class = "every-issue-to-drag">';
-    ddd[i] += '<div class ="issue-to-drag_title issue-change"><span>';
+    ddd[i] = '<div class="boader-list-component"><ul data-board="" class="board-list"><li index = "0" class = "every-issue-to-drag issue-change">';
+    ddd[i] += '<div class ="issue-to-drag_title"><span>';
     ddd[i] += issue_info[array[i]].name;
     ddd[i] += '</span><span>· #';
     ddd[i] += issue_info[array[i]].no;
@@ -711,6 +711,48 @@ function forCloseAndBacklog(num,array,targetNode) {
     newList.innerHTML = ddd[i];
     targetNode.appendChild(newList);
   }
+}
+*/
+/*
+for (let i = 0 ; i < blocks; i++) {
+  sss += '<li index = '+issueHaveI[i]+' class = "every-issue-to-drag issue-change" style:"margin: 10px;">'
+  sss += '<div class = "issue-to-drag_title">'
+  sss += '<span>'+issue_info[issueHaveI[i]].name+'</span>';
+  sss += '<span>· #'+issue_info[issueHaveI[i]].no+'</span></div>';
+  sss += '<div class = "issue-to-drag_labels">';
+  for (let k = 0; k < issue_info[issueHaveI[i]].tag.length; k++) {
+    sss += '<span style="background-color: ' + issue_info[issueHaveI[i]].tagColor[k]+ '">'+issue_info[issueHaveI[i]].tag[k] + '</span>';
+  }
+}
+*/
+
+function forCloseAndBacklog(num,array,targetNode) {
+  var ddd = [];
+  var sss = "";
+  sss += '<ul data-board="" class="board-list">';
+  for (let i = 0; i < num; i++) {
+    sss += '<li index = ' + array[i] + ' class = "every-issue-to-drag issue-change" style:"margin: 10px;">';
+    sss += '<div class ="issue-to-drag_title"><span>';
+    sss += issue_info[array[i]].name;
+    sss += '</span><span>· #';
+    sss += issue_info[array[i]].no;
+    sss += '</span></div>';
+    if(issue_info[array[i]].tag.length !== 0) {
+      sss += '<div class = "issue-to-drag_labels">';
+      for (let k = 0; k < tagsInIssueNum(issue_info[array[i]]); k++) {
+        sss +=  '<span style="background-color:' + issue_info[array[i]].tagColor[k]+ '">'+issue_info[array[i]].tag[k] + '</span>';
+      }
+      sss +='</div>'
+    }
+    sss += '</li>';
+
+  }
+  sss += '</ul>'
+  newList = document.createElement("div");
+  newList.className += "clickToHide ";
+  newList.className += "board-list-component";
+  newList.innerHTML = sss;
+  targetNode.appendChild(newList);
 }
 //当点击addlist中的label时，在下方的boardlist中显示出新的框框
 function addaddadd() {
@@ -793,7 +835,9 @@ function showIssueTagsInBoards(index, issueHaveI) {
 //构建通过修改board处的issue名字和标签对原本的数组进行修改。
 
 $(".issue-change").live("click",function() {
-  $("#changeIssueData").removeClass("toHide");
+  $(".inlineDisplay").addClass("width75");
+  $("#addListUpdown").addClass("toHide");
+  $("#changeIssueData").fadeIn("slow");
   var toChangeIssueNo = $(this).attr("index");
   var toChangeIssueName = issue_info[toChangeIssueNo].name;
   $("p[id='toChangeissueName']").html(toChangeIssueName);
@@ -808,25 +852,13 @@ function getLabels(index,targetNode) { //传入的是点击的这个issue的inde
   var div = document.createElement("div");
   div.innerHTML = "";
   var sss = "";
-  let i = 0;
   var length = issue_info[index].tag.length;
-  while (length % 4  >= 0) {
-    sss += '<p>'
-    if (length % 4 !== 0) {
-      for (; i < 4; i++) {
-        sss += '<span class = "ddd" style="background-color: ' + issue_info[index].tagColor[i]+ '">'+issue_info[index].tag[i] + '</span>';
-        console.log(i);
-      }
-    } else {
-      for (; i < length+4; i++) {
-        sss += '<span class = "ddd" style="background-color: ' + issue_info[index].tagColor[i]+ '">'+issue_info[index].tag[i] + '</span>';
-      }
+    sss += '<p>';
+    for (let i = 0; i < length; i++) {
+      sss += '<span class = "ddd" style="background-color: ' + issue_info[index].tagColor[i]+ '">'+issue_info[index].tag[i] + '</span>';
     }
-    length = length - 4;
-    sss += '</p>'
+    sss += '</p>';
 
-    console.log(length % 4);
-  }
   div.innerHTML = sss;
   return div;
 }
@@ -866,7 +898,7 @@ function showLabelListWhenSearch2(searchLabel) {
   var insertLabelsDisNode = document.getElementById("labelsTodisplay2");
   var ddddNode = [];
   for (var i = 0 ; i < label_num; i++) {
-    var dddd = '<div class = "choose"><label ><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle glyphicon"></span></label>';
+    var dddd = '<div class = "choose"><label style = "vertical-align: top;"><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle glyphicon"></span></label>';
     dddd +='<div class = "labelsColor" style = "background-color : '+allLabels[searchLabel[i]].color+'"></div>';
     dddd +='<div class = "labelsName" style="display: inline-block"><span class="labelname">'+allLabels[searchLabel[i]].name+'</span></div></div>';
     ddddNode[i] = document.createElement("div");
@@ -878,35 +910,43 @@ function showLabelListWhenSearch2(searchLabel) {
   addaddadd2();
 }
 
-
 addLoadEvent(showLabelListWhenSearch2(getAllLabelsIndex()))
 
-/*
-//当点击addlist中的label时，在下方的boardlist中显示出新的框框
-function addaddadd() {
-  let index = getAllLabelsIndex();
-  let length = index.length;
-  console.log(length);
-  for (let i = 0; i < length ; i++) {
-    var sss = "#" + allLabels[index[i]].name;
-    $(sss).click(function() {
-      showNewBoardWhenClickAL(i);//将点击的label的编号传入函数
-      console.log(i);
-      //但是我需要显示的是包含这个label编号的issue；通过issueHave这个属性
-    });
-  }
-}
-*/
 function addaddadd2() {
   let index = getAllLabelsIndex();
   let length = index.length;
   for (let i = 0; i < length; i++) {
     var sss = "#add"+allLabels[index[i]].name;
     $(sss).click(function() {
-      addNewLabelToIssue(i);   //传入的是label的index；
+      if($(this).children().children().children(".labelsCheckout + span").attr("class").indexOf("changeBack") > 0 ) {
+          $(this).children().children().children(".labelsCheckout + span").removeClass("changeBack");
+          $(this).children().children(".labelsName").children("span").removeClass("changeFontweight");
+      } else {
+          $(this).children().children().children(".labelsCheckout + span").addClass("changeBack");
+          $(this).children().children(".labelsName").children("span").addClass("changeFontweight");
+      }
+      //addNewLabelToIssue(i);   //传入的是label的index；
     });
   }
 }
+
+//可以获取到的是这个issue所包含的labels的名字。
+
+function addOfdeleteLabels() {  //编写是否该label在issue中。
+
+}
+
+$("#change_close").click(function() {  //关闭修改issuelabel的页面
+  $("#changeIssueData").fadeOut("slow");
+  $(".inlineDisplay").addClass("width100");
+  $(".inlineDisplay").removeClass("width75");
+});
+
+$("#labels_edit").click(function() {
+  $(".toChangeLabels").fadeIn("fast");
+});
+
+
 
 
 addLoadEvent(showCloseIssue());
