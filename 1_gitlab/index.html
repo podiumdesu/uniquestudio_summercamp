@@ -60,9 +60,9 @@
         <div class = "menu-bar">
           <div class="menu-bar-left">
             <ul class = "words-display">
-              <li id="open_num"  class = "chooseHover chooseActive"><a href="#" >Open</a></li>
-              <li id="close_num" class = "chooseHover"><a href="#" >Close</a></li>
-              <li id="all_num" class = "chooseHover"><a href="#">All</a></li>
+              <li id="open_num"  class = "chooseHover chooseActive"><a href="#" >Open</a><span class="showNums"></span></li>
+              <li id="close_num" class = "chooseHover"><a href="#" >Close</a><span class="showNums"></span></li>
+              <li id="all_num" class = "chooseHover"><a href="#">All</a><span class="showNums"></span></li>
             </ul>
           </div>
         </div>
@@ -185,11 +185,23 @@
                     <div class="board-issue-count-container pull-right clickToHide">
                       <span class= "board-issue-count" id="backlogNum"></span>
                       <button class = "btn btn-small btn-default addNewIssues">
-                        <i aria-hidden="true" data-hidden="true" class="fa fa-plus"></i>
+                        <i aria-hidden="true" data-hidden="true" class="fa fa-plus" id="leftAdd"></i>
                       </button>
                     </div>
                   </h6>
                 </header>
+                <div class="addNewIssueInTheBoard margin10px toHide">
+                  <div>
+                    <header>Title</header>
+                    <input type="text" class = "add_new_issue_input" placeholder="Name a new issue? mew~">
+                    <div class = "add_clickToCreate">
+                      <button class="btn btn-success flow-to-left add_submit">Submit issue</button>
+                      <button class="btn float-to-right2 add_cancel">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+
+
                 <!--使用js插入
               -->
               </div>
@@ -202,15 +214,25 @@
                     <div class="board-issue-count-container pull-right clickToHide">
                       <span class= "board-issue-count" id="closeNum"></span>
                       <button class = "btn btn-small btn-default  addNewIssues">
-                        <i aria-hidden="true" data-hidden="true" class="fa fa-plus"></i>
+                        <i aria-hidden="true" data-hidden="true" class="fa fa-plus" id="rightAdd"> </i>
                       </button>
                     </div>
                   </h6>
                 </header>
+                <div class="addNewIssueInTheBoard margin10px toHide">
+                  <div>
+                    <header>Title</header>
+                    <input type="text" class = "add_new_issue_input" placeholder="Name a new issue? mew~">
+                    <div class = "add_clickToCreate">
+                      <button class="btn btn-success flow-to-left add_submit">Submit issue</button>
+                      <button class="btn float-to-right2 add_cancel">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+
                 <!--使用js插入
               -->
               </div>
-
             </div>
             <div id= "changeIssueData" class="toHide"  >
               <header class="ChangeIssueName">
@@ -248,7 +270,8 @@
                   -->
                 </div>
               </div>
-            </div>
+            </div>   <!--changeIssueData-->
+
 
           </div>
         </div>

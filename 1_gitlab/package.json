@@ -15,6 +15,7 @@
     "webpack-dev-server": "^2.5.0"
   },
   "dependencies": {
-    "babel-polyfill": "^6.23.0"
+    "babel-polyfill": "^6.23.0",
+    "dragula": "^3.7.2"
   }
 }

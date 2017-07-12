@@ -427,9 +427,6 @@ button.closebtn {
   white-space: nowrap;  /*设置滑动效果*/
   display: block;
   background-color: #f6f6f6;
-  border: 1px solid pink;
-
-
 }
 
 .board {   /*整个方框的样式*/
@@ -644,7 +641,7 @@ div.issue-to-drag_title span:nth-child(2){
 
   padding: 8px 0px;
 }
-.changeItem {
+.changeItem {gg
   font-size: 15px;
 }
 
@@ -662,4 +659,42 @@ div.issue-to-drag_title span:nth-child(2){
     margin-top: 4px;
     color: white;
     display: inline-block;
+}
+
+
+.addNewIssueInTheBoard {
+  border: 1px dashed black;
+}
+.add_clickToCreate {
+  margin-top: 10px;
+
+}
+.addNewIssueInTheBoard header {
+  font-size: 20px;
+}
+.addNewIssueInTheBoard input {
+  width: 100%;
+  padding: 5px;
+}
+.addNewIssueInTheBoard > div {
+  margin: 8px;
+  position: relative;
+}
+
+
+
+
+.margin10px {
+  margin: 10px;
+}
+.float-to-left {
+  position: absolute;
+  left: 0px;
+}
+.float-to-right2 {
+  position: absolute;
+  right: 0px;
+}
+.droparea:-moz-drag-over {
+  border : 1px dashed black;
 }
