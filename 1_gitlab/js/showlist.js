@@ -186,9 +186,9 @@ function showOpenCloseNum() {
 
 
 /******获取allIssue，openIssue，closeIssue数组中的issue编号****/
-var allIssue = [];
+var allIssues = [];
 for (let i = 1; i <= all; i++) {
-  allIssue.push(i);
+  allIssues.push(i);
 }
 function allIssue() {
   let alls = issue_info.length-1;
@@ -387,7 +387,7 @@ displayAllIssue.onclick = function(event) {
   $("#open_num").removeClass("chooseActive");
   $("#close_num").removeClass("chooseActive");
   clear(targetNode);
-  showListIssue(allIssue);
+  showListIssue(allIssue());
 };
 
 var displayOpenIssue = document.getElementById("open_num");
@@ -649,7 +649,7 @@ $(".right-board .board-header").click(function() {
   if ($(this).parent().attr("class").indexOf("displaySmall") > 0) {
     $(this).parent().removeClass("displaySmall");
     $(this).parent().children(".toHide").removeClass("toHide");
-    $(this).children().children(".board-issue-count-container").removeClass("toHide");
+    $(this).childrsen().children(".board-issue-count-container").removeClass("toHide");
     $(this).attr("style","border-bottom:  1px solid black;");
   } else {
     $(this).parent().addClass("displaySmall");
@@ -684,11 +684,7 @@ $(".left-board .board-header").bind('click',function(e) {
 });
 
 $(".right-board .board-header").bind('click',function(e) {
-  if (e.target && e.target.id === "rightAdd") {   //捕捉到了最里层的点击事件
-    if ($(this).next().attr("class").indexOf("toHide") > 0) {
-      $(this).next().removeClass("toHide");
-    }
-  } else {
+
     if ($(this).parent().attr("class").indexOf("displaySmall") > 0) {
       $(this).parent().removeClass("displaySmall");
       $(this).parent().children(".clickToHide").removeClass("toHide");
@@ -696,12 +692,10 @@ $(".right-board .board-header").bind('click',function(e) {
       $(this).attr("style","border-bottom:  1px solid black;");
     } else {
       $(this).parent().addClass("displaySmall");
-      $(this).next().addClass("toHide");
       $(this).parent().children(".clickToHide").addClass("toHide");
       $(this).children().children(".board-issue-count-container").addClass("toHide");
       $(this).attr("style","border-bottom: 0px");
     }
-  }
 });
 
 $(".add_cancel").click(function() {
@@ -728,8 +722,11 @@ $(".add_submit").click(function() {
   showCloseIssue();
   showBacklogIssue();
   showOpenCloseNum();
+  var targetNode = document.getElementsByClassName("display-issue")[0];
+  clear(targetNode);
   showListIssue(openIssueNum());
   alert("Ok!");
+  $(this).parent().prev(".add_new_issue_input")[0].value = "";
   $(".addNewIssueInTheBoard").addClass("toHide");
 });
 
@@ -859,23 +856,6 @@ function addaddadd() {
     });
   }
 }
-
-/*
-$(".addNewIssues").live("click",function() {
-  //var targetNode = document.getElementsByClassName("board-list")[0];
-  clickToAddNewIssues(this);
-  //$(".addNewIssues").parents(".board-header").addClass("toHide");
-  $(this).parent().addClass(" toHide ");
-});
-
-function clickToAddNewIssues(targetNode) {
-  alert("ddd");
-  alert(targetNode);
-  targetNode.parents(".board-header").addClass(".toHide");
-  //targetNode.className += "toHide";
-}
-*/
-
 function showNewBoardWhenClickAL(new_board_index) {
   var index = new_board_index;  //获得是点击的那个label的编号
   var targetNode = document.getElementById("backlogBoard");
@@ -892,7 +872,18 @@ function showNewBoardWhenClickAL(new_board_index) {
   } else {
     sss += 0;
   }
-  sss += '</span><button class="btn btn-small btn-default addNewIssues"><i aria-hidden="true" data-hidden="true" class="fa fa-plus"></i></button></div></h6></header>';
+  sss += '</span><button class="btn btn-small btn-default"><i aria-hidden="true" data-hidden="true" class="fa fa-plus  board_addNewIssues"></i></button></div></h6></header>';
+  sss += `<div class="addNewIssueInTheBoard margin10px toHide">
+                    <div>
+                      <header>Title</header>
+                      <input type="text" class = "add_new_issue_input" placeholder="Name a new issue? mew~">
+                      <div class = "add_clickToCreate">
+                        <button class="btn btn-success flow-to-left board_add_submit">Submit issue</button>
+                        <button class="btn float-to-right2 board_add_cancel">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                  `
   sss += '<div class="boader-list-component"><ul data-board="" class="board-list">';
   sss += showIssueTagsInBoards(index, issueHaveI);
   sss += '</ul></div>';
@@ -900,7 +891,79 @@ function showNewBoardWhenClickAL(new_board_index) {
   $("#backlogBoard").after(newdivs);
 }
 
+$(".board_addNewIssues").live('click',function() {
+  if ($(this).parents('header').next().attr("class").indexOf('toHide') > 0) {
+    $(this).parents("header").next().removeClass("toHide");
+  } else {
+    $(this).parents('header').next().addClass('toHide');
+  }
+});
 
+$(".board_add_cancel").live('click',function() {
+  $(this).parents(".addNewIssueInTheBoard").addClass('toHide');
+  $(this).parent().prev(".add_new_issue_input")[0].value = "";
+});
+
+$('.board_add_submit').live('click',function() {
+  var new_issue_name = $(this).parent().prev('.add_new_issue_input')[0].value;
+  var new_issue_no = issue_info.length;
+  var new_issue_object = {
+    tag: [],
+    tagColor: [],
+    no: new_issue_no,
+    name: new_issue_name,
+    date: new Date(),
+    state: 1
+  }
+  var this_tag_no = $(this).parents('.newBoard').attr('data-id');
+  new_issue_object = new_issue_object_addInfo(new_issue_object, this_tag_no, new_issue_no);
+  issue_info.push(new_issue_object);
+
+/*反正前期写的函数封装得太差了，感觉都要重新写，非常烦恼*/
+  $(this).parents(".newBoard").children('.boader-list-component').children('ul').empty();
+  var sss = test(this_tag_no, allLabels[this_tag_no].IssueHave);
+  $(this).parents(".newBoard").children('.boader-list-component').children('ul').html(sss);
+  $(this).parents('.newBoard').children('header').children().children().children('.board-issue-count').html(allLabels[this_tag_no].IssueHave.length)
+  showCloseIssue();
+  showOpenCloseNum();
+  //showNewBoardWhenClickAL(this_tag_no);
+  //showIssueTagsInBoards(this_tag_no, allLabels[this_tag_no].IssueHave);
+  var targetNode = document.getElementsByClassName('display-issue')[0];
+  clear(targetNode);
+  showListIssue(openIssueNum());
+  alert("ok");
+  $(this).parent().prev('.add_new_issue_input')[0].value = "";
+  $('.addNewIssueInTheBoard').addClass('toHide');
+});
+
+function new_issue_object_addInfo(new_issue_object, label_no, new_issue_no) {
+  new_issue_object.tag.push(allLabels[label_no].name);
+  new_issue_object.tagColor.push(allLabels[label_no].color);
+  allLabels[label_no].IssueHave.push(new_issue_no);
+  return new_issue_object;
+}
+
+function test(index, issueHaveI) {
+  var blocks = issueHaveI.length;
+  var sss = "";
+  if(allLabels[index].IssueHave) {
+    var blocks = issueHaveI.length;
+    var sss = "";
+    for (let i = 0 ; i < blocks; i++) {
+      sss += '<li index = '+issueHaveI[i]+' class = "every-issue-to-drag issue-change" style:"margin: 10px;">'
+      sss += '<div class = "issue-to-drag_title">'
+      sss += '<span>'+issue_info[issueHaveI[i]].name+'</span>';
+      sss += '<span>· #'+issue_info[issueHaveI[i]].no+'</span></div>';
+      sss += '<div class = "issue-to-drag_labels">';
+      for (let k = 0; k < issue_info[issueHaveI[i]].tag.length; k++) {
+        sss += '<span style="background-color: ' + issue_info[issueHaveI[i]].tagColor[k]+ '">'+issue_info[issueHaveI[i]].tag[k] + '</span>';
+      }
+    }
+    return sss;
+  } else {
+    return "";
+  }
+}
 function showIssueTagsInBoards(index, issueHaveI) {
   //传入的是点击的那个label的index，以及含有这个label的issue的index
   //例如点击bug， 传入0，[1,2,3];

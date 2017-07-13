@@ -681,7 +681,9 @@ div.issue-to-drag_title span:nth-child(2){
   position: relative;
 }
 
-
+.newBoard {
+  overflow: auto;
+}
 
 
 .margin10px {
