@@ -12,6 +12,11 @@
 <link rel="icon" href="./favicon.ico">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs
 /jquery/1.4.0/jquery.min.js"></script>
+
+  <!-- Sortable.js -->
+  <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
+
+
 </head>
 <body>
   <nav class = "nav-container height55px">
@@ -47,8 +52,8 @@
   <nav class = "nav-body nav-second">
     <div class="body-container">
       <ul class = "ul-display nav-container listboardChange">
-        <li class = "listToChoose"><a href="#" id="list">List</a></li>
-        <li class = " "><a href="#" id="boards">Boards</a></li>
+        <li ><a href="#" class = "listToChoose" id="list">List</a></li>
+        <li><a href="#" id="boards">Boards</a></li>
         <li  id="labels"><a href="#">Labels</a></li>
         <li><a href="#" id="milestones">Milestones</a></li>
       </ul>
@@ -60,9 +65,9 @@
         <div class = "menu-bar">
           <div class="menu-bar-left">
             <ul class = "words-display">
-              <li id="open_num"  class = "chooseHover chooseActive"><a href="#" >Open</a><span class="showNums"></span></li>
-              <li id="close_num" class = "chooseHover"><a href="#" >Close</a><span class="showNums"></span></li>
-              <li id="all_num" class = "chooseHover"><a href="#">All</a><span class="showNums"></span></li>
+              <li id="open_num"  class = "chooseHover chooseActive"><a href="#" >Open<span class="showNums"></span></a></li>
+              <li id="close_num" class = "chooseHover"><a href="#" >Close<span class="showNums">11</span></a></li>
+              <li id="all_num" class = "chooseHover"><a href="#">All<span class="showNums"></span></a></li>
             </ul>
           </div>
         </div>
@@ -78,10 +83,7 @@
             </div>
             <div class = "click-to-search height55px">
               <div class="input-group height55px">
-                <span class="input-group-btn">
-                <button class="btn btn-info" type="button"><span>&nbsp;&nbsp;</span></button>
-                </span>
-                <input type="text" size="4" value="" id = "searchBar" placeholder="Please input sth to search">
+                <input type="text" size="4" value="" id = "searchBar" placeholder="You can search for the labels in the issues!   Attention: only labels">
               </div>
             </div>
           </div>
@@ -101,7 +103,7 @@
                       <div class="input-group">
                           <input type="text" class="form-control" id = "boardSearchBar" placeholder="Search or filter results...">
                           <span class="input-group-btn">
-                          <button class="btn btn-info" type="button" id ="addListBtn"><span>Add list</span></button>
+                          <button class="btn btn-add-list" type="button" id ="addListBtn"><span>Add list</span></button>
                           </span>
                       </div>
                   </div>
@@ -109,6 +111,8 @@
           <div id = "addListUpdown" class = "toHide UpdownFlow">
             <div class = "listFlexbody">
               <h1>Add list</h1>
+              <span id="closeAddListUpdown" class="pull-right">x</span>
+
               <div class="updownIntro">
                 <p>hello,world. What you can just do here is to search the labels you use in your projects. Have a good time :)</p>
               </div>

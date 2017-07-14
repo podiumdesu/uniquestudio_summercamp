@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
-    "dragula": "^3.7.2"
+    "dragula": "^3.7.2",
+    "sortablejs": "^1.6.0"
   }
 }

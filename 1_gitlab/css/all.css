@@ -50,32 +50,33 @@ div.header-content a:hover {
 
 nav.nav-body {
   position: relative;
-    border-bottom: 1px solid #DFEFF0;
+    border-bottom: 1px solid #e5e5e5;
   width: 100%;
 
 }
 
-.labelInissue {
+.issueOpen span.labelInissue {
    margin:3px 4px;
-   padding:3px 10px;
-   color: rgba(33,33,23,0.4);
-   border-radius: 20px;
-   font-size: 13px;
+   padding:3px 7px;
+   color: #ffffff;
+   border-radius: 100px;
+   font-size: 12px;
    vertical-align: text-bottom;
 
 }
 
 .issueClosed {
-   background-color: #F6F6F6;
+   background-color: #fafafa;
 }
 
 .issueOpen {
-  height: 60px;
-  padding: 5px 10px;
-  border-bottom: 1px solid #DFEFF0;
 
+  padding: 10px 15px;
+  border-bottom: 1px solid #e5e5e5;
 }
-
+.issueOpen span {
+  color: rgba(0,0,0,0.55);
+}
 .displayClose {
   position: absolute;
   right: 10%;
@@ -100,14 +101,32 @@ ul.words-display{
 
 ul.words-display li {
   line-height: 23px;
-  padding: 10px 15px;
+  padding: 19px 15px 10px;
 }
 
-ul.words-display ul li:hover{
+ul.words-display li a{
+  color: rgba(0,0,0,0.55);
+}
+
+ul.words-display  li:hover{
+  border-bottom: 2px solid rgba(0,0,0,0.5);
+}
+
+ul.words-display li:hover a{
+  color: #000;
+  text-decoration: none;
+}
+.words-display a span {
+  padding: 3px 7px;
+  background-color: rgba(0,0,0,0.07);
+  border-radius: 50%;
+  margin-left: 5px;
+}
+ul.words-display li:hover {
   border-bottom: 2px solid rgba(0,0,0,0.5);
 }
 nav.nav-body ul li {
-  line-height: 23px;
+  line-height: 30px;
   padding: 10px 15px;
 }
 
@@ -120,19 +139,28 @@ nav.nav-body div.main-body div {
 
 /*设置字体颜色*/
 nav.nav-body ul li a {
-  font-size: 16px;
+  font-weight: normal;
+  font-size: 14px;
   text-decoration: none;
   color: rgba(0,0,0,0.55);
   transition: all ease 0.5s;
 
 }
+nav.nav-body ul li:hover a span {
+  color: #000000;
+}
+nav.nav-body ul li:hover a span {
+}
 nav.nav-body ul li:hover a{
-  color: rgba(0,0,0,1);
+  color: #000;
 }
 
+nav.nav-body ul.titleChange a {
+  font-size: 16px;
+}
 
 nav.nav-second{
-  background-color: rgba(255,250,250,1)
+  background-color: #f5f5f5;
 }
 
 
@@ -140,15 +168,46 @@ nav.nav-second{
   vertical-align: text-bottom;
 }
 
+.btn-add-list {
+  border: 1px solid green;
+  background-color: white;
+  color: green;
+}
+.allinhere {
+  height: 70px;
+  padding: 0;
+  position: relative;
+  background-color: #fafafa;
+}
+
+div.row > span {
+  height: 33px;
+  border-radius: 4px;
+  vertical-align: baseline;
+    border: 1px solid #e5e5e5;
+    padding: 5px 6px 7px;
+    text-align: center;
+}
+div.row {
+  height: 70px;
+  margin: 0px;
+padding: 18px 30px;
+position: relative;
+background-color: #f6f6f6;
+}
 div.display-issue p{
   line-height: 25px;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 500;
   margin: 0px;
 }
 
+div.display-issue {
+  font-size: 12px;
+}
 div.flex-body {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
   background-color: transparent;
 }
 
@@ -182,37 +241,34 @@ div.search-bar div.click-to-search input {
 .chooseActive {
   border-bottom: 2px solid #1f78d1;
 }
+.words-display .chooseActive a{
+  text-decoration: none;
+  color: #000;
+}
 .chooseDisactive {
   border-bottom: 2px solid rgba(0,0,0,0.5);
 }
-.chooseHover:hover {
-  border-bottom: 2px solid rgba(0,0,0,0.5);
-}
+
 .UpdownFlow {
   background-color: white;
   width: 300px;
   z-index: 100;
   position: absolute;
-  right: 20px;
-  top: 43px;
-  border: 3px solid green;
+  right: 44px;
+  top: 52px;
+  border: 1px solid #e5e5e5;
 }
 
-.allinhere {
-  height: 55px;
-  padding: 10px 20px;
-  position: relative;
-  background-color: #f6f6f6;
-}
+
 #addListUpdown h1 {
   text-align: center;
   margin: 8px;
   padding: 7px 0;
-  border-bottom: 1px solid pink;
+  border-bottom: 1px solid #e5e5e5;
 }
 div.updownIntro {
   margin: 8px;
-  border-bottom: 1px solid pink;
+  border-bottom: 1px solid #e5e5e5;
 }
 
  div.updownSearch {
@@ -224,7 +280,7 @@ div.updownIntro {
 
 div.labelsTodisplay {
   margin: 8px;
-  border-bottom: 1px solid pink;
+  border-bottom: 1px solid #e5e5e5;
   padding: 3px 0;
 
 }
@@ -266,18 +322,22 @@ input.labelsCheckout + span {
 }
 
 .menu-bar-left {
-  border-bottom: 1px solid #DFEFF0;
+  border-bottom: 1px solid #e5e5e5;
 }
 div.click-to-search > div.input-group {
-
+  width: 100%;
   padding: 10px 10px;
-  background-color:#F6F6F6;
-  border-bottom: 1px solid #DFEFF0;
+  background-color:#fafafa;
+  border-bottom: 1px solid #e5e5e5;
 
+}
 
+div.input-group input {
+  border: 1px solid #e5e5e5;
 }
 
 ul.titleChange li.chooseActive a {
+  font-weight: 600;
   color: black;
 }
 
@@ -422,26 +482,31 @@ button.closebtn {
 .inlineDisplay {
 
   width: 100%;
-  padding: 20px;
+  padding: 30px 0px;
   overflow-x: scroll;
   white-space: nowrap;  /*设置滑动效果*/
   display: block;
-  background-color: #f6f6f6;
+  background-color: #fff;
 }
 
 .board {   /*整个方框的样式*/
-  width: 350px;
-  height: 500px;
-  border: 2px solid black;
+  width: 370px;
+  height: 510px;
+  border: 1px solid #e5e5e5;
   position: relative;
 
   display: inline-block;    /*设置滑动效果*/
-  margin-right: 10px;
-  background-color: #f6f6f6;
+  margin-right: 25px;
+  background-color: #fafafa;
   border-radius: 4px;
   vertical-align: -webkit-baseline-middle;
 }
-
+.board:first-child {
+  margin-left: 25px;
+}
+.board:last-child {
+  margin-right: 25px;
+}
 .board ul {
   list-style: none;
 }
@@ -459,20 +524,30 @@ div.add-btn> button {   /*添加新issue的button*/
 }
 
 .board-header {  /*最上方的label块显示信息*/
-  border-bottom: 1px solid black;
-  border-top: 3px solid pink;   /*根据label自带的颜色自己进行设置*/
+  border-bottom: 1px solid #e5e5e5;
   height: 50px;
   padding: 5px 10px;
 }
-
-.every-issue-to-drag {   /*每个可拖动的小方块*/
-  border: 1px solid black;
-  margin: 5px 5px;
-  height: 60px;
-  padding: 5px;
-  border-radius: 5px;
+.boardtitle {
+  font-size: 15px;
+  font-weight: 500;
 }
-
+.every-issue-to-drag {   /*每个可拖动的小方块*/
+  box-shadow: 0px 1px 2px rgba(186,186,186,0.5);
+  border: 1px solid #e5e5e5;
+  margin: 10px 10px;
+  height: 70px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+#closeAddListUpdown {
+  position: absolute;
+  right: 0px;
+  top: 13px;
+  cursor: pointer;
+  padding: 0px 10px;
+}
 /*
 background-color:#F6F6F6;
 border-bottom: 1px solid #DFEFF0;
@@ -527,10 +602,6 @@ i {
 }
 /*******************/
 
-.every-issue-to-drag {
-  margin: 10px;
-}
-
 
 .changeColor {
   background-color: red;
@@ -552,13 +623,19 @@ i.fa-trash::before {
     padding-right: 10px;
     padding-left: 10px;
     line-height: 22px;
-    border-radius: 3px 0 0 px;
+    border-radius: 3px 0 0 3px;
     border: 1px solid #e5e5e5;
+}
+.right-board .board-issue-count {
+  border-radius: 3px
 }
 .board-issue-count-container .btn {
     line-height: 13px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+}
+.right-board .board-issue-count {
+  margin-right: 0;
 }
 .btn.btn-small {
     padding: 0px 0px;
@@ -566,33 +643,38 @@ i.fa-trash::before {
     vertical-align: baseline;
 }
 
-ul.listboardChange li {
-  transition: all ease 1s;
-}
 
 ul.listboardChange li:hover {
   color: black;
 }
 
 ul.listboardChange .listToChoose {
-  color: black;
+    color: #1f78d1;
+    font-weight: 600;
 }
 
 
 div.issue-to-drag_labels {
-  margin-top: 4px;
+  margin-top: 0px;
+  height: 50%;
+}
+.issue-to-drag_title {
+  height: 50%;
 }
 /*为board显示的每个list中的label设置颜色*/
 .issue-to-drag_labels span{
-
   border-radius: 10px;
   margin-right: 10px;
   padding: 2px 6px;
   line-height: 10px;
   margin-top: 4px;
-  color: black;
+  font-size: 12px;
+  color: white;
 }
-
+.issue-to-drag_title span {
+  font-size: 14px;
+  font-weight: 500;
+}
 
 div.issue-to-drag_title span:nth-child(1){
   margin-right: 5px;
@@ -605,14 +687,14 @@ div.issue-to-drag_title span:nth-child(2){
 /*changelist*/
 
 #changeIssueData {
-  height: 550px;
+  height: 600px;
   width: 25%;
   z-index: 4;
   background: white;
-  position: fixed;
+  position: absolute;
   right: 0;
-  top: 210px;
-  border: 2px solid #dfeff0;
+  top: 220px;
+  border: 1px solid #e5e5e5;
   overflow: scroll;
 }
 .width100 {
@@ -625,7 +707,7 @@ div.issue-to-drag_title span:nth-child(2){
 .ChangeIssueName {
   margin: 0 14px;
   margin-top: 10px;
-  border-bottom: 1px solid #DFEFF0;
+  border-bottom: 1px solid #e5e5e5;
   font-size: 17px;
 }
 .ChangeIssueName p:nth-child(3){
@@ -637,14 +719,18 @@ div.issue-to-drag_title span:nth-child(2){
 
 .changeItem {
   margin: 0 14px;
-  border-bottom: 1px solid #DFEFF0;
+  border-bottom: 1px solid #e5e5e5;
 
   padding: 8px 0px;
 }
-.changeItem {gg
+.changeItem {
   font-size: 15px;
 }
 
+#change_close {
+  text-decoration: none;
+  color: #e5e5e5;
+}
 .changeItem p {
   font-size: 13px;
   margin-top: 5px;
@@ -699,4 +785,23 @@ div.issue-to-drag_title span:nth-child(2){
 }
 .droparea:-moz-drag-over {
   border : 1px dashed black;
+}
+
+
+.sortable-ghost {
+  opacity: .2;
+  background: #dedede;
+}
+
+.board-delete i {
+  vertical-align: baseline;
+  margin: 2px;
+}
+
+.board-delete {
+  border: 0px;
+  line-height: 17px;
+  margin-right: 7px;
+  padding: 2px;
+  background-color: transparent;
 }
