@@ -629,11 +629,12 @@ function showLabelListWhenSearch(searchLabel) {
   var insertLabelsDisNode = document.getElementById("labelsTodisplay");
   var ddddNode = [];
   for (var i = 0 ; i < label_num; i++) {
-    var dddd = '<div class = "choose"><label style = "vertical-align: top;"><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle glyphicon"></span></label>';
+    var dddd = '<div class = "choose"><label style = "vertical-align: top;"><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle"></span></label>';
     dddd +='<div class = "labelsColor" style = "background-color : '+allLabels[searchLabel[i]].color+'"></div>';
     dddd +='<div class = "labelsName" style="display: inline-block"><span class="labelname">'+allLabels[searchLabel[i]].name+'</span></div></div>';
     ddddNode[i] = document.createElement("div");
     ddddNode[i].setAttribute("id",allLabels[searchLabel[i]].name);
+    ddddNode[i].setAttribute("style","cursor:pointer");
     //alert(dddd);
     ddddNode[i].innerHTML = dddd;
     insertLabelsDisNode.appendChild(ddddNode[i]);
@@ -786,7 +787,7 @@ function forCloseAndBacklog(num,array,targetNode,id) {
   var sss = "";
   sss += '<ul data-board="" id = " ' + id + '" class="board-list">';
   for (let i = 0; i < num; i++) {
-    sss += '<li index = ' + array[i] + ' class = "every-issue-to-drag issue-change" draggable="true" ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)" ondragenter="handleDragEnter(event)" >';
+    sss += '<li index = ' + array[i] + ' class = "every-issue-to-drag issue-change" draggable="true">';
     sss += '<div class ="issue-to-drag_title"><span>';
     sss += issue_info[array[i]].name;
     sss += '</span><span>· #';
@@ -803,11 +804,14 @@ function forCloseAndBacklog(num,array,targetNode,id) {
 
   }
   sss += '</ul>'
-
   newList = document.createElement("div");
   newList.className += "clickToHide ";
   newList.className += "board-list-component";
   newList.innerHTML = sss;
+  Sortable.create(newList.getElementsByClassName("board-list")[0],{
+    group:"boards",
+  });
+
   console.log($(targetNode).has("div"));     //根据数据变化后渲染新的页面
   if($(targetNode).has("div")) {
     $(targetNode).children(".board-list-component").remove();
@@ -856,17 +860,80 @@ window.onDrop = function(e) {       //监听drop事件执行所需操作
 */
 
 
+/**boards页面下addlist时搜索labels
+封装成可以显示被搜索到的labels的div块的函数
+所需要传入的参数是allLabels[]中的index */
 
+//每次修改数据以后需要重新进行计算
+/*
+function showLabelListWhenSearch(searchLabel) {
+  let label_num = searchLabel.length;
+  var insertLabelsDisNode = document.getElementById("labelsTodisplay");
+  var ddddNode = [];
+  for (var i = 0 ; i < label_num; i++) {
+    var dddd = '<div class = "choose"><label style = "vertical-align: top;"><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle glyphicon"></span></label>';
+    dddd +='<div class = "labelsColor" style = "background-color : '+allLabels[searchLabel[i]].color+'"></div>';
+    dddd +='<div class = "labelsName" style="display: inline-block"><span class="labelname">'+allLabels[searchLabel[i]].name+'</span></div></div>';
+    ddddNode[i] = document.createElement("div");
+    ddddNode[i].setAttribute("id",allLabels[searchLabel[i]].name);
+    //alert(dddd);
+    ddddNode[i].innerHTML = dddd;
+    insertLabelsDisNode.appendChild(ddddNode[i]);
+  }
+  addaddadd();
+}
+addLoadEvent(showLabelListWhenSearch(getAllLabelsIndex()));// 最开始显示所有的lables
+*/
+var showingBoardarray = [];   //将此时正在显示的label的index传入数组中进行保存。
+console.log("showingBoardarray"+showingBoardarray);
+function getShowingBoardArray(index) {    //添加新的index
+  showingBoardarray.push(index);
+  //console.log(showingBoardarray);
+}
+function deleteShowingBoardArray(index) {
+  showingBoardarray.pop(index);
+}
+
+var showingLabelArray = [];  //将点击后显示在board中的label的index传入数组中进行报错。
+function getShowingLabelArray(index) {
+  showingLabelArray.push(index);
+}
+function deleteShowingLabelArray(index) {
+  showingLabelArray.pop(index);
+}
 //当点击addlist中的label时，在下方的boardlist中显示出新的框框
 function addaddadd() {
   let index = getAllLabelsIndex();
   let length = index.length;
-  console.log(length);
+  //console.log(length);
+  var boardIndexInDisplay = showingBoardarray;
   for (let i = 0; i < length ; i++) {
-    var sss = "#" + allLabels[index[i]].name;
+    const sss = "#" + allLabels[index[i]].name;
     $(sss).click(function() {
-      showNewBoardWhenClickAL(i);//将点击的label的编号传入函数
-      console.log(i);
+      //console.log(showingBoardarray);
+      if(showingBoardarray.indexOf(i) < 0) {
+        //console.log(showingBoardarray);
+        getShowingBoardArray(i);
+
+        $(sss).children().children().children(".checkboxStyle").attr("style","background-color:lightgreen");
+      //  addLabelInAddList(sss);
+        showNewBoardWhenClickAL(i);//将点击的label的编号传入函数
+        //console.log(i);
+        console.log("added"+showingBoardarray);
+      } else {
+        deleteShowingBoardArray(i);
+        $(".board").each(function() {
+          //console.log(i);
+          //console.log($(this).attr("data-id"));
+          if(parseInt($(this).attr("data-id")) === i) {
+            $(this).fadeOut(400,function() {     //这是一个可爱的回调函数
+              $(this).remove();
+            })
+          }
+        })
+        $(sss).children().children().children(".checkboxStyle").attr("style","background-color:transparent");
+
+      }
       //但是我需要显示的是包含这个label编号的issue；通过issueHave这个属性
     });
   }
@@ -905,11 +972,23 @@ function showNewBoardWhenClickAL(new_board_index) {
   sss += showIssueTagsInBoards(index, issueHaveI);
   sss += '</ul></div>';
   newdivs.innerHTML = sss;
-  Sortable.create(newdivs.getElementsByClassName("board-list")[0],{group:"boards"});
-  $("#backlogBoard").after(newdivs);
+  //var inline = document.getElementsByClassName("inlineDisplay")[0];
+//  Sortable.create(inline.getElementsByClassName("board")[0], {group: "newdivs"});
+  Sortable.create(newdivs.getElementsByClassName("board-list")[0],{
+    group:"boards",
+    draggable: ".every-issue-to-drag",
+    onChoose: function(ev) {
+      console.log(ev.target.index);
+    }
+  });
+  $("#closeBoard").after(newdivs);
 }
-
+/*$("#addListSearchBar2").bind("input propertychange",function() {  //使用bind检测输入框的实时变化，并进行搜索。
+  searchLabel2($(this).val());
+});*/
 $(".board_addNewIssues").live('click',function() {
+  $(this).parents('header').next().children(".add_new_issue_input:first").focus();
+  //$(this).parents('header').next().children(".add_new_issue_input")[0].value;
   if ($(this).parents('header').next().attr("class").indexOf('toHide') > 0) {
     $(this).parents("header").next().removeClass("toHide");
   } else {
@@ -920,6 +999,10 @@ $(".board_addNewIssues").live('click',function() {
 $(".board_add_cancel").live('click',function() {
   $(this).parents(".addNewIssueInTheBoard").addClass('toHide');
   $(this).parent().prev(".add_new_issue_input")[0].value = "";
+});
+
+$(".add_new_issue_input").bind("input propertychange",function() {  //使用bind检测输入框的实时变化，并进行搜索。
+  alert($(this).val());
 });
 
 $('.board_add_submit').live('click',function() {
@@ -993,7 +1076,7 @@ function showIssueTagsInBoards(index, issueHaveI) {
       sss += '<span>'+issue_info[issueHaveI[i]].name+'</span>';
       sss += '<span>· #'+issue_info[issueHaveI[i]].no+'</span></div>';
       sss += '<div class = "issue-to-drag_labels">';
-      for (let k = 0; k < issue_info[issueHaveI[i]].tag.length; k++) {
+      for (var k = 0; k < issue_info[issueHaveI[i]].tag.length; k++) {
         sss += '<span style="background-color: ' + issue_info[issueHaveI[i]].tagColor[k]+ '">'+issue_info[issueHaveI[i]].tag[k] + '</span>';
       }
     }
@@ -1066,12 +1149,20 @@ function searchLabel2(sss) {
 所需要传入的参数是allLabels[]中的index */
 
 //每次修改数据以后需要重新进行计算
+
 function showLabelListWhenSearch2(searchLabel) {
+  console.log(showingBoardarray);
   var label_num = searchLabel.length;
   var insertLabelsDisNode = document.getElementById("labelsTodisplay2");
   var ddddNode = [];
   for (var i = 0 ; i < label_num; i++) {
-    var dddd = '<div class = "choose"><label style = "vertical-align: top;"><input type="checkbox" value="" class="labelsCheckout"/><span class="checkboxStyle glyphicon"></span></label>';
+    var dddd = '<div class = "choose"><label style = "vertical-align: top;"><input type="checkbox" value="" class="labelsCheckout"/>';
+    if (showingBoardarray.indexOf(i)) {
+      console.log(showingBoardarray);
+      dddd += '<span class="checkboxStyle"'+' style="background-color:lightgreen"></span></label>';
+    } else {
+      dddd += '<span class="checkboxStyle"></span></label>';
+    }
     dddd +='<div class = "labelsColor" style = "background-color : '+allLabels[searchLabel[i]].color+'"></div>';
     dddd +='<div class = "labelsName" style="display: inline-block"><span class="labelname">'+allLabels[searchLabel[i]].name+'</span></div></div>';
     ddddNode[i] = document.createElement("div");
@@ -1082,7 +1173,6 @@ function showLabelListWhenSearch2(searchLabel) {
   }
   addaddadd2();
 }
-
 
 addLoadEvent(showLabelListWhenSearch2(getAllLabelsIndex()));
 
@@ -1110,13 +1200,17 @@ function addOfdeleteLabels() {  //编写是否该label在issue中。
 
 }
 
-$(".board-delete").live('hover' , function(e){
-  if(event.type == 'mouseenter') {
-    console.log('mouseenter');
-  } else {
-    console.log('mouseleave')
-  }
-})
+$(".board-delete").live('click', function() {
+  var index = $(this).parents(".board").attr("data-id");
+  console.log("after-delete"+showingBoardarray);
+  $(this).parents(".board").fadeOut(400 ,function() {
+    deleteShowingBoardArray(index);
+    var targetNode = '#'+allLabels[index].name;
+    $(targetNode).children().children().children(".checkboxStyle").attr("style","background-color:transparent");
+    $(this).remove();
+  });
+});
+
 /*决定使用sortable啦*/
 
 var el = document.getElementById("backlogBoard");
@@ -1131,8 +1225,6 @@ $("#change_close").click(function() {  //关闭修改issuelabel的页面
 $("#labels_edit").click(function() {
   $(".toChangeLabels").fadeIn("fast");
 });
-
-
 
 
 
