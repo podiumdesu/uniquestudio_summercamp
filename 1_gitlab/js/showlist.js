@@ -494,8 +494,6 @@ function tagsInIssueNum(issue_num) {     //需要传入的参数是issue_info[i]
 
 /***********************************************************************************/
 
-
-
 /*********************************AddList页面的函数块*************************************／
 /*通过监听其父节点来解决*/
 //为颜色块的每个颜色绑定点击事件。并获取它们的对应的颜色。
@@ -509,6 +507,15 @@ $("#cancel").click(function() {
   $("#addNewLabel").removeClass("toDisplay");
   $("#addNewLabel").addClass("toHide");
 });
+
+/*想实现根据输入获取实时颜色变化，但是没成功*/
+/*
+$("#showColorName").bind("input propertychange",function() {  //使用bind检测输入框的实时变化，并进行搜索。
+  if($("#showColorName").value.match(^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$) ){
+    console.log("hello");
+  }
+});
+*/
 
 $("#ok").click(function()  {    //点击确认添加按钮以后添加
   if (document.getElementById("pppName").value.length === 0) {
@@ -968,7 +975,7 @@ function showNewBoardWhenClickAL(new_board_index) {
                     </div>
                   </div>
                   `
-  sss += '<div class="boader-list-component"><ul data-board="" class="board-list">';
+  sss += '<div class="boader-list-component"><ul data-board="'+ new_board_index+'" class="board-list">';
   sss += showIssueTagsInBoards(index, issueHaveI);
   sss += '</ul></div>';
   newdivs.innerHTML = sss;
@@ -977,11 +984,67 @@ function showNewBoardWhenClickAL(new_board_index) {
   Sortable.create(newdivs.getElementsByClassName("board-list")[0],{
     group:"boards",
     draggable: ".every-issue-to-drag",
-    onChoose: function(ev) {
-      console.log(ev.target.index);
-    }
+    onAdd: function(ev) {
+      var itemIssueIndex = ev.item.getAttribute('index');    //获取的是现在进行改动的issue的index
+      var labelFromIndex = ev.from.getAttribute('data-board');   //离开的label-board的index
+      var labelToIndex = ev.item.parentNode.getAttribute('data-board');
+      if (labelFromIndex !== labelToIndex) {
+        //console.log('success');
+        addData(itemIssueIndex,labelFromIndex,labelToIndex,ev.item);
+        deleteData(itemIssueIndex,labelFromIndex,ev.from);
+        render();
+      }
+      /*console.log(ev.item.parentNode);
+      console.log(itemIssueIndex);
+      console.log(labelFromIndex);
+      console.log(labelToIndex);
+      */
+    },
   });
   $("#closeBoard").after(newdivs);
+}
+
+function render() {
+  showOpenCloseNum();
+  var targetNode = document.getElementsByClassName("display-issue")[0];
+  clear(targetNode);
+  showListIssue(openIssueNum());
+}
+function addData(issueIndex, labelFromIndex, labelToIndex,evItem) {
+  var i = allLabels[labelFromIndex].IssueHave.indexOf(parseInt(issueIndex));
+  /*
+  console.log("ddd"+labelToIndex);
+  console.log("ddd"+issueIndex);
+  console.log("ddd"+allLabels[labelToIndex].IssueHave.indexOf(1));
+  console.log(allLabels[labelToIndex].IssueHave);
+  console.log(issueIndex);
+  console.log(typeof(issueIndex));
+  console.log(allLabels[labelToIndex].IssueHave.indexOf(issueIndex));
+*/
+  var j = allLabels[labelToIndex].IssueHave.indexOf(parseInt(issueIndex));
+  if (j >= 0) {    //
+    evItem.setAttribute("style","display:none");
+  } else {
+    allLabels[labelToIndex].IssueHave.push(parseInt(issueIndex));    //将原本label中没有的issue添加进去
+    var labelname = allLabels[labelToIndex].name;
+    var labelcolor = allLabels[labelToIndex].color;
+    issue_info[parseInt(issueIndex)].tag.push(labelname);
+    issue_info[parseInt(issueIndex)].tagColor.push(labelcolor);
+    var num = allLabels[labelToIndex].IssueHave.length;
+    evItem.parentNode.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[1].childNodes[0].innerHTML = num;
+  }
+}
+/*传入参数为：需要修改的issue的index， 以及删除了哪一个label*/
+function deleteData(issueIndex, labelIndex,evItem) {
+  var i = allLabels[labelIndex].IssueHave.indexOf(parseInt(issueIndex));
+  var labelname = allLabels[labelIndex].name;
+  allLabels[labelIndex].IssueHave.splice(i, 1);
+  var j = issue_info[issueIndex].tag.indexOf(labelname);
+  issue_info[issueIndex].tag.splice(j,1);
+  issue_info[issueIndex].tagColor.splice(j,1);
+  var num = allLabels[labelIndex].IssueHave.length;
+  evItem.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[1].childNodes[0].innerHTML = num;
+
 }
 /*$("#addListSearchBar2").bind("input propertychange",function() {  //使用bind检测输入框的实时变化，并进行搜索。
   searchLabel2($(this).val());
