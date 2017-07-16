@@ -6,15 +6,40 @@ module.exports = {
     output: {
         filename: 'bundle.js'
     },
+    plugins: [
+        new webpack.BannerPlugin('Created by PetnaKanojo'),
+        new webpack.HotModuleReplacementPlugin()
+    ],
     module: {
         loaders: [
-            {test: /\.css$/, loader: 'style-loader!css-loader'}
+/*          {
+            test: /\.js$/,
+            loader: 'babel-core',
+            query: {
+              presets: ['es2015', 'react']
+            }
+          },
+          */
+            {test: /\.css$/, loader: 'style-loader!css-loader'},
  //           test: /\.js[x]?$/, loader: 'babel'}
-        ]
-    },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ]
+/*            {
+                test: /\.jsx?$/,
+                loader: 'babel-core',
+                query: {
+                    presets: ['es2015']
+                }
+            }*/
+            {
+              test: /\.js$/,
+              exclude: /(node_modules|bower_components)/,
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  presets: ['env']
+                }
+              }
+            }
+        ],
+
+    }
 };
-
-

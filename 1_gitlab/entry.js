@@ -1,4 +1,9 @@
 //entry.js
 require("./css/all.css");
  require("./js/onload.js");
+//require("./js/data.js");
 require("./js/showlist.js");
+require('./js/clickAddList.js');
+//require("./js/openclosenum.js");
+require('./js/changePages.js');
+require('./js/boardPage.js');

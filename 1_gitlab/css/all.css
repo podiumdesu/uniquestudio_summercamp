@@ -395,11 +395,7 @@ div.createNewLabels > span {
   vertical-align: bottom;
 }
 
-#addNewLabel  {
-  width: 300px;
-  border: 3px solid pink;
 
-}
 #addNewLabel h1 {
   display: inline-block;
   margin-top: 10px;
@@ -425,7 +421,7 @@ button.closebtn {
 }
 #title {
   margin: 0 8px;
-  border-bottom: 1px solid pink;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .margin8px {
