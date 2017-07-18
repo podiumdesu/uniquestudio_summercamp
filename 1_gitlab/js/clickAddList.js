@@ -1,4 +1,3 @@
-
 var showLabelListWhenSearch = require('./boardPage/showLabelListWhenSearch.js').showLabelListWhenSearch;
 var showLabelListWhenSearch2 = require('./boardPage/showLabelListWhenSearch.js').showLabelListWhenSearch2;
 var getAllLabelsIndex = require('./common/getAllLabelsIndex.js').getAllLabelsIndex;
