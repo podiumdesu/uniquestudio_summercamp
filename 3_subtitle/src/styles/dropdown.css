@@ -1,0 +1,38 @@
+* {
+    padding:0px;
+    margin:0px;
+}
+.dropdown ul li {
+    display: block;
+    border: 1px solid black;
+    width: 100px;
+    line-height: 25px;
+    font-size: 16px;
+}
+
+.dropdown ul  {
+    list-style: none;
+    top: 25px;
+    left: 0px;
+    display: none;
+    position: absolute;
+    padding: 0px;
+}
+.dropdown:hover ul {
+    display: block;
+}
+.dropdown {
+    width: 100px;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+}
+.dropdown p{
+    border:1px solid black;
+    width: 100px;
+    line-height: 25px;
+}
+
+.dropdown ul li:hover {
+    background-color: aquamarine;
+}
