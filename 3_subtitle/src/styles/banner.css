@@ -1,0 +1,16 @@
+* {
+    margin: 0px;
+    padding:0px;
+}
+#banner {
+    margin: 0px;
+    height: 80px;
+    background-color: #343434;
+    padding:25px;
+}
+
+#banner h2 {
+    margin: 0px;
+    color: #fff;
+}
+

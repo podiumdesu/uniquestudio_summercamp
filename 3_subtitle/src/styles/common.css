@@ -1,0 +1,17 @@
+/*.toHide {
+    display: none;
+}*/
+
+
+/* edit/video part*/
+
+.part {
+    padding: 20px;
+    margin-top: 50px;
+    border: 1px solid darkcyan;
+    height: 600px;
+}
+
+.container {
+    width: 100%;
+}

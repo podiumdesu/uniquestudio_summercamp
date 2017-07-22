@@ -19,5 +19,3 @@ const findID = function(content) {
 const findSUBTITLE = function(content) {
     alert("subtitile");
 }
-40.125.204.223
-xuza5724

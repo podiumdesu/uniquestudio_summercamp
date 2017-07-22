@@ -13,8 +13,7 @@ $(window).bind('beforeunload', function(e) {    //用户刷新时提示数据未
 */
 $("#clickToAddDataThroughWrap").click(function() {   //点击将输入框中的数据成行存入数组中
     splitDataThroughWrap(textAreaWithWrap);
-    findDataThrough("id",sss);
-    //alert("添加成功");
+    alert("Added successfully!!!");
 })
 $("#clickToDownloadSRT").click(function() {    //点击下载srt文件
     saveFile(dataToDownload);
@@ -22,5 +21,5 @@ $("#clickToDownloadSRT").click(function() {    //点击下载srt文件
 
 $("#clickToFindWhatYouWant").click(function() {
     const inputValueToSearch = $("#inputAreaForValueToSearch").val();
-
+    findDataThrough("id",sss);
 });
