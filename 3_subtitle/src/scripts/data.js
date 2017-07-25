@@ -1,5 +1,17 @@
 export var dataToDownload;
 dataToDownload = [
+    {
+        index: 1,
+        startTime: "00:00:01,810",
+        endTime: "00:00:03,200",
+        subtitleInfo: "好啦，节目马上开始",
+    },
+    {
+        index: 2,
+        startTime: "00:00:03,200",
+        endTime: "00:00:04,620",
+        subtitleInfo: "大家拿出最佳表现",
+    }
 
 ];
 

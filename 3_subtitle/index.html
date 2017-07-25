@@ -33,9 +33,9 @@
                     <div id ="searchIndexDiv">
                         <p id="searchIndex">search</p>
                         <ul>
-                            <li>id</li>
-                            <li>time</li>
-                            <li>subtitle</li>
+                            <li class="select-item">id</li>
+                            <li class="select-item">time</li>
+                            <li class="select-item">subtitle</li>
                         </ul>
                     </div>
 
@@ -59,26 +59,30 @@
             <div id="changeInfoDiv">
 
             </div>
+            <div id="edit-info">
+                <table id="edit-table">
+                    <tr>
+                        <td id="edit-index" class="index">
+                            <button id='clickToRecordTime' style="background-color: #434343; border: 0px; margin-left: 10px">
+                                <img src="./src/images/start.png" alt="" style="width: 25px;">
+                            </button>
+                        </td>
+                        <td id="edit-start-time" class="start-time"><input type="text"></td>
+                        <td id="edit-end-time" class="end-time"><input type="text"></td>
+                        <td id="edit-subtitle" class="subtitle"><input type="text"></td>
+                    </tr>
+                </table>
+                <div id="submit-btn-div">
+                    <button id="clickToAddInfo">
+                        <img src="./src/images/submit.png" alt="" style="width:30px;">
+                    </button>
+                </div>
+            </div>
             <div id="info-container" class="samePadding">
-                <div id="edit-info">
-                    <table id="edit-table">
-                        <tr >
-                            <td class="index">
-                                <button id='clickToRecordTime' style="background-color: #434343; border: 0px; margin-left: 10px">
-                                    <img src="./src/images/start.png" alt="" style="width: 25px">
-                                </button>
-                            </td>
-                            <td class="start-time"><input type="text"></td>
-                            <td class="end-time"><input type="text"></td>
-                            <td class="subtitle"><input type="text"></td>
-                        </tr>
-                    </table>
-                </div>
                 <div id="info-table" >
-                    <table id="display-table"></table>
-
+                    <!--这里使用js插入代码
+                           render.js    -->
                 </div>
-
             </div>
 
         </div>
