@@ -15,37 +15,79 @@
 <nav id="banner">
     <h2>字幕神器</h2>
 </nav>
-<div id="video-part" class="part">
-    <div id="video-btn-container" class="container">
-        <button id="clickToUploadVideo" class="btn btn-load">上传视频</button>
-        <button id="clickToDownloadSRT" class="btn btn-load">点我下载</button>
-    </div>
-    <div id="video-container">
-
-    </div>
-</div>
-
-
-<div id="edit-part" class="part">
-    <div id="search-area-container" class="container">
-        <div class="dropdown">
-            <p>search</p>
-            <ul>
-                <li>id</li>
-                <li>time</li>
-                <li>subtitle</li>
-            </ul>
+<div id="body-part">
+    <div id="video-part" class="part">
+        <div id="video-btn-container" class="container">
+            <button id="clickToUploadVideo" class="btn btn-load">上传视频</button>
+            <button id="clickToDownloadSRT" class="btn btn-load">点我下载</button>
         </div>
-
-        <input type="text" id="inputAreaForValueToSearch"/>
-        <button id="clickToFindWhatYouWant">点我搜索</button>
+        <div id="video-container">
+        </div>
     </div>
+
+
+    <div id="edit-part" class="part">
+        <div id="edit-part-container">
+            <div id="search-area-container" class="container">
+                <div id="dropdown" class="dropdown edit-child samePadding">
+                    <div id ="searchIndexDiv">
+                        <p id="searchIndex">search</p>
+                        <ul>
+                            <li>id</li>
+                            <li>time</li>
+                            <li>subtitle</li>
+                        </ul>
+                    </div>
+
+                    <input type="text" id="inputAreaForValueToSearch" placeholder="请输入你想搜索的字幕信息..."/>
+
+
+                </div>
+                <div id="moreFunc" class="edit-child samePadding">
+                    <button id="btnAddAfter" class="btn btn-style">添加</button>
+                    <button id="btnInputThroughWrap" class="btn btn-style">批量上传</button>
+                </div>
+            </div>
+            <div id="textarea-container" class="samePadding toHide" >
+                <textarea type="text" id="input_textarea" autofocus ></textarea>
+                <div id="textarea-btn">
+                    <button id="clickToAddDataThroughWrap" class="btn btn-style btn-reverse">添加</button>
+                    <button id="clickToCancel" class="btn btn-style btn-reverse">取消</button>
+                </div>
+
+            </div>
+            <div id="changeInfoDiv">
+
+            </div>
+            <div id="info-container" class="samePadding">
+                <div id="edit-info">
+                    <table id="edit-table">
+                        <tr >
+                            <td class="index">
+                                <button id='clickToRecordTime' style="background-color: #434343; border: 0px; margin-left: 10px">
+                                    <img src="./src/images/start.png" alt="" style="width: 25px">
+                                </button>
+                            </td>
+                            <td class="start-time"><input type="text"></td>
+                            <td class="end-time"><input type="text"></td>
+                            <td class="subtitle"><input type="text"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="info-table" >
+                    <table id="display-table"></table>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
-<div id="textarea-container" class="toHide">
-    <textarea type="text" id="input_textarea" cols="60" rows="5" ></textarea>
-    <button id="clickToAddDataThroughWrap">添加</button>
-</div>
+
+
 <div class="searchBar">
 
 </div>

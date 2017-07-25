@@ -23,3 +23,17 @@ $("#clickToFindWhatYouWant").click(function() {
     const inputValueToSearch = $("#inputAreaForValueToSearch").val();
     findDataThrough("id",sss);
 });
+
+$('#btnInputThroughWrap').click(function() {
+    $("#textarea-container").fadeIn();
+    $("#info-table").addClass("blur-display");
+});
+
+$("#clickToCancel").click(function() {
+    $("#textarea-container").fadeOut();
+    $("#info-table").removeClass("blur-display");
+});
+
+$("#clickToRecordTime").click(function(){
+    alert('hello');
+});

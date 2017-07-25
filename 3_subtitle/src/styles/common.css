@@ -6,12 +6,23 @@
 /* edit/video part*/
 
 .part {
-    padding: 20px;
     margin-top: 50px;
-    border: 1px solid darkcyan;
-    height: 600px;
+    box-shadow: 1px 1px 20px #434343;
 }
 
 .container {
     width: 100%;
+}
+
+
+#body-part {
+    min-width: 1300px;
+}
+
+.toHide{
+    display: none;
+}
+
+.blur-display {
+    filter: blur(10px);
 }

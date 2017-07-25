@@ -2,8 +2,105 @@
     width: 35%;
     float: right;
     margin-right: 5%;
+    height: 0px;
+    padding-bottom: 43.5%;
+    position: relative;
 }
 
 #search-area-container {
-    
+    width: 100%;
+    padding: 0;
+    height: 35px;
+
 }
+
+
+
+.edit-child {
+    width: 100%;
+}
+
+#moreFunc {
+    margin-top: 2px;
+}
+
+.btn-style {
+    height: 23px;
+    font-size: 12px;
+    padding:3px 20px;
+    background-color: #434343;
+    color: white;
+
+    transition: all ease .5s;
+}
+.btn-reverse {
+    background-color: #fff;
+    border: 1px solid #434343;
+    color: #434343;
+}
+
+#btnAddAfter {
+    float: left;
+}
+
+#btnInputThroughWrap {
+    float: right;
+}
+
+#clickToAddDataThroughWrap {
+    float: left;
+}
+#clickToCancel {
+    float: right;
+
+}
+.btn-style:hover {
+    background-color: #fff;
+    border: 1px solid #434343;
+    color: #434343;
+}
+
+.btn-reverse:hover {
+    background-color: #434343;
+    color: white;
+}
+#textarea-container {
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    z-index: 333;
+}
+#input_textarea {
+    height: 200px;
+    width: 100%;
+    padding: 5px;
+}
+
+.samePadding {
+    padding: 0 40px 0 20px;
+}
+
+#edit-part-container {
+    margin-top: 20px
+}
+
+#info-container {
+    padding-bottom: 10%;
+    margin-top: 25px;
+    width: 100%;
+    position: relative;
+
+}
+
+#info-table {
+    margin-top: 3px;
+    border: 1px solid #434343;
+    overflow: auto;
+    background-color: white;
+    width: 100%;
+    padding: 20px;
+    height: 0px;
+    padding-bottom: 103%;
+}
+
+
