@@ -1,12 +1,11 @@
 #video-part {
-    padding:20px;
-    margin-top: 50px;
-
-    width: 50%;
-    margin-left: 5%;
+    padding-right: 10px;
+    padding-left: 30px;
+    width: 53.34%;
     float: left;
     height: 0px;
-    padding-bottom: 42%;
+    margin: 0px;
+    padding-bottom: 58%;
 }
 #video-btn-container {
     width: 100%;
@@ -16,9 +15,12 @@
 .btn-load {
     width: 48%;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     text-align: center;
     line-height: 15px;
+    box-shadow:  1px 1px 1px #eaeaea;
+    background-color: white;
+    border: 1px solid #eaeaea;
 }
 /*两个按钮*/
 #clickToUploadVideo {
@@ -27,7 +29,7 @@
     color: #e6e8ea;
 
 }
-#clickToDownloadSRT {
+#btnInputSRTFile {
     float: right;
     border: 1px solid #e6e8ea;
     background-color: transparent;
@@ -36,15 +38,25 @@
 
 /*视频包含区域*/
 #video-container {
-    border: 1px solid black;
+    border: 1px solid #eaeaea;
     width: 100%;
     height: 0px;
-    padding-bottom: 75%;
+    padding-bottom: 90%;
     background-color: #343434;
     margin-top: 20px;
 }
 
+#clickToGetRecentSubtitle {
+    margin-top: 15px;
+}
 
+#part-container {
+    background-color: white;
+    /* width: 100%; */
+    height: 100px;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+}
 
 
 

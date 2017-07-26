@@ -1,17 +1,18 @@
-
+import computeIndex from './computeIndex.js';
 
 export default function (renderData) {
-    console.log("This is render.js");
-    console.log(renderData);
+    computeIndex();
+    //console.log("This is render.js");
+    //console.log(renderData);
 
     const targetNode  = $("#info-table");
-    console.log(typeof(targetNode) );
+    //console.log(typeof(targetNode) );
     renderData.forEach(renderDataFunc);
 
 }
 
 function renderDataFunc(element,index) {
-    console.log(element);
+    //console.log(element);
     let targetNode = $("#info-table");
     let div = document.createElement("div");
     div.setAttribute("class","display-info");
@@ -20,8 +21,9 @@ function renderDataFunc(element,index) {
                         <span class='start-time'>${element.startTime}</span>
                         <span class='end-time'>${element.endTime}</span>
                         <span class='subtitle'>${element.subtitleInfo}</span>
+                        <span class="close-item">x</span>
                         `;
     div.innerHTML = stringToInsert;
-    console.log(div);
+    //console.log(div);
     targetNode.append(div);
 }

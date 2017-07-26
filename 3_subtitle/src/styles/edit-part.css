@@ -1,10 +1,11 @@
 #edit-part {
-    width: 35%;
+    width: 46.66%;
     float: right;
-    margin-right: 5%;
     height: 0px;
-    padding-bottom: 43.5%;
+    padding-bottom: 57%;
     position: relative;
+    padding-left: 10px;
+    margin: 0px;
 }
 
 #search-area-container {
@@ -15,6 +16,12 @@
 }
 
 
+#part-container {
+    margin-top: 50px;
+    padding-top: 30px;
+    padding-bottom: 43.5%;
+    border-radius: 4px;
+}
 
 .edit-child {
     width: 100%;
@@ -25,27 +32,40 @@
 }
 
 .btn-style {
-    height: 23px;
+    height: 28px;
     font-size: 12px;
     padding:3px 20px;
     background-color: white;
     color: #434343;
-    border: 1px solid #434343;
-
+    border: 1px solid #eaeaea;
+    margin-top: 5px;
     transition: all ease .5s;
+    box-shadow: 1px 1px 1px #eaeaea;
 }
 .btn-reverse {
     background-color: #fff;
-    border: 1px solid #434343;
+    border: 1px solid #eae aea;
     color: #434343;
 }
 
 #btnAddAfter {
     float: left;
 }
+#btnDelete {
+    float: left;
+    margin-left: 6px;
+}
 
+#btnGoto {
+    float: left;
+    margin-left: 6px;
+}
 #btnInputThroughWrap {
     float: right;
+}
+#clickToDownloadSRT {
+    float: right;
+    margin-left:6px;
 }
 
 #clickToAddDataThroughWrap {
@@ -80,9 +100,7 @@
     padding: 0 40px 0 20px;
 }
 
-#edit-part-container {
-    margin-top: 20px
-}
+
 
 #info-container {
     padding-bottom: 10%;
@@ -94,12 +112,11 @@
 }
 
 #info-table {
-    margin-top: 3px;
-    border: 1px solid #434343;
+    margin-top:3px;
     overflow: auto;
     background-color: white;
     width: 100%;
-    padding: 0px 0px 0px 5px;
+    padding: 0px 0px 0px 0px;
     height: 0px;
     padding-bottom: 103%;
 }
@@ -116,7 +133,7 @@
     position: absolute;
     display: inline-block;
     right: 1%;
-    top: 80px;
+    top: 75px;
     height: 30px;
     width: 30px;
 

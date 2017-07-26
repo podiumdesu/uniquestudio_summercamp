@@ -14,7 +14,7 @@ function exportRaw(name, data) {
 }
 
 export function saveFile(WhatToBeDownloaded){
-    exportRaw('test.srt', JSON.stringify(WhatToBeDownloaded,null,'\n'));
+    exportRaw('subtitle.srt', JSON.stringify(WhatToBeDownloaded,null,'\n'));
 }
 
 //最终下载数据还需要再进行处理，因为数组中本身不包含id。
