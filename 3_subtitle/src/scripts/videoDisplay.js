@@ -9,6 +9,7 @@ URL = window.URL || window.webkitURL;
 var playSelectorFile = function (event) {
     var file = this.files[0];
     var fileURL = URL.createObjectURL(file);
+    console.log(fileURL);
     videoNode.src = fileURL;
 }
 
@@ -19,6 +20,7 @@ setTimeButtonNode.click(function() {
     if ($(this).children().attr("src").indexOf("start") >= 0) {   //说明此时需要记录的是开始时间
         //console.log(videoNode.currentTime);
         $("#edit-start-time").children().val(ms2TimeString(videoNode.currentTime*1000));
+        console.log(videoNode.currentTime);
     } else {
         $("#edit-end-time").children().val(ms2TimeString(videoNode.currentTime*1000));
     }

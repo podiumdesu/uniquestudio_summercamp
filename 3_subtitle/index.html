@@ -20,84 +20,85 @@
 
 <div id="body-part">
     <div id="part-container">
-            <div id="video-part" class="part">
-                <div id="video-btn-container" class="container">
-                    <button id="clickToUploadVideo" class="btn btn-load"><input id="inputFile" type="file" accept="video/*"/></button>
-                    <button id="btnInputSRTFile" class="btn btn-load">上传srt文件</button>
-                </div>
-                <div id="video-container">
-                    <video id="video" class="video-js" controls preload="auto" style="width:100%" data-setup='{}'>
-                    </video>
-                </div>
-                <div id="video-assist-container" class="container">
-                    <button id="clickToGetRecentSubtitle" class="btn btn-load">获取当前时间附近字幕</button>
-                </div>
+        <div id="video-part" class="part">
+            <div id="video-btn-container" class="container">
+                <button id="clickToUploadVideo" class="btn btn-load"><input id="inputFile" type="file" accept="video/*"/></button>
+                <span id="btnInputSRTFile" class=" btn-load">上传srt<input id="inputSRT" type="file" accept="text/*"/></span>
             </div>
+            <div id="video-container">
+                <video id="video" class="video-js" controls preload="auto" style="width:100%" data-setup='{}'>
+                </video>
+            </div>
+            <div id="video-assist-container" class="container">
+                <button id="clickToGetRecentSubtitle" class="btn btn-load">获取当前时间附近字幕</button>
+                <p id="displayCurrentTime"></p>
+            </div>
+        </div>
 
-            <div id="edit-part" class="part">
-                <div id="edit-part-container">
-                    <div id="search-area-container" class="container">
-                        <div id="dropdown" class="dropdown edit-child samePadding">
-                            <div id ="searchIndexDiv">
-                                <p id="searchIndex">search</p>
-                                <ul>
-                                    <li class="select-item">id</li>
-                                    <li class="select-item">time</li>
-                                    <li class="select-item">subtitle</li>
-                                </ul>
-                            </div>
-
-                            <input type="text" id="inputAreaForValueToSearch" placeholder="请输入你想搜索的字幕信息..."/>
-
-
+        <div id="edit-part" class="part">
+            <div id="edit-part-container">
+                <div id="search-area-container" class="container">
+                    <div id="dropdown" class="dropdown edit-child samePadding">
+                        <div id ="searchIndexDiv">
+                            <p id="searchIndex">search</p>
+                            <ul>
+                                <li class="select-item">id</li>
+                                <li class="select-item">time</li>
+                                <li class="select-item">subtitle</li>
+                            </ul>
                         </div>
-                        <div id="moreFunc" class="edit-child samePadding">
-                            <button id="btnAddAfter" class="btn btn-style">添加</button>
-                            <button id="btnDelete" class="btn btn-style">删除</button>
-                            <button id="btnGoto" class="btn btn-style">跳转</button>
-                            <button id="clickToDownloadSRT" class="btn btn-style">下载srt</button>
-                            <button id="btnInputThroughWrap" class="btn btn-style">批量上传</button>
-                        </div>
-                    </div>
-                    <div id="textarea-container" class="samePadding toHide" >
-                        <textarea type="text" id="input_textarea" autofocus ></textarea>
-                        <div id="textarea-btn">
-                            <button id="clickToAddDataThroughWrap" class="btn btn-style btn-reverse">添加</button>
-                            <button id="clickToCancel" class="btn btn-style btn-reverse">取消</button>
-                        </div>
+
+                        <input type="text" id="inputAreaForValueToSearch" placeholder="请输入你想搜索的字幕信息..."/>
+
 
                     </div>
-                    <div id="changeInfoDiv">
-
+                    <div id="moreFunc" class="edit-child samePadding">
+                        <button id="btnAddAfter" class="btn btn-style">添加</button>
+                        <button id="btnDelete" class="btn btn-style">删除</button>
+                        <button id="btnGoto" class="btn btn-style">跳转</button>
+                        <button id="clickToDownloadSRT" class="btn btn-style">下载srt</button>
+                        <button id="btnInputThroughWrap" class="btn btn-style">批量上传</button>
                     </div>
-                    <div id="edit-info">
-                        <table id="edit-table">
-                            <tr>
-                                <td id="edit-index" class="index">
-                                    <button id='clickToRecordTime' style="background-color: #434343; border: 0px; margin-left: 10px">
-                                        <img src="./src/images/start.png" alt="" style="width: 25px;">
-                                    </button>
-                                </td>
-                                <td id="edit-start-time" class="start-time"><input type="text"></td>
-                                <td id="edit-end-time" class="end-time"><input type="text"></td>
-                                <td id="edit-subtitle" class="subtitle"><input type="text"></td>
-                            </tr>
-                        </table>
-                        <div id="submit-btn-div">
-                            <button id="clickToAddInfo">
-                                <img src="./src/images/submit.png" alt="" style="width:30px;">
-                            </button>
-                        </div>
-                    </div>
-                    <div id="info-container" class="samePadding">
-                        <div id="info-table" >
-                            <!--这里使用js插入代码
-                                   render.js    -->
-                        </div>
+                </div>
+                <div id="textarea-container" class="samePadding toHide" >
+                    <textarea type="text" id="input_textarea" autofocus ></textarea>
+                    <div id="textarea-btn">
+                        <button id="clickToAddDataThroughWrap" class="btn btn-style btn-reverse">添加</button>
+                        <button id="clickToCancel" class="btn btn-style btn-reverse">取消</button>
                     </div>
 
                 </div>
+                <div id="changeInfoDiv">
+
+                </div>
+                <div id="edit-info">
+                    <table id="edit-table">
+                        <tr>
+                            <td id="edit-index" class="index">
+                                <button id='clickToRecordTime' style="background-color: #434343; border: 0px; margin-left: 10px">
+                                    <img src="./src/images/start.png" alt="" style="width: 25px;">
+                                </button>
+                            </td>
+                            <td id="edit-start-time" class="start-time"><input type="text"></td>
+                            <td id="edit-end-time" class="end-time"><input type="text"></td>
+                            <td id="edit-subtitle" class="subtitle"><input type="text"></td>
+                        </tr>
+                    </table>
+                    <div id="submit-btn-div">
+                        <button id="clickToAddInfo">
+                            <img src="./src/images/submit.png" alt="" style="width:30px;">
+                        </button>
+                    </div>
+                </div>
+                <div id="info-container" class="samePadding">
+                    <div id="info-table" >
+                        <!--这里使用js插入代码
+                               render.js    -->
+                    </div>
+                </div>
+
             </div>
+        </div>
     </div>
 </div>
 
@@ -108,5 +109,7 @@
 </div>
 <div class=""></div>
 <script src="./src/scripts/bundle.js"></script>
+
+
 </body>
 </html>

@@ -11,7 +11,8 @@ export default function (renderData) {
 
 }
 
-function renderDataFunc(element,index) {
+//Todo
+function renderDataFunc(element,index) {   //返回
     //console.log(element);
     let targetNode = $("#info-table");
     let div = document.createElement("div");

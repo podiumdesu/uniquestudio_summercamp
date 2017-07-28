@@ -21,7 +21,7 @@ body {
     list-style: none;
     top: 28px;
     left: 21px;
-    border: 1px solid #343434;
+    border: 1px solid #eaeaea;
     border-top: 0px;
     position: absolute;
     width: 18%;
@@ -58,7 +58,7 @@ body {
 .dropdown p{
 
     width: 100%;
-    line-height: 25px;
+    line-height: 26px;
     margin: 0px;
 }
 
@@ -71,9 +71,10 @@ body {
 }
 #searchIndexDiv {
     width: 20%;
-    border: 1px solid #343434;
+    border: 1px solid #eaeaea;
     margin-right: 1px;
     margin-left: -3px;
+    box-shadow: 1px 1px 1px #eaeaea;
 }
 #inputAreaForValueToSearch {
     line-height: 25px;

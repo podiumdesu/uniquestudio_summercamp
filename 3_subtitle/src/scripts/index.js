@@ -4,14 +4,15 @@ import splitDataThroughWrap from './buttonFunc/splitDataThroughWrap.js';
 import {saveFile} from './buttonFunc/clickToDownload.js';
 import {dataToDownload} from './data.js';
 import findDataThrough from './findData/findDataThrough.js';
-const textAreaWithWrap = "#input_textarea";
 import render from './render.js';
 import clear from './clear';
 import addNewData from './addNewData.js';
 import empty from './empty.js';
 import {videoNode} from './videoDisplay.js';
-import {timeString2ms} from './convertTime.js';
+import {timeString2ms, ms2TimeString} from './convertTime.js';
+import srtImport from './srtImport.js';
 
+const textAreaWithWrap = "#input_textarea";
 /*禁止刷新*/
 /*
 $(window).bind('beforeunload', function(e) {    //用户刷新时提示数据未保存
@@ -71,6 +72,26 @@ $("#btnAddAfter").click(function() {
         addNewData();
     });
 });
+
+$("#clickToGetRecentSubtitle").click(function() {
+    let targetTime = videoNode.currentTime;
+    var targetArray = [];
+    $("#displayCurrentTime").html("当前时间: "+ms2TimeString(videoNode.currentTime*1000));
+    dataToDownload.forEach(function(element, index) {
+        let newTime = timeString2ms(element.startTime)/1000;
+        if (Math.abs(targetTime - newTime) <= 25) {
+            targetArray.push(element);
+        }
+    });
+    clear();
+    render(targetArray);
+});
+/*上传srt文件*/
+
+$('#btnInputSRTFile').click(function () {
+    srtImport();
+})
+
 /*多行输入*/
 //点击显示"多行输入"的窗口
 $('#btnInputThroughWrap').click(function() {
@@ -143,7 +164,7 @@ $(".display-info").live('click',function() {
 $(".display-info").live('mouseover',function() {
     console.log("ddd");
    $(this).children('.close-item').addClass('toDisplay');
-})
+});
 render(dataToDownload);
 /*
 $('#clickToAddInfo').click(function(this) {

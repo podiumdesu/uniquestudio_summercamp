@@ -13,9 +13,25 @@ function exportRaw(name, data) {
     fakeClick(save_link);
 }
 
-export function saveFile(WhatToBeDownloaded){
-    exportRaw('subtitle.srt', JSON.stringify(WhatToBeDownloaded,null,'\n'));
+var finalDataString = "";
+function concatToString(element, index) {
+
+    var everyArrayToDownload = element.index.toString();
+    everyArrayToDownload = everyArrayToDownload.concat('\n');
+    everyArrayToDownload = everyArrayToDownload.concat(element.startTime);
+    everyArrayToDownload = everyArrayToDownload.concat(' --> ',element.endTime);
+    everyArrayToDownload = everyArrayToDownload.concat('\n');
+    everyArrayToDownload = everyArrayToDownload.concat(element.subtitleInfo, '\n\n');
+    finalDataString = finalDataString.concat(everyArrayToDownload);
+
 }
+export function saveFile(WhatToBeDownloaded){
+    //exportRaw('subtitle.srt', JSON.stringify(WhatToBeDownloaded,null,'\n'));
+    WhatToBeDownloaded.forEach(concatToString);
+    exportRaw('subtitle.srt', finalDataString);
+    finalDataString = "";
+}
+
 
 //最终下载数据还需要再进行处理，因为数组中本身不包含id。
 //标准srt格式：
