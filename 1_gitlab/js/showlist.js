@@ -187,9 +187,9 @@ function getThoseDontHaveLabels() {
 /***board页面下显示每个issue******/
 function showCloseIssue() {
   var targetNode = "#closeBoard";
-  close_num = closeIssueNum().length;
+  var close_num = closeIssueNum().length;
   var array = closeIssueNum();
-  tat = document.createTextNode(close_num);
+  var tat = document.createTextNode(close_num);
   $("#closeNum").html(tat);
   var id = "close"
   forCloseAndBacklog(close_num,array,targetNode,id);
@@ -198,9 +198,9 @@ function showCloseIssue() {
 function showBacklogIssue() {
   var targetNode = "#backlogBoard";
 
-  noLabel_num = getThoseDontHaveLabels().length;
+  var noLabel_num = getThoseDontHaveLabels().length;
   var array = getThoseDontHaveLabels();
-  tat = document.createTextNode(noLabel_num);
+  var tat = document.createTextNode(noLabel_num);
   $("#backlogNum").html(tat);
   var id = "open";
   forCloseAndBacklog(noLabel_num,array,targetNode,id);
@@ -228,7 +228,7 @@ function forCloseAndBacklog(num,array,targetNode,id) {
 
   }
   sss += '</ul>'
-  newList = document.createElement("div");
+  var newList = document.createElement("div");
   newList.className += "clickToHide ";
   newList.className += "board-list-component";
   newList.innerHTML = sss;
